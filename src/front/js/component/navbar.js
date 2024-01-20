@@ -47,13 +47,13 @@ export const Navbar = () => {
           </ul>
 
           <div className="d-flex">
-            <a className="btn btn-outline-primary me-2" href="#">
+            <a className="btn text-white me-2" href="#">
               Invitado
             </a>
-            <a className="btn btn-outline-primary me-2" href="#">
+            <a className="btn text-white me-2" href="#">
               Entrar
             </a>
-            <a className="btn btn-primary" href="#">
+            <a className="btn text-white me-2" href="#">
               Registrarse
             </a>
           </div>
