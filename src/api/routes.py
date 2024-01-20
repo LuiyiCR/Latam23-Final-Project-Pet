@@ -5,6 +5,8 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+from bcrypt import gensalt
+from flask_bcrypt import generate_password_hash
 
 api = Blueprint('api', __name__)
 
@@ -12,11 +14,32 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+@api.route('/user', methods=['POST'])
+def singup():
+    if request.method == 'POST':
+        data = request.json
+        email = data.get("email")
+        name =  data.get("name")
+        password = data.get("password")
+        verify_data = [email, name, password]
+        if None in verify_data:
+            return jsonify({"message":"All parameters are required"}), 400
+        user_exist = User.query.filter_by(email=email).first()
+        if user_exist:
+            return jsonify({"message":"User all ready exist"}), 400
+        salt = str(gensalt(), encoding = 'utf-8')
+        password_and_salt = password + salt
+        print(password_and_salt)
+        password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
+        print(password_hash)
+        new_user = User(name = name, email = email, password_hash = password_hash, salt = salt)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return jsonify({"message": "POST request received"}), 201
+        except Exception as error:
+            db.session.rollback()
+            print(error)
+            return jsonify ({"message": "Server error"}), 500
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
 
-    return jsonify(response_body), 200
