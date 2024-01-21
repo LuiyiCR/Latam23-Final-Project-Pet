@@ -35,7 +35,7 @@ export const Home = () => {
           </p>
         </div>
 
-        <p>
+        <p className="mb-4">
           Acá puedes ver el código fuente{' '}
           <a href="https://github.com/4GeeksAcademy/Latam23-Final-Project-Pet">
             GITHUB
