@@ -6,7 +6,8 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from bcrypt import gensalt
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token
 
 api = Blueprint('api', __name__)
 
@@ -42,4 +43,32 @@ def singup():
             print(error)
             return jsonify ({"message": "Server error"}), 500
 
+@api.route('/token', methods = ['POST'])
+def login():
+    if request.method == 'POST':
+        data = request.json
+        email = data.get("email")
+        password = data.get("password")
+        verify_data = [email, password]
+        if None in verify_data:
+            return jsonify({"message":"All parameters are required"}), 400
+        user_exist = User.query.filter_by(email=email).first()
+        if user_exist is None:
+            return jsonify({"message":"User not exist"}), 400
+        password = password + user_exist.salt
+        password_hash = user_exist.password_hash
+        validation_password = check_password_hash(password_hash, password)
+        try:
+            if validation_password:
+                token = create_access_token(identity= user_exist.id)   
+                return jsonify({"message":"Authentication successful",
+                                "token": token}), 201 
+            else:
+                return jsonify({"message":"Incorrect Pasword"}), 401  
+        except Exception as error:
+            db.session.rollback()
+            print(error)
+            return jsonify({"message": "Server error"}), 500 
 
+
+            
