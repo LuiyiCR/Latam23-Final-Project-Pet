@@ -17,6 +17,15 @@ Orange: F18043
   font-size: 1rem;
 }
 
+.hero-title {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.lead {
+  margin-bottom: 2rem;
+}
+
 .logo {
   max-width: 3rem;
   transform: scale(1.5);
