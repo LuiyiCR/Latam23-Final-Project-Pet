@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../store/appContext';
-import rigoImageUrl from '../../img/foto-movil.png';
+import heroImgUrl from '../../img/foto-pc.png';
 import '../../styles/home.css';
 
 export const Home = () => {
@@ -18,20 +18,20 @@ export const Home = () => {
           </h6>
         </div>
 
-        <div class="d-grid gap-2">
-          <button class="btn text-white" type="button">
+        <div className="d-grid gap-2">
+          <button className="btn text-white" type="button">
             Invitado
           </button>
-          <button class="btn btn-light text-black" type="button">
+          <button className="btn btn-light text-black" type="button">
             Usuario
           </button>
-          <button class="btn btn-light text-black" type="button">
+          <button className="btn btn-light text-black" type="button">
             Registrarse
           </button>
         </div>
 
         <p>
-          <img className="hero-images" src={rigoImageUrl} />
+          <img className="hero-images" src={heroImgUrl} />
         </p>
 
         <p>
