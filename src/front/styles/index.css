@@ -20,10 +20,33 @@ Orange: F18043
 .hero-title {
   margin-top: 4rem;
   margin-bottom: 2rem;
+  /* font-size: 4rem; */
+}
+
+/* Para pantallas de 400px o menos */
+@media screen and (max-width: 400px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Para pantallas de 800px o menos */
+@media screen and (max-width: 800px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Para pantallas de 1200px o más */
+@media screen and (min-width: 1200px) {
+  .hero-title {
+    font-size: 4rem;
+  }
 }
 
 .lead {
   margin-bottom: 2rem;
+  font-size: 1.125rem;
 }
 
 .logo {
