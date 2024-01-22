@@ -30,6 +30,46 @@ const Signup = () => {
         setConfirmPassword(value);
     }
 
+    // Funciones para verificacion de Nombre
+
+    function verifyNameParameters(name) {
+        // Expresiones para buscar  un número (Devuelve un valor booleano)
+        const contieneNumero = /\d/.test(name);
+        const contieneSimbolo = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(name);
+        const contieneAlgo = name === "";
+
+        return contieneNumero || contieneSimbolo || contieneAlgo;
+    }
+
+    function verifyName() {
+        if (verifyNameParameters(name)) {
+            alert("El nombre que proporcionaste no es valido");
+            return false
+        }
+        return true
+    }
+
+
+    // Funciones para verificaciones de correo electronico
+
+    function verifyEmailParameters() {
+        if (email.includes(".com") &&
+            email.includes("@") &&
+            email.length !== "") {
+            return true
+        }
+        return false
+    }
+
+    function verifyEmail() {
+        if (verifyEmailParameters()) {
+            return true
+        }
+        alert("Email invalido")
+        return false
+    }
+
+
     // Funciones para verificaciones de contraseña
 
     function verifyContainsPassword(password) {
@@ -70,8 +110,13 @@ const Signup = () => {
 
     // Funcion onClick para manejar el boton de enviar (submit) / registrarse
 
-    function submitHandler() {
-        if (verifyPassword()) {
+    function submitHandler(event) {
+
+        event.preventDefault();
+
+        if (verifyPassword() &&
+            verifyName() &&
+            verifyEmail()) {
             alert("Registro con exito")
             return true
         }
@@ -89,20 +134,20 @@ const Signup = () => {
 
                 <form className="contenedor-form col-md-6 col-sm-12">
                     <div className="mb-3">
-                        <label for="exampleInputName" className="form-label">Name</label>
-                        <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autocomplete="off" value={name} onChange={setNameValue} />
+                        <label htmlFor="exampleInputName" className="form-label">Name</label>
+                        <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} />
                     </div>
                     <div className="mb-3">
-                        <label for="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autocomplete="off" value={email} onChange={setEmailValue} />
+                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} />
                     </div>
                     <div className="mb-3">
-                        <label for="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" autocomplete="off" value={password} onChange={setPasswordValue} />
+                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="exampleInputPassword1" autoComplete="off" value={password} onChange={setPasswordValue} />
                     </div>
                     <div className="mb-3">
-                        <label for="exampleInputPassword2" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword2" autocomplete="off" value={confirmPassword} onChange={setConfirmPasswordValue} />
+                        <label htmlFor="exampleInputPassword2" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="exampleInputPassword2" autoComplete="off" value={confirmPassword} onChange={setConfirmPasswordValue} />
                     </div>
                     <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Submit</button>
                 </form>
