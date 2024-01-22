@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Context } from '../store/appContext';
 import heroImgUrl from '../../img/foto-pc.png';
+import { Link } from 'react-router-dom';
 import '../../styles/home.css';
 
 export const Home = () => {
@@ -24,11 +25,14 @@ export const Home = () => {
                   <button className="button btn text-white rounded-3" type="button">
                     Invitado
                   </button>
-                  <button className="btn btn-light text-black rounded-3" type="button">
-                    Usuario
-                  </button>
-                  <button className="btn btn-light text-black rounded-3" type="button">
+                  <Link to="/signup" className="btn btn-light text-black rounded-3"
+                    type="button">
                     Registrarse
+                  </Link>
+                  <button className="btn btn-light text-black rounded-3" type="button"
+
+                  >
+                    Entrar
                   </button>
                 </div>
               </div>
@@ -41,9 +45,9 @@ export const Home = () => {
           </div>
 
           <p className="m-4">
-            Acá puedes ver el código fuente{' '}
-            <a href="https://github.com/4GeeksAcademy/Latam23-Final-Project-Pet">
-              GITHUB
+            Ingresa y empieza a incluir tus mascotas{' '}
+            <a href="#">
+              ENTRAR
             </a>
           </p>
         </div>

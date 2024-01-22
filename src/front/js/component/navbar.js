@@ -26,7 +26,7 @@ export const Navbar = () => {
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Home
+                Inicio
               </a>
             </li>
             <li className="nav-item">
@@ -50,11 +50,11 @@ export const Navbar = () => {
             <a className="btn text-white me-2" href="#">
               Invitado
             </a>
+            <Link to="signup" className="btn btn-light text-black rounded-3 me-2" href="#">
+              Registrarse
+            </Link>
             <a className="btn btn-light text-black rounded-3 me-2" href="#">
               Entrar
-            </a>
-            <a className="btn btn-light text-black rounded-3 me-2" href="#">
-              Registrarse
             </a>
           </div>
         </div>
