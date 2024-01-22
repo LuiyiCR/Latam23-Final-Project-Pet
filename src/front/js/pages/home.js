@@ -11,29 +11,29 @@ export const Home = () => {
       <div className="hero text-center">
         <div className="container">
           <div className='row align-items-center'>
-            <div className='col-lg-6'>
-              <h1 className="hero-title">PET+, el mejor aliado en el cuidado de tus mascotas</h1>
+
+            <div className='col-lg-6 p-5'>
+              <h1 className="hero-title">PET+, el mejor aliado <br /> en el cuidado de <br />tus mascotas</h1>
               <p className="lead text-muted">
                 Registra, controla, y disfruta de la salud de tus mascotas con Pet+.
                 Mantén al día sus vacunas, peso, citas y más. Todo en un solo lugar,
                 su bienestar merece la mejor atención.
               </p>
-
-              <div className="d-grid gap-2">
-                <button className="btn text-white" type="button">
+              <div className='btn-group gap-3'>
+                <button className="btn text-white rounded-3" type="button">
                   Invitado
                 </button>
-                <button className="btn btn-light text-black" type="button">
+                <button className="btn btn-light text-black rounded-3" type="button">
                   Usuario
                 </button>
-                <button className="btn btn-light text-black" type="button">
+                <button className="btn btn-light text-black rounded-3" type="button">
                   Registrarse
                 </button>
               </div>
             </div>
             <div className='col-lg-6'>
-              <div className='img-container'>
-                <img className="img-fluid mt-3 mb-3" src={heroImgUrl} alt='Picture of pets' />
+              <div className='hero-image'>
+                <img className="img-fluid hero-image" src={heroImgUrl} alt='Picture of pets' />
               </div>
             </div>
           </div>
