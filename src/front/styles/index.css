@@ -27,13 +27,22 @@ Orange: F18043
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 40%;
   height: 20%;
   border-radius: 31.25rem;
   opacity: 0.5;
   background: #ff5722;
+  /* background: #f18043; */
   filter: blur(250px);
   z-index: -1;
+}
+
+@media (max-width: 767px) {
+  .background-container::before {
+    border-radius: 15px;
+    filter: blur(100px);
+    z-index: -1;
+  }
 }
 
 .hero-title {
@@ -66,7 +75,7 @@ Orange: F18043
 }
 
 .btn-light {
-  font: black;
+  color: black;
   background-color: white;
   border-color: #f18043;
 }
