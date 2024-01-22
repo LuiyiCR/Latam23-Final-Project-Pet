@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/signup.css";
 
+const BACKEND_URL = process.env.BACKEND_URL;
+
 const Signup = () => {
 
     const [name, setName] = useState("");
@@ -108,6 +110,31 @@ const Signup = () => {
         return true
     }
 
+    //Funcion para realizar el envio de datos a la API
+
+    async function enviarData() {
+        const response = await fetch(BACKEND_URL + "/api/user",
+            {
+                method: "POST",
+                body: JSON.stringify(
+                    {
+                        "name": name,
+                        "email": email,
+                        "password": password
+                    }
+                ),
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            })
+        if (response.status != 201) {
+            alert("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+            return
+        }
+
+
+    }
+
     // Funcion onClick para manejar el boton de enviar (submit) / registrarse
 
     function submitHandler(event) {
@@ -118,6 +145,7 @@ const Signup = () => {
             verifyName() &&
             verifyEmail()) {
             alert("Registro con exito")
+            enviarData()
             return true
         }
         return false
