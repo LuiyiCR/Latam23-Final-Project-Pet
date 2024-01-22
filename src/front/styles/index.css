@@ -27,18 +27,19 @@ Orange: F18043
   position: absolute;
   top: 0;
   left: 0;
-  width: 40%;
-  height: 20%;
-  border-radius: 31.25rem;
+  width: 35%;
+  height: 25%;
+  border-radius: 20px;
   opacity: 0.5;
-  background: #ff5722;
-  /* background: #f18043; */
-  filter: blur(250px);
+  background: #f18043;
+  filter: blur(125px);
   z-index: -1;
 }
 
 @media (max-width: 767px) {
   .background-container::before {
+    width: 40%;
+    background: #ff5722;
     border-radius: 15px;
     filter: blur(100px);
     z-index: -1;
@@ -49,6 +50,11 @@ Orange: F18043
   margin-bottom: 2rem;
   line-height: 120%;
   letter-spacing: 0.07em;
+}
+
+.header-pet-text {
+  color: #8c52ff;
+  font-size: 2.3rem;
 }
 
 .lead {

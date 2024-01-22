@@ -15,7 +15,7 @@ export const Home = () => {
             <div className='row align-items-center'>
 
               <div className='col-lg-6 p-5'>
-                <h1 className="hero-title">PET+, el mejor aliado <br /> en el cuidado de <br />tus mascotas</h1>
+                <h1 className="hero-title"><span className='header-pet-text'>PET+</span>, el mejor aliado <br /> en el cuidado de <br />tus mascotas</h1>
                 <p className="lead text-muted">
                   Registra, controla, y disfruta de la salud de tus mascotas con Pet+.
                   Mantén al día sus vacunas, peso, citas y más. Todo en un solo lugar,

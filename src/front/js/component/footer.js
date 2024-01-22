@@ -6,8 +6,9 @@ export const Footer = () => (
 			<div className="row">
 				<div className="col-md-4">
 					<h5>Contacto</h5>
-					<p>Correo electrónico: info@petplus.com</p>
-					<p>Teléfono: (123) 456-7890</p>
+					<p>
+						<i className="fa fa-envelope"></i> Correo electrónico: info@petplus.com</p>
+					<p><i className="fa fa-phone"></i> Teléfono: (123) 456-7890</p>
 				</div>
 				<div className="col-md-4">
 					<h5>Enlaces útiles</h5>
