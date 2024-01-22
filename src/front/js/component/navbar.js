@@ -50,10 +50,10 @@ export const Navbar = () => {
             <a className="btn text-white me-2" href="#">
               Invitado
             </a>
-            <a className="btn text-white me-2" href="#">
+            <a className="btn btn-light text-black rounded-3 me-2" href="#">
               Entrar
             </a>
-            <a className="btn text-white me-2" href="#">
+            <a className="btn btn-light text-black rounded-3 me-2" href="#">
               Registrarse
             </a>
           </div>
