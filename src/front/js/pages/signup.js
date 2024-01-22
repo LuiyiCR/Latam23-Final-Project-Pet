@@ -8,6 +8,8 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    // Funciones para onChanges en inputs del formulario
+
     function setNameValue(event) {
         const value = event.target.value;
         setName(value);
@@ -26,6 +28,55 @@ const Signup = () => {
     function setConfirmPasswordValue(event) {
         const value = event.target.value;
         setConfirmPassword(value);
+    }
+
+    // Funciones para verificaciones de contraseña
+
+    function verifyContainsPassword(password) {
+        // Expresiones para buscar al menos una letra mayúscula y al menos un número
+        var contieneMayuscula = /[A-Z]/.test(password);
+        var contieneNumero = /\d/.test(password);
+
+        // Verifica si la contraseña cumple con ambos requisitos
+        return contieneMayuscula && contieneNumero;
+    }
+
+    function verifyPassowordParameters() {
+        if (password.length >= 8 &&
+            verifyContainsPassword(password)) {
+            return true
+        }
+        return false
+    }
+
+    function comparePasswords() {
+        if (password === confirmPassword) {
+            return true
+        }
+        return false
+    }
+
+    function verifyPassword() {
+        if (!verifyPassowordParameters()) {
+            alert("Tu contraseña debe ser de almenos 8 caracteres y contener minimo una letra mayuscula y un numero")
+            return false
+        }
+        if (!comparePasswords()) {
+            alert("Las contraseñas deben coincidir")
+            return false
+        }
+        return true
+    }
+
+    // Funcion onClick para manejar el boton de enviar (submit) / registrarse
+
+    function submitHandler() {
+        if (verifyPassword()) {
+            alert("Registro con exito")
+            return true
+        }
+        return false
+
     }
 
     return (
@@ -53,7 +104,7 @@ const Signup = () => {
                         <label for="exampleInputPassword2" className="form-label">Password</label>
                         <input type="password" className="form-control" id="exampleInputPassword2" autocomplete="off" value={confirmPassword} onChange={setConfirmPasswordValue} />
                     </div>
-                    <button type="submit" className="btn btn-primary boton-signup">Submit</button>
+                    <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Submit</button>
                 </form>
 
             </div>
