@@ -1,0 +1,37 @@
+/* Contenedor de inputs de registro */
+
+.div-signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* Estilos para labels de inputs de registro */
+
+
+
+/* Estilos para inputs de registro */
+
+.form-control{
+    border-radius: 60px;
+    max-width: 430px;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #6f00f7;
+    outline: 0;
+    box-shadow: none;
+}
+
+/* Estilos para boton de registro */
+
+.boton-signup{
+    background-color: #8c52ff;
+}
+
+.boton-signup:hover{
+    background-color: #5834a1;
+}
