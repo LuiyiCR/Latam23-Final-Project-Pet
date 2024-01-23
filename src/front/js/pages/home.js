@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Context } from '../store/appContext';
 import heroImgUrl from '../../img/foto-pc.png';
+import docImgUrl from '../../img/foto-veterinaria.png'
+import docCatImgUrl from '../../img/foto-doc-cat.png'
+import docsImgUrl from '../../img/foto-docs.png'
 import { Link } from 'react-router-dom';
 import '../../styles/home.css';
 
@@ -38,29 +41,27 @@ export const Home = () => {
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
-      {/* <div className="container my-5">
-        <div className="row align-items-center">
-          <div className="col-lg-6">
-            <h2 className="mb-3">¿Eres veterinario?</h2>
-            <p>Como veterinario, puedes...</p>
-            <ul>
-              <li>Registrar a tus pacientes y llevar un control de su historial clínico.</li>
-              <li>Programar recordatorios para las citas de tus pacientes.</li>
-              <li>Y mucho más...</li>
-            </ul>
-            <Link to="/signup" className="btn btn-light text-black rounded-3" type="button">
-              Únete ahora
-            </Link>
-          </div>
-          <div className="col-lg-6">
-            <img src={heroImgUrl} alt="Imagen de un veterinario" className="img-fluid" />
-          </div>
+
+      <div className="divider-section">
+        <div>
+          <i className="fas fa-dog"></i>
+          <p>Perros</p>
         </div>
-      </div> */}
+        <div>
+          <i className="fas fa-cat"></i>
+          <p>Gatos</p>
+        </div>
+        <div>
+          <i className="fas fa-dove"></i>
+          <p>Aves</p>
+        </div>
+        <div>
+          <i className="fas fa-paw"></i>
+          <p>Otras mascotas</p>
+        </div>
+      </div>
 
       <div className="container my-5">
         <div className="row align-items-center">
@@ -73,26 +74,26 @@ export const Home = () => {
             <p>Como veterinario, puedes...</p>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-4">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          <div className="col">
             <div className="card">
-              <img src={'img1'} className="card-img-top" alt="Imagen 1" />
+              <img src={docImgUrl} className="card-img-top" alt="Imagen 1" />
               <div className="card-body">
                 <p className="card-text">Registrar a tus pacientes y llevar un control de su historial clínico.</p>
               </div>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col">
             <div className="card">
-              <img src={'img2'} className="card-img-top" alt="Imagen 2" />
+              <img src={docsImgUrl} className="card-img-top" alt="Imagen 2" />
               <div className="card-body">
                 <p className="card-text">Programar recordatorios para las citas de tus pacientes.</p>
               </div>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col">
             <div className="card">
-              <img src={'img3'} className="card-img-top" alt="Imagen 3" />
+              <img src={docCatImgUrl} className="card-img-top" alt="Imagen 3" />
               <div className="card-body">
                 <p className="card-text">Y mucho más...</p>
               </div>
@@ -100,7 +101,7 @@ export const Home = () => {
           </div>
         </div>
         <div className="row align-items-center">
-          <div className="col-lg-12 text-center">
+          <div className="col-lg-12 text-center mb-5">
             <Link to="/signup" className="btn btn-light text-black rounded-3" type="button">
               Únete ahora
             </Link>
