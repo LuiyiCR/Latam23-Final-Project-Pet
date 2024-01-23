@@ -65,12 +65,12 @@ export const Home = () => {
 
       <div className="container my-5">
         <div className="row align-items-center">
-          <div className="col-lg-12 text-center">
+          <div className="col-lg-12 text-center mt-5">
             <h2 className="mb-3">¿Eres veterinario?</h2>
           </div>
         </div>
         <div className="row align-items-center">
-          <div className="col-lg-12 text-center">
+          <div className="col-lg-12 text-center mb-2 ">
             <p>Como veterinario, puedes...</p>
           </div>
         </div>
@@ -79,7 +79,7 @@ export const Home = () => {
             <div className="card">
               <img src={docImgUrl} className="card-img-top" alt="Imagen 1" />
               <div className="card-body">
-                <p className="card-text">Registrar a tus pacientes y llevar un control de su historial clínico.</p>
+                <p className="card-text"><i className="fas fa-book-medical"></i> Registrar a tus pacientes y llevar un control de su historial clínico.</p>
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ export const Home = () => {
             <div className="card">
               <img src={docsImgUrl} className="card-img-top" alt="Imagen 2" />
               <div className="card-body">
-                <p className="card-text">Programar recordatorios para las citas de tus pacientes.</p>
+                <p className="card-text"><i className="far fa-calendar-alt icon-docs"></i> Programar recordatorios para las citas de tus pacientes.</p>
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@ export const Home = () => {
             <div className="card">
               <img src={docCatImgUrl} className="card-img-top" alt="Imagen 3" />
               <div className="card-body">
-                <p className="card-text">Y mucho más...</p>
+                <p className="card-text">🐾 Y mucho más...</p>
               </div>
             </div>
           </div>
@@ -108,6 +108,6 @@ export const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };

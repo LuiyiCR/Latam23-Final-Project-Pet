@@ -106,12 +106,6 @@ Orange: F18043
   );
 }
 
-/* .flex-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-} */
-
 .card {
   width: 100%;
   display: flex;
@@ -135,5 +129,5 @@ Orange: F18043
 }
 
 .card-body {
-  flex-grow: 1;
+  min-height: 80px;
 }
