@@ -11,6 +11,7 @@
     align-items: center;
     flex-direction: column;
     min-width: 400px;
+    margin: 20px 0;
 }
 
 /* Estilos para labels de inputs de registro */
@@ -44,6 +45,7 @@
 .boton-signup{
     background-color: #8c52ff;
     border-color: #7a3afa;
+    width: 150px;
 }
 
 .boton-signup:hover{
@@ -55,3 +57,37 @@
 .error-message{
     text-align: center;
 }
+
+
+/* Contenedor header de signup */
+
+.signup-header{
+    text-align: center;
+}
+
+.signup-header img {
+    width: 5rem;
+
+}
+
+.container-label-radio button{
+    border: none;
+    
+}
+
+/* Estilos inputs radio bootstrap */
+
+.form-check-input[type=radio] {
+    border-radius: 35%;
+}
+
+.form-check-input:checked {
+    background-color: #8c52ff;
+    border-color: #7a3afa;
+}
+
+.form-check-input:focus {
+    border-color: #7a3afa;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(204, 148, 235, 0.25)
+} 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/signup.css";
-import logo from "../../img/logo.png";
+import logo from "../../img/logopetplus.png";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -10,6 +10,7 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [type, setType] = useState("owner");
     const [errorMessage, setErrorMessage] = useState("");
 
     // Funciones para onChanges en inputs del formulario
@@ -112,6 +113,15 @@ const Signup = () => {
         return true
     }
 
+
+    //Fucnciones para verificacion de tipo de usuario
+
+    function verifyType(event) {
+        const valor = event.target.value;
+        setType(valor);
+    }
+
+
     //Funcion para realizar el envio de datos a la API
 
     async function enviarData() {
@@ -122,7 +132,8 @@ const Signup = () => {
                     {
                         "name": name,
                         "email": email,
-                        "password": password
+                        "password": password,
+                        "type": type
                     }
                 ),
                 headers: {
@@ -155,7 +166,7 @@ const Signup = () => {
     }
 
     return (
-        <div className="container-fluid div-signup">
+        <div className="container-fluid div-signup d-flex align-items-center flex-column">
 
             {errorMessage && (
                 <div className="alert alert-warning error-message" role="alert">
@@ -163,7 +174,10 @@ const Signup = () => {
                 </div>
             )}
 
-            <h2>Crear una cuenta</h2>
+            <div className="signup-header">
+                <img src={logo} />
+                <h2>Crear una cuenta</h2>
+            </div>
 
             <form className="contenedor-form">
                 <div className="mb-3">
@@ -178,9 +192,28 @@ const Signup = () => {
                     <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" autoComplete="off" value={password} onChange={setPasswordValue} placeholder="*******" />
                 </div>
-                <div className="mb-4">
+                <div className="mb-3">
                     <label htmlFor="exampleInputPassword2" className="form-label">Confirmar Contraseña</label>
                     <input type="password" className="form-control" id="exampleInputPassword2" autoComplete="off" value={confirmPassword} onChange={setConfirmPasswordValue} placeholder="*******" />
+                </div>
+
+                <div className="container-radio mb-4">
+                    <div className="container-label-radio">
+                        <label className="form-label mb-2">Tipo de usuario</label>
+                    </div>
+
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={verifyType} value="owner" checked={type === "owner"} />
+                        <label className="form-check-label" htmlFor="flexRadioDefault1">
+                            Dueño de mascota
+                        </label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={verifyType} value="vet" checked={type === "vet"} />
+                        <label className="form-check-label" htmlFor="flexRadioDefault2">
+                            Veterinario
+                        </label>
+                    </div>
                 </div>
                 <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Registrarse</button>
             </form>
