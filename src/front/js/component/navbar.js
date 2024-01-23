@@ -47,16 +47,13 @@ export const Navbar = () => {
             </li>
           </ul>
 
-          <div className="d-flex">
-            <a className="btn text-white me-2" href="#">
-              Invitado
-            </a>
-            <Link to="signup" className="btn btn-light text-black rounded-3 me-2" href="#">
-              Registrarse
+          <div className='btn-group gap-3'>
+            <Link to="/guest" className="button btn text-white rounded-3" type="button">
+              Explorar como invitado
             </Link>
-            <a className="btn btn-light text-black rounded-3 me-2" href="#">
-              Entrar
-            </a>
+            <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
+              Iniciar sesión
+            </Link>
           </div>
         </div>
       </div>
