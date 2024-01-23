@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/signup.css";
+import logo from "../../img/logo.png";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -9,6 +10,7 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     // Funciones para onChanges en inputs del formulario
 
@@ -45,7 +47,7 @@ const Signup = () => {
 
     function verifyName() {
         if (verifyNameParameters(name)) {
-            alert("El nombre que proporcionaste no es valido");
+            setErrorMessage("El nombre que proporcionaste no es valido");
             return false
         }
         return true
@@ -67,7 +69,7 @@ const Signup = () => {
         if (verifyEmailParameters()) {
             return true
         }
-        alert("Email invalido")
+        setErrorMessage("El Correo electronico que proporcionaste no es valido")
         return false
     }
 
@@ -100,11 +102,11 @@ const Signup = () => {
 
     function verifyPassword() {
         if (!verifyPassowordParameters()) {
-            alert("Tu contraseña debe ser de almenos 8 caracteres y contener minimo una letra mayuscula y un numero")
+            setErrorMessage("Tu contraseña debe ser de almenos 8 caracteres y contener minimo una letra mayuscula y un numero")
             return false
         }
         if (!comparePasswords()) {
-            alert("Las contraseñas deben coincidir")
+            setErrorMessage("Las contraseñas deben coincidir")
             return false
         }
         return true
@@ -128,7 +130,7 @@ const Signup = () => {
                 }
             })
         if (response.status != 201) {
-            alert("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+            setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
             return
         }
 
@@ -153,34 +155,36 @@ const Signup = () => {
     }
 
     return (
-        <div className="container-fluid">
-            <div className="row div-signup">
+        <div className="container-fluid div-signup">
 
-                <div className="contenedor-imagenes d-flex justify-content-center col-md-6 col-sm-12">
-                    <img src="https://static.vecteezy.com/system/resources/previews/028/597/438/original/cute-cat-jumping-file-no-background-ai-generated-png.png" alt="Gato" style={{ width: '350px', height: 'auto' }} />
+            {errorMessage && (
+                <div className="alert alert-warning error-message" role="alert">
+                    {errorMessage}
                 </div>
+            )}
 
-                <form className="contenedor-form col-md-6 col-sm-12">
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputName" className="form-label">Name</label>
-                        <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" autoComplete="off" value={password} onChange={setPasswordValue} />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword2" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword2" autoComplete="off" value={confirmPassword} onChange={setConfirmPasswordValue} />
-                    </div>
-                    <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Submit</button>
-                </form>
+            <h2>Crear una cuenta</h2>
 
-            </div>
+            <form className="contenedor-form">
+                <div className="mb-3">
+                    <label htmlFor="exampleInputName" className="form-label">Nombre</label>
+                    <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} placeholder="cual es tu nombre?" />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="exampleInputEmail1" className="form-label">Correo Electronico</label>
+                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} placeholder="email@email.com" />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
+                    <input type="password" className="form-control" id="exampleInputPassword1" autoComplete="off" value={password} onChange={setPasswordValue} placeholder="*******" />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="exampleInputPassword2" className="form-label">Confirmar Contraseña</label>
+                    <input type="password" className="form-control" id="exampleInputPassword2" autoComplete="off" value={confirmPassword} onChange={setConfirmPasswordValue} placeholder="*******" />
+                </div>
+                <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Registrarse</button>
+            </form>
+
         </div>
     )
 }

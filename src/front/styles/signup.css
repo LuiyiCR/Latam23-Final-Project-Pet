@@ -1,21 +1,30 @@
 /* Contenedor de inputs de registro */
 
 .div-signup{
+    margin: 20px 0;
+}
+
+.contenedor-form{
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin: 20px;
+    align-items: center;
+    flex-direction: column;
+    min-width: 400px;
 }
 
 /* Estilos para labels de inputs de registro */
 
-
+.contenedor-form div{
+    width: 420px;
+}
 
 /* Estilos para inputs de registro */
 
 .form-control{
-    border-radius: 60px;
+    border-radius: 10px;
     max-width: 430px;
+    width: 100%;
 }
 
 .form-control:focus {
@@ -26,12 +35,23 @@
     box-shadow: none;
 }
 
+.form-control::placeholder{
+    color: rgb(187, 183, 183);
+}
+
 /* Estilos para boton de registro */
 
 .boton-signup{
     background-color: #8c52ff;
+    border-color: #7a3afa;
 }
 
 .boton-signup:hover{
     background-color: #5834a1;
+}
+
+/* Mensaje de alerta de error en el formulario */
+
+.error-message{
+    text-align: center;
 }
