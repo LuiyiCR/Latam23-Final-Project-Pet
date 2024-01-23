@@ -17,6 +17,10 @@ Orange: F18043
   font-size: 1rem;
 }
 
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
 .container {
   max-width: 1200px;
   position: relative;
@@ -84,4 +88,8 @@ Orange: F18043
   color: black;
   background-color: white;
   border-color: #f18043;
+}
+
+footer {
+  background-color: red !important;
 }
