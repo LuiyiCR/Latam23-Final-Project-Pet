@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/signup.css";
 import logo from "../../img/logopetplus.png";
 
 const BACKEND_URL = process.env.BACKEND_URL;
+console.log(BACKEND_URL)
 
 const Signup = () => {
 
@@ -12,6 +14,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [type, setType] = useState("owner");
     const [errorMessage, setErrorMessage] = useState("");
+
+    const navigate = useNavigate();
 
     // Funciones para onChanges en inputs del formulario
 
@@ -103,7 +107,7 @@ const Signup = () => {
 
     function verifyPassword() {
         if (!verifyPassowordParameters()) {
-            setErrorMessage("Tu contraseña debe ser de almenos 8 caracteres y contener minimo una letra mayuscula y un numero")
+            setErrorMessage("Tu contraseña debe ser de al menos 8 caracteres y contener minimo una letra mayuscula y un numero")
             return false
         }
         if (!comparePasswords()) {
@@ -132,20 +136,24 @@ const Signup = () => {
                     {
                         "name": name,
                         "email": email,
-                        "password": password,
-                        "type": type
+                        "password": password
                     }
                 ),
                 headers: {
                     'Content-Type': "application/json"
                 }
             })
-        if (response.status != 201) {
-            setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
-            return
+        if (response.status === 400) {
+            setErrorMessage("El correo electronico ya se encuentra en uso")
+            return 400
         }
 
+        if (response.status != 201) {
+            setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+            return 500
+        }
 
+        return 201
     }
 
     // Funcion onClick para manejar el boton de enviar (submit) / registrarse
@@ -157,11 +165,14 @@ const Signup = () => {
         if (verifyPassword() &&
             verifyName() &&
             verifyEmail()) {
-            alert("Registro con exito")
+            if (enviarData() === 201) {
+                navigate("/");
+                return true
+            }
             enviarData()
-            return true
+            return false
         }
-        return false
+        return
 
     }
 
