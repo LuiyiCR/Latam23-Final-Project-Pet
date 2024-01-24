@@ -232,7 +232,6 @@ const Signup = () => {
                 </div>
                 <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Registrarse</button>
             </form>
-
         </div>
     )
 }
