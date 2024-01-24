@@ -4,7 +4,6 @@ import "../../styles/signup.css";
 import logo from "../../img/logopetplus.png";
 
 const BACKEND_URL = process.env.BACKEND_URL;
-console.log(BACKEND_URL)
 
 const Signup = () => {
 
@@ -158,19 +157,24 @@ const Signup = () => {
 
     // Funcion onClick para manejar el boton de enviar (submit) / registrarse
 
-    function submitHandler(event) {
+    async function submitHandler(event) {
 
         event.preventDefault();
 
-        if (verifyPassword() &&
-            verifyName() &&
-            verifyEmail()) {
-            if (enviarData() === 201) {
+        if (verifyName() &&
+            verifyEmail() &&
+            verifyPassword()) {
+
+            const statusCode = await enviarData();
+
+            if (statusCode === 201) {
                 navigate("/");
-                return true
+                return
             }
-            enviarData()
-            return false
+            if (statusCode === 400) {
+                return
+            }
+
         }
         return
 
