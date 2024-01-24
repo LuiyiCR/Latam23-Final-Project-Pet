@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../../styles/signup.css";
 import logo from "../../img/logopetplus.png";
 
@@ -194,7 +194,7 @@ const Signup = () => {
                 <h2>Crear una cuenta</h2>
             </div>
 
-            <form className="contenedor-form">
+            <form className="contenedor-form mb-5">
                 <div className="mb-3">
                     <label htmlFor="exampleInputName" className="form-label">Nombre</label>
                     <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} placeholder="cual es tu nombre?" />
@@ -232,6 +232,13 @@ const Signup = () => {
                 </div>
                 <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Registrarse</button>
             </form>
+
+            <div className="question-mark">
+                <div>
+                    Ya estas registrado? <Link to={"/login"}>Iniciar Sesion</Link>
+                </div>
+            </div>
+
         </div>
     )
 }
