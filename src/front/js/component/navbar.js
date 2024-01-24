@@ -8,9 +8,7 @@ export const Navbar = () => {
 
       <div className="container">
         <Link to="/" className="" type="button">
-          <a className="navbar-brand" href="#">
-            <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
-          </a>
+          <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
         </Link>
 
         <button
@@ -28,10 +26,8 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
-              <Link to="/" className="" type="button">
-                <a className="nav-link" href="#">
-                  Inicio
-                </a>
+              <Link to="/" className="nav-link" type="button">
+                Inicio
               </Link>
             </li>
             <li className="nav-item">

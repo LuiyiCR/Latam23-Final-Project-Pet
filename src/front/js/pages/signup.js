@@ -189,7 +189,7 @@ const Signup = () => {
                 </div>
             )}
 
-            <div className="signup-header">
+            <div className="signup-header mb-3">
                 <img src={logo} />
                 <h2>Crear una cuenta</h2>
             </div>
