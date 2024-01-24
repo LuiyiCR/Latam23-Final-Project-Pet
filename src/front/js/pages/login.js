@@ -123,13 +123,17 @@ const Login = () => {
             </div>
 
             <form className="contenedor-form mb-5">
-                <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Correo Electronico</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} placeholder="email@email.com" />
+                <div className="mb-3 d-flex justify-content-center flex-column align-items-center">
+                    <div className="div-input-interno">
+                        <label htmlFor="exampleInputEmail1" className="form-label">Correo Electronico</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} placeholder="email@email.com" />
+                    </div>
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" autoComplete="off" value={password} onChange={setPasswordValue} placeholder="*******" />
+                <div className="mb-4 d-flex justify-content-center flex-column align-items-center">
+                    <div className="div-input-interno">
+                        <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
+                        <input type="password" className="form-control" id="exampleInputPassword1" autoComplete="off" value={password} onChange={setPasswordValue} placeholder="*******" />
+                    </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Iniciar Sesion</button>

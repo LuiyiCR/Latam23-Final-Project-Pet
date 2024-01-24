@@ -10,21 +10,31 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-width: 400px;
+    max-width: 400px;
     margin: 20px 0;
 }
 
 /* Estilos para labels de inputs de registro */
 
-.contenedor-form div{
-    width: 420px;
+.contenedor-form > div {
+    width: 100%;
 }
+
+.div-input-interno {
+    width: 430px; /* Ancho predeterminado para pantallas mayores o iguales a 430px */
+}
+
+@media (max-width: 430px) {
+    .div-input-interno {
+        width: 100%; /* Ancho del 100% para pantallas menores a 430px */
+    }
+}
+
 
 /* Estilos para inputs de registro */
 
 .form-control{
     border-radius: 10px;
-    max-width: 430px;
     width: 100%;
 }
 
