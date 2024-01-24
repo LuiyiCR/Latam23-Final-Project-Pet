@@ -63,9 +63,9 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="container my-5">
+      <div className="container my-4">
         <div className="row align-items-center">
-          <div className="col-lg-12 text-center mt-5">
+          <div className="col-lg-12 text-center">
             <h2 className="mb-3">¿Eres veterinario?</h2>
           </div>
         </div>
@@ -102,7 +102,7 @@ export const Home = () => {
         </div>
         <div className="row align-items-center">
           <div className="col-lg-12 text-center mb-5">
-            <Link to="/signup" className="btn btn-light text-black rounded-3" type="button">
+            <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
               Únete ahora
             </Link>
           </div>

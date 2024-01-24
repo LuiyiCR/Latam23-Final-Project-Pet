@@ -7,9 +7,11 @@ export const Navbar = () => {
     <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
 
       <div className="container">
-        <a className="navbar-brand" href="#">
-          <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
-        </a>
+        <Link to="/" className="" type="button">
+          <a className="navbar-brand" href="#">
+            <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
+          </a>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -26,9 +28,11 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Inicio
-              </a>
+              <Link to="/" className="" type="button">
+                <a className="nav-link" href="#">
+                  Inicio
+                </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
