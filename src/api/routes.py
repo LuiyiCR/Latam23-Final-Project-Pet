@@ -62,10 +62,10 @@ def login():
         try:
             if validation_password:
                 token = create_access_token(identity= user_exist.id) 
-                type = user_exist.type  
+                user_type = user_exist.user_type  
                 return jsonify({"message":"Authentication successful",
                                 "token": token,
-                                "type" : type}), 201 
+                                "user_type" : user_type}), 201 
             else:
                 return jsonify({"message":"Incorrect Pasword"}), 401  
         except Exception as error:
