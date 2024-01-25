@@ -3,8 +3,8 @@
 */
 
 /* Color palette
-Morado: 8C52FF
-Orange: F18043
+Morado: #8C52FF
+Orange: #F18043
 */
 
 *,
@@ -13,12 +13,12 @@ Orange: F18043
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: black;
-  font-size: 1rem;
+  /* color: black; */
+  /* font-size: 1rem; */
 }
 
 * {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 .container {
@@ -27,7 +27,7 @@ Orange: F18043
 }
 
 .background-container::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -104,6 +104,11 @@ Orange: F18043
     rgba(252, 251, 255, 1) 47%,
     rgba(140, 82, 255, 10) 500%
   );
+}
+
+.divider-section i {
+  font-size: 2rem;
+  color: #f18043;
 }
 
 .card {

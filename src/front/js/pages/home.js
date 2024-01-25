@@ -3,6 +3,7 @@ import { Context } from '../store/appContext';
 import heroImgUrl from '../../img/foto-pc.png';
 import docImgUrl from '../../img/foto-veterinaria.png'
 import docCatImgUrl from '../../img/foto-doc-cat.png'
+// import iconImgUrl from '../../img-icons/icon1.png'
 import docsImgUrl from '../../img/foto-docs.png'
 import { Link } from 'react-router-dom';
 import '../../styles/home.css';
@@ -51,7 +52,9 @@ export const Home = () => {
         </div>
         <div>
           <i className="fas fa-cat"></i>
+          {/* <img src={iconImgUrl} className="icon-div-section" alt="Imagen 1" /> */}
           <p>Gatos</p>
+
         </div>
         <div>
           <i className="fas fa-dove"></i>
