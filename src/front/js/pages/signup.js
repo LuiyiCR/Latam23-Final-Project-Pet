@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/signup.css";
 import logo from "../../img/logopetplus.png";
+import ScrollToTop from "../component/scrollToTop";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -13,6 +14,7 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [type, setType] = useState("owner");
     const [errorMessage, setErrorMessage] = useState("");
+    const [alertMessageColor, setalertMessageColor] = useState("alert-danger")
 
     const navigate = useNavigate();
 
@@ -91,6 +93,7 @@ const Signup = () => {
 
     function verifyPassowordParameters() {
         if (password.length >= 8 &&
+            !password.includes(" ") &&
             verifyContainsPassword(password)) {
             return true
         }
@@ -106,7 +109,7 @@ const Signup = () => {
 
     function verifyPassword() {
         if (!verifyPassowordParameters()) {
-            setErrorMessage("Tu contraseña debe ser de al menos 8 caracteres y contener minimo una letra mayuscula y un numero")
+            setErrorMessage("Tu contraseña debe ser de al menos 8 caracteres, contener minimo una letra mayuscula, un numero y sin espacios en blanco")
             return false
         }
         if (!comparePasswords()) {
@@ -128,20 +131,28 @@ const Signup = () => {
     //Funcion para realizar el envio de datos a la API
 
     async function enviarData() {
-        const response = await fetch(BACKEND_URL + "/api/user",
-            {
-                method: "POST",
-                body: JSON.stringify(
-                    {
-                        "name": name,
-                        "email": email,
-                        "password": password
+        try {
+            const response = await fetch(BACKEND_URL + "/api/user",
+                {
+                    method: "POST",
+                    body: JSON.stringify(
+                        {
+                            "name": name,
+                            "email": email,
+                            "password": password,
+                            "user_type": type
+                        }
+                    ),
+                    headers: {
+                        'Content-Type': "application/json"
                     }
-                ),
-                headers: {
-                    'Content-Type': "application/json"
-                }
-            })
+                })
+
+        } catch (error) {
+            setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde");
+            window.scrollTo(0, 0);
+        }
+
         if (response.status === 400) {
             setErrorMessage("El correo electronico ya se encuentra en uso")
             return 400
@@ -168,30 +179,37 @@ const Signup = () => {
             const statusCode = await enviarData();
 
             if (statusCode === 201) {
-                navigate("/");
+                setalertMessageColor("alert-success")
+                setErrorMessage("Registro exitoso, redirigiendo a pantalla de login");
+                window.scrollTo(0, 0);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 3000);
                 return
             }
             if (statusCode === 400) {
+                window.scrollTo(0, 0);
                 return
             }
 
         }
+        window.scrollTo(0, 0);
         return
 
     }
 
     return (
-        <div className="container-fluid div-signup d-flex align-items-center flex-column">
+        <div className="container-fluid div-signup d-flex align-items-center flex-column background-container">
 
             {errorMessage && (
-                <div className="alert alert-warning error-message" role="alert">
+                <div className={"alert error-message " + alertMessageColor} role="alert">
                     {errorMessage}
                 </div>
             )}
 
             <div className="signup-header mb-3">
                 <img src={logo} />
-                <h2>Crear una cuenta</h2>
+                <h2 className="mt-3">Crear una cuenta</h2>
             </div>
 
             <form className="contenedor-form mb-5">

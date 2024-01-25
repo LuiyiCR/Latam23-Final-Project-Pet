@@ -65,26 +65,27 @@ const Login = () => {
     //Funcion para realizar el envio de datos a la API
 
     async function enviarData() {
-        const response = await fetch(BACKEND_URL + "/api/token",
-            {
-                method: "POST",
-                body: JSON.stringify(
-                    {
-                        "email": email,
-                        "password": password
+        try {
+            const response = await fetch(BACKEND_URL + "/api/token",
+                {
+                    method: "POST",
+                    body: JSON.stringify(
+                        {
+                            "email": email,
+                            "password": password
+                        }
+                    ),
+                    headers: {
+                        'Content-Type': "application/json"
                     }
-                ),
-                headers: {
-                    'Content-Type': "application/json"
-                }
-            })
-        if (response.status === 400) {
-            setErrorMessage("El correo electronico no esta registrado")
-            return false
+                })
+
+        } catch (error) {
+            setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde")
         }
 
-        if (response.status === 401) {
-            setErrorMessage("Contraseña incorrecta, vuelva a intentarlo")
+        if (response.status !== 201) {
+            setErrorMessage("Correo electronico o contraseña incorrecta, vuelva a intentarlo");
             return false
         }
 
@@ -98,28 +99,32 @@ const Login = () => {
         event.preventDefault();
         if (verifyEmail() &&
             verifyPassword()) {
+
             const responseData = await enviarData();
+
             if (responseData === false) {
+                window.scrollTo(0, 0);
                 return
             }
             const token = responseData.token;
             localStorage.setItem("token", token);
             navigate("/");
         }
+        window.scrollTo(0, 0);
     }
 
     return (
         <div className="container-fluid div-signup d-flex align-items-center flex-column">
 
             {errorMessage && (
-                <div className="alert alert-warning error-message" role="alert">
+                <div className="alert alert-danger error-message" role="alert">
                     {errorMessage}
                 </div>
             )}
 
             <div className="signup-header mb-3">
                 <img src={logo} />
-                <h2>Iniciar Sesion</h2>
+                <h2 className="mt-3">Iniciar Sesion</h2>
             </div>
 
             <form className="contenedor-form mb-5">
@@ -144,6 +149,7 @@ const Login = () => {
                     Aun no tienes cuenta? <Link to={"/signup"}>Registrate</Link>
                 </div>
             </div>
+
         </div>
     )
 }
