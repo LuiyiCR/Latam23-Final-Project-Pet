@@ -8,6 +8,8 @@ class User(db.Model):
     name = db.Column(db.String(200), unique=False, nullable=False)
     password_hash = db.Column(db.String(300), unique=True, nullable=True)
     salt = db.Column(db.String(300), unique=True, nullable=True)
+    user_type = db.Column(db.String(10), unique=False, nullable=False)
+
 
     
     def __repr__(self):
@@ -17,5 +19,6 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "type" : self.type
             # do not serialize the password, its a security breach
         }

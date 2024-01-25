@@ -21,11 +21,12 @@ def singup():
         data = request.json
         email = data.get("email")
         name =  data.get("name")
+        user_type = data.get("user_type")
         password = data.get("password")
-        verify_data = [email, name, password]
+        verify_data = [email, name, password, user_type]
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
-        user_exist = User.query.filter_by(email=email).first()
+        user_exist = User.query.filter_by(email = email).first()
         if user_exist:
             return jsonify({"message":"User all ready exist"}), 400
         salt = str(gensalt(), encoding = 'utf-8')
@@ -33,7 +34,7 @@ def singup():
         print(password_and_salt)
         password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
         print(password_hash)
-        new_user = User(name = name, email = email, password_hash = password_hash, salt = salt)
+        new_user = User(name = name,user_type = user_type, email = email, password_hash = password_hash, salt = salt)
         try:
             db.session.add(new_user)
             db.session.commit()
@@ -60,15 +61,15 @@ def login():
         validation_password = check_password_hash(password_hash, password)
         try:
             if validation_password:
-                token = create_access_token(identity= user_exist.id)   
+                token = create_access_token(identity= user_exist.id) 
+                type = user_exist.type  
                 return jsonify({"message":"Authentication successful",
-                                "token": token}), 201 
+                                "token": token,
+                                "type" : type}), 201 
             else:
                 return jsonify({"message":"Incorrect Pasword"}), 401  
         except Exception as error:
             db.session.rollback()
             print(error)
             return jsonify({"message": "Server error"}), 500 
-
-
             
