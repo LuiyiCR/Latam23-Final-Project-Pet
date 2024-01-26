@@ -28,13 +28,15 @@ export const Home = () => {
       testimonio: '"Pet+ ha sido una herramienta increíble para el cuidado de mis mascotas. ¡Altamente recomendada!"',
       foto: gusTestimonioImgUrl,
       pais: "Colombia",
+      puntuacion: 5
     },
     {
       id: 2,
       nombre: "Paola Rodríguez",
       testimonio: '"La aplicación hace que sea fácil realizar un seguimiento de las vacunas y programar citas con el veterinario. ¡Me encanta!"',
       foto: paoTestimonioImgUrl,
-      pais: "Costa Rica"
+      pais: "Costa Rica",
+      puntuacion: 4
 
     },
     {
@@ -42,14 +44,16 @@ export const Home = () => {
       nombre: "Rosaura Pérez",
       testimonio: '"Increíble. Estoy muy impresionado por la facilidad de uso y la eficacia de Pet+. Mis mascotas nunca han estado tan saludables."',
       foto: rosTestimonioImgUrl,
-      pais: "México"
+      pais: "México",
+      puntuacion: 5
     },
     {
       id: 4,
       nombre: "Soledad Gómez",
       testimonio: '"Como dueño de varias mascotas, Pet+ me ayuda a mantener todo organizado. ¡Una aplicación imprescindible para los amantes de los animales!"',
       foto: soleTestimonioImgUrl,
-      pais: "Venezuela"
+      pais: "Venezuela",
+      puntuacion: 5
     },
   ];
 
@@ -143,36 +147,31 @@ export const Home = () => {
         <h3 className='testimonios-h3'>¡Testimonios!</h3>
         <div className="carousel-inner">
           {testimonios.map((testimonio, index) => (
-            <div key={testimonio.id}>
-              <div className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                <div className="d-flex flex-column align-items-center">
-                  <img src={testimonio.foto} className="rounded-circle" style={{ width: '30%', maxWidth: '100px' }} alt={`Foto de ${testimonio.nombre}`} />
-                  <div className="mt-3 text-center testimonios-name">
-                    <h5>{testimonio.nombre}</h5>
-                    <p>{testimonio.pais}</p>
-                  </div>
-                  <div className="text-center testimonios-stars">
-                    <span className="star">&#9733;</span>
-                    <span className="star">&#9733;</span>
-                    <span className="star">&#9733;</span>
-                    <span className="star">&#9733;</span>
-                    <span className="star">&#9733;</span>
-                  </div>
-                  <p className="text-center testimonios-text">{testimonio.testimonio}</p>
+            <div key={testimonio.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+              <div className="d-flex flex-column align-items-center">
+                <img src={testimonio.foto} className="rounded-circle" style={{ width: '30%', maxWidth: '100px' }} alt={`Foto de ${testimonio.nombre}`} />
+                <div className="mt-3 text-center testimonios-name">
+                  <h5>{testimonio.nombre}</h5>
+                  <p>{testimonio.pais}</p>
                 </div>
+                <div className="text-center testimonios-stars">
+                  {Array.from({ length: 5 }, (_, i) =>
+                    <span key={i} className='star' style={{ color: i < testimonio.puntuacion ? 'gold' : 'grey' }}>&#9733;</span>
+                  )}
+                </div>
+                <p className="text-center testimonios-text">{testimonio.testimonio}</p>
               </div>
             </div>
           ))}
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <i className="fas fa-chevron-left"></i>
           <span className="visually-hidden">Anterior</span>
         </button>
         <button className="carousel-control-next" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <i className="fas fa-chevron-right"></i>
           <span className="visually-hidden">Siguiente</span>
         </button>
-
       </div>
 
       <div className="container my-5">
@@ -223,3 +222,4 @@ export const Home = () => {
     </div >
   );
 };
+
