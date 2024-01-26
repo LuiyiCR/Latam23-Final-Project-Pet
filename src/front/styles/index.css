@@ -139,6 +139,13 @@ Orange: #F18043
   min-height: 80px;
 }
 
+.carousel {
+  /* background-color: #8c52ff1f; */
+  background-color: #f180431f;
+  padding-top: 2rem;
+  height: 27.1875rem;
+}
+
 .testimonios-h3 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -187,7 +194,6 @@ Orange: #F18043
 .fas.fa-chevron-right {
   width: 2.9rem;
   height: 2.9rem;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

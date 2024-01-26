@@ -5,7 +5,6 @@ import exampleOneImgUrl from '../../img/foto-tem1.png'
 import exampleTwoImgUrl from '../../img/foto-tem2.png'
 import docImgUrl from '../../img/foto-veterinaria.png'
 import docCatImgUrl from '../../img/foto-doc-cat.png'
-// import iconImgUrl from '../../img-icons/icon1.svg'
 import docsImgUrl from '../../img/foto-docs.png'
 import rosTestimonioImgUrl from '../../img/rosaura-testimonio.png'
 import gusTestimonioImgUrl from '../../img/gustavo-testimonio.png'
@@ -98,7 +97,6 @@ export const Home = () => {
         </div>
         <div>
           <i className="fas fa-cat"></i>
-          {/* <img src={iconImgUrl} className="icon-div-section" alt="Imagen 1" /> */}
           <p>Gatos</p>
 
         </div>
