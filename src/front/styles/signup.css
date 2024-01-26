@@ -101,3 +101,56 @@
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(204, 148, 235, 0.25)
 } 
+
+
+.background-container-forms::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 25%;
+    border-radius: 20px;
+    opacity: 0.5;
+    background: #784eed;
+    filter: blur(125px);
+    z-index: -1;
+  }
+  
+  @media (max-width: 767px) {
+    .background-container-forms::before {
+      width: 40%;
+      background: #784eed;
+      border-radius: 15px;
+      filter: blur(100px);
+      z-index: -1;
+    }
+  }
+
+
+.background-container-forms::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35%;
+    height: 25%;
+    border-radius: 20px;
+    opacity: 0.5;
+    background: #f18043;
+    filter: blur(125px);
+    z-index: -1;
+  }
+  
+  @media (max-width: 767px) {
+    .background-container-forms::after {
+      width: 40%;
+      background: #ff5722;
+      border-radius: 15px;
+      filter: blur(100px);
+      z-index: -1;
+    }
+  }
+
+
+  

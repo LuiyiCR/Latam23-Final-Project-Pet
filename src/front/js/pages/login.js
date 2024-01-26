@@ -114,7 +114,7 @@ const Login = () => {
     }
 
     return (
-        <div className="container-fluid div-signup d-flex align-items-center flex-column">
+        <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms">
 
             {errorMessage && (
                 <div className="alert alert-danger error-message" role="alert">

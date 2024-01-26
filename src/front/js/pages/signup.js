@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/signup.css";
 import logo from "../../img/logopetplus.png";
-import ScrollToTop from "../component/scrollToTop";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -146,21 +145,22 @@ const Signup = () => {
                     headers: {
                         'Content-Type': "application/json"
                     }
-                })
+                });
+
+            if (response.status === 400) {
+                setErrorMessage("El correo electronico ya se encuentra en uso")
+                return 400
+            }
+
+            if (response.status != 201) {
+                setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+                return 500
+            }
+
 
         } catch (error) {
             setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde");
             window.scrollTo(0, 0);
-        }
-
-        if (response.status === 400) {
-            setErrorMessage("El correo electronico ya se encuentra en uso")
-            return 400
-        }
-
-        if (response.status != 201) {
-            setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
-            return 500
         }
 
         return 201
@@ -199,7 +199,7 @@ const Signup = () => {
     }
 
     return (
-        <div className="container-fluid div-signup d-flex align-items-center flex-column background-container">
+        <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms">
 
             {errorMessage && (
                 <div className={"alert error-message " + alertMessageColor} role="alert">
