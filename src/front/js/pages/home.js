@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Button } from 'react-bootstrap';
 import '../../styles/home.css';
 
 export const Home = () => {
@@ -23,26 +24,26 @@ export const Home = () => {
   const testimonios = [
     {
       nombre: "Gustavo Santos",
-      testimonio: "Pet+ ha sido una herramienta increíble para el cuidado de mis mascotas. ¡Altamente recomendada!",
+      testimonio: '"Pet+ ha sido una herramienta increíble para el cuidado de mis mascotas. ¡Altamente recomendada!"',
       foto: gusTestimonioImgUrl,
       pais: "Colombia",
     },
     {
       nombre: "Paola Rodríguez",
-      testimonio: "La aplicación hace que sea fácil realizar un seguimiento de las vacunas y programar citas con el veterinario. ¡Me encanta!",
+      testimonio: '"La aplicación hace que sea fácil realizar un seguimiento de las vacunas y programar citas con el veterinario. ¡Me encanta!"',
       foto: paoTestimonioImgUrl,
       pais: "Costa Rica"
 
     },
     {
       nombre: "Rosaura Pérez",
-      testimonio: "Increíble. Estoy muy impresionado por la facilidad de uso y la eficacia de Pet+. Mis mascotas nunca han estado tan saludables.",
+      testimonio: '"Increíble. Estoy muy impresionado por la facilidad de uso y la eficacia de Pet+. Mis mascotas nunca han estado tan saludables."',
       foto: rosTestimonioImgUrl,
       pais: "México"
     },
     {
       nombre: "Soledad Gómez",
-      testimonio: "Como dueño de varias mascotas, Pet+ me ayuda a mantener todo organizado. ¡Una aplicación imprescindible para los amantes de los animales!",
+      testimonio: '"Como dueño de varias mascotas, Pet+ me ayuda a mantener todo organizado. ¡Una aplicación imprescindible para los amantes de los animales!"',
       foto: soleTestimonioImgUrl,
       pais: "Venezuela"
     },
@@ -117,7 +118,7 @@ export const Home = () => {
         <div className="row row-cols-1 row-cols-md-2 g-4">
           <div className="col">
             <div className="card">
-              <img src={exampleOneImgUrl} className="card-img-top" alt="Imagen 1" />
+              <img src={exampleOneImgUrl} className="card-img-top img-example" alt="Imagen 1" />
               <div className="card-body">
                 <p className="card-text">🐾 Ingresar tantas mascotas como gustes.</p>
               </div>
@@ -125,7 +126,7 @@ export const Home = () => {
           </div>
           <div className="col">
             <div className="card">
-              <img src={exampleTwoImgUrl} className="card-img-top" alt="Imagen 2" />
+              <img src={exampleTwoImgUrl} className="card-img-top img-example" alt="Imagen 2" />
               <div className="card-body">
                 <p className="card-text">📓 Llevar un control separado de cada una de ellas.</p>
               </div>
@@ -134,7 +135,34 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="testimonial-section container my-4">
+      <div id="testimoniosCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+          {testimonios.map((testimonio, index) => (
+            <div key={index}>
+              <div className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                <div className="d-flex flex-column align-items-center">
+                  <img src={testimonio.foto} className="rounded-circle" style={{ width: '30%', maxWidth: '100px' }} alt={`Foto de ${testimonio.nombre}`} />
+                  <div className="mt-3 text-center">
+                    <h5>{testimonio.nombre}</h5>
+                    <p>{testimonio.pais}</p>
+                  </div>
+                  <p className="text-center">{testimonio.testimonio}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Anterior</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+
+      {/* <div className="testimonial-section container my-4">
         <div className="row">
           <div className="col-lg-12 text-center">
             <h2 className="mb-3">Testimonios de Usuarios</h2>
@@ -154,7 +182,9 @@ export const Home = () => {
           {testimonios.map((testimonio, index) => (
             <div key={index}>
               <div className="card">
-                <img src={testimonio.foto} className="card-img-top" alt={`Foto de ${testimonio.nombre}`} />
+                <img src={testimonio.foto} className="card-img-top img-testimonial"
+                  style={{ width: '30%', maxWidth: '', display: 'inline-flex', margin: '0 auto' }}
+                  alt={`Foto de ${testimonio.nombre}`} />
                 <div className="card-body">
                   <p className="card-text"><strong>{testimonio.nombre} / {testimonio.pais} </strong></p>
                   <p className="card-text">{testimonio.testimonio}</p>
@@ -163,9 +193,10 @@ export const Home = () => {
             </div>
           ))}
         </Slider>
-      </div>
+        <div className="testimonial-dots-container"></div>
+      </div> */}
 
-      <div className="container my-4">
+      <div className="container my-5">
         <div className="row align-items-center">
           <div className="col-lg-12 text-center">
             <h2 className="mb-3">¿Eres veterinario?</h2>

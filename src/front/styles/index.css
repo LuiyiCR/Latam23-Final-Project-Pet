@@ -133,6 +133,19 @@ Orange: #F18043
   object-fit: cover;
 }
 
+.img-example {
+  object-fit: scale-down;
+}
+
 .card-body {
   min-height: 80px;
+}
+
+.testimonial-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  color: #8c52ff;
 }
