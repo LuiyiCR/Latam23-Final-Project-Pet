@@ -11,6 +11,7 @@ import rosTestimonioImgUrl from '../../img/rosaura-testimonio.png'
 import gusTestimonioImgUrl from '../../img/gustavo-testimonio.png'
 import paoTestimonioImgUrl from '../../img/paola-testimonio.png'
 import soleTestimonioImgUrl from '../../img/soledad-testimonio.png'
+import vectorImgUrl from '../../img-icons/vector.png'
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -22,12 +23,14 @@ export const Home = () => {
 
   const testimonios = [
     {
+      id: 1,
       nombre: "Gustavo Santos",
       testimonio: '"Pet+ ha sido una herramienta increíble para el cuidado de mis mascotas. ¡Altamente recomendada!"',
       foto: gusTestimonioImgUrl,
       pais: "Colombia",
     },
     {
+      id: 2,
       nombre: "Paola Rodríguez",
       testimonio: '"La aplicación hace que sea fácil realizar un seguimiento de las vacunas y programar citas con el veterinario. ¡Me encanta!"',
       foto: paoTestimonioImgUrl,
@@ -35,12 +38,14 @@ export const Home = () => {
 
     },
     {
+      id: 3,
       nombre: "Rosaura Pérez",
       testimonio: '"Increíble. Estoy muy impresionado por la facilidad de uso y la eficacia de Pet+. Mis mascotas nunca han estado tan saludables."',
       foto: rosTestimonioImgUrl,
       pais: "México"
     },
     {
+      id: 4,
       nombre: "Soledad Gómez",
       testimonio: '"Como dueño de varias mascotas, Pet+ me ayuda a mantener todo organizado. ¡Una aplicación imprescindible para los amantes de los animales!"',
       foto: soleTestimonioImgUrl,
@@ -134,18 +139,26 @@ export const Home = () => {
         </div>
       </div>
 
-      <div id="testimoniosCarousel" className="carousel slide" data-bs-ride="carousel">
+      <div id="testimoniosCarousel" className="carousel slide text-center" data-bs-ride="carousel">
+        <h3 className='testimonios-h3'>¡Testimonios!</h3>
         <div className="carousel-inner">
           {testimonios.map((testimonio, index) => (
-            <div key={index}>
+            <div key={testimonio.id}>
               <div className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                 <div className="d-flex flex-column align-items-center">
                   <img src={testimonio.foto} className="rounded-circle" style={{ width: '30%', maxWidth: '100px' }} alt={`Foto de ${testimonio.nombre}`} />
-                  <div className="mt-3 text-center">
+                  <div className="mt-3 text-center testimonios-name">
                     <h5>{testimonio.nombre}</h5>
                     <p>{testimonio.pais}</p>
                   </div>
-                  <p className="text-center">{testimonio.testimonio}</p>
+                  <div className="text-center testimonios-stars">
+                    <span className="star">&#9733;</span>
+                    <span className="star">&#9733;</span>
+                    <span className="star">&#9733;</span>
+                    <span className="star">&#9733;</span>
+                    <span className="star">&#9733;</span>
+                  </div>
+                  <p className="text-center testimonios-text">{testimonio.testimonio}</p>
                 </div>
               </div>
             </div>
@@ -159,41 +172,8 @@ export const Home = () => {
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Siguiente</span>
         </button>
-      </div>
 
-      {/* <div className="testimonial-section container my-4">
-        <div className="row">
-          <div className="col-lg-12 text-center">
-            <h2 className="mb-3">Testimonios de Usuarios</h2>
-          </div>
-        </div>
-        <Slider
-          className="testimonial-slider"
-          dots={true}
-          infinite={true}
-          speed={500}
-          slidesToShow={1}
-          slidesToScroll={1}
-          cssEase="linear"
-          centerMode={false}
-          centerPadding="0px"
-        >
-          {testimonios.map((testimonio, index) => (
-            <div key={index}>
-              <div className="card">
-                <img src={testimonio.foto} className="card-img-top img-testimonial"
-                  style={{ width: '30%', maxWidth: '', display: 'inline-flex', margin: '0 auto' }}
-                  alt={`Foto de ${testimonio.nombre}`} />
-                <div className="card-body">
-                  <p className="card-text"><strong>{testimonio.nombre} / {testimonio.pais} </strong></p>
-                  <p className="card-text">{testimonio.testimonio}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </Slider>
-        <div className="testimonial-dots-container"></div>
-      </div> */}
+      </div>
 
       <div className="container my-5">
         <div className="row align-items-center">
