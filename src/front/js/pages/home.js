@@ -1,15 +1,52 @@
 import React, { useContext } from 'react';
 import { Context } from '../store/appContext';
 import heroImgUrl from '../../img/foto-pc.png';
+import exampleOneImgUrl from '../../img/foto-tem1.png'
+import exampleTwoImgUrl from '../../img/foto-tem2.png'
 import docImgUrl from '../../img/foto-veterinaria.png'
 import docCatImgUrl from '../../img/foto-doc-cat.png'
-// import iconImgUrl from '../../img-icons/icon1.png'
+// import iconImgUrl from '../../img-icons/icon1.svg'
 import docsImgUrl from '../../img/foto-docs.png'
+import rosTestimonioImgUrl from '../../img/rosaura-testimonio.png'
+import gusTestimonioImgUrl from '../../img/gustavo-testimonio.png'
+import paoTestimonioImgUrl from '../../img/paola-testimonio.png'
+import soleTestimonioImgUrl from '../../img/soledad-testimonio.png'
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import '../../styles/home.css';
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
+  const testimonios = [
+    {
+      nombre: "Gustavo Santos",
+      testimonio: "Pet+ ha sido una herramienta increíble para el cuidado de mis mascotas. ¡Altamente recomendada!",
+      foto: gusTestimonioImgUrl,
+      pais: "Colombia",
+    },
+    {
+      nombre: "Paola Rodríguez",
+      testimonio: "La aplicación hace que sea fácil realizar un seguimiento de las vacunas y programar citas con el veterinario. ¡Me encanta!",
+      foto: paoTestimonioImgUrl,
+      pais: "Costa Rica"
+
+    },
+    {
+      nombre: "Rosaura Pérez",
+      testimonio: "Increíble. Estoy muy impresionado por la facilidad de uso y la eficacia de Pet+. Mis mascotas nunca han estado tan saludables.",
+      foto: rosTestimonioImgUrl,
+      pais: "México"
+    },
+    {
+      nombre: "Soledad Gómez",
+      testimonio: "Como dueño de varias mascotas, Pet+ me ayuda a mantener todo organizado. ¡Una aplicación imprescindible para los amantes de los animales!",
+      foto: soleTestimonioImgUrl,
+      pais: "Venezuela"
+    },
+  ];
 
   return (
     <div className='background-container'>
@@ -69,6 +106,68 @@ export const Home = () => {
       <div className="container my-4">
         <div className="row align-items-center">
           <div className="col-lg-12 text-center">
+            <h2 className="mb-3">¿Eres dueño de una o varias mascotas?</h2>
+          </div>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-lg-12 text-center mb-2 ">
+            <p>Inicia sesión y podrás...</p>
+          </div>
+        </div>
+        <div className="row row-cols-1 row-cols-md-2 g-4">
+          <div className="col">
+            <div className="card">
+              <img src={exampleOneImgUrl} className="card-img-top" alt="Imagen 1" />
+              <div className="card-body">
+                <p className="card-text">🐾 Ingresar tantas mascotas como gustes.</p>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card">
+              <img src={exampleTwoImgUrl} className="card-img-top" alt="Imagen 2" />
+              <div className="card-body">
+                <p className="card-text">📓 Llevar un control separado de cada una de ellas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="testimonial-section container my-4">
+        <div className="row">
+          <div className="col-lg-12 text-center">
+            <h2 className="mb-3">Testimonios de Usuarios</h2>
+          </div>
+        </div>
+        <Slider
+          className="testimonial-slider"
+          dots={true}
+          infinite={true}
+          speed={500}
+          slidesToShow={1}
+          slidesToScroll={1}
+          cssEase="linear"
+          centerMode={false}
+          centerPadding="0px"
+        >
+          {testimonios.map((testimonio, index) => (
+            <div key={index}>
+              <div className="card">
+                <img src={testimonio.foto} className="card-img-top" alt={`Foto de ${testimonio.nombre}`} />
+                <div className="card-body">
+                  <p className="card-text"><strong>{testimonio.nombre} / {testimonio.pais} </strong></p>
+                  <p className="card-text">{testimonio.testimonio}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+
+      <div className="container my-4">
+        <div className="row align-items-center">
+          <div className="col-lg-12 text-center">
             <h2 className="mb-3">¿Eres veterinario?</h2>
           </div>
         </div>
@@ -98,7 +197,7 @@ export const Home = () => {
             <div className="card">
               <img src={docCatImgUrl} className="card-img-top" alt="Imagen 3" />
               <div className="card-body">
-                <p className="card-text">🐾 Y mucho más...</p>
+                <p className="card-text">★ Y mucho más...</p>
               </div>
             </div>
           </div>
