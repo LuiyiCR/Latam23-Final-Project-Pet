@@ -157,7 +157,11 @@ export const Home = () => {
                     <span key={i} className='star' style={{ color: i < testimonio.puntuacion ? 'gold' : 'grey' }}>&#9733;</span>
                   )}
                 </div>
-                <p className="text-center testimonios-text">{testimonio.testimonio}</p>
+                <p className="text-center testimonios-text">
+                  <span style={{ fontSize: '1.7rem', padding: '0.1rem' }}>"</span>
+                  {testimonio.testimonio.slice(1, testimonio.testimonio.length - 1)}
+                  <span style={{ fontSize: '1.7rem', padding: '0.1rem' }}>"</span>
+                </p>
               </div>
             </div>
           ))}
