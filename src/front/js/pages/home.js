@@ -10,9 +10,7 @@ import rosTestimonioImgUrl from '../../img/rosaura-testimonio.png'
 import gusTestimonioImgUrl from '../../img/gustavo-testimonio.png'
 import paoTestimonioImgUrl from '../../img/paola-testimonio.png'
 import soleTestimonioImgUrl from '../../img/soledad-testimonio.png'
-import vectorImgUrl from '../../img-icons/vector.png'
 import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../../styles/home.css';
