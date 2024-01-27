@@ -8,6 +8,7 @@ from flask_cors import CORS
 from bcrypt import gensalt
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
+import re
 
 api = Blueprint('api', __name__)
 
@@ -23,7 +24,12 @@ def singup():
         name =  data.get("name")
         user_type = data.get("user_type")
         password = data.get("password")
+        if user_type != "veterinario" and user_type != "user":
+            return jsonify({"message":"type invalid"}), 400
         verify_data = [email, name, password, user_type]
+        email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if not re.match(email_patron, email):
+            return jsonify({"message":"Email invalid"}),400
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
         user_exist = User.query.filter_by(email = email).first()
@@ -38,7 +44,7 @@ def singup():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return jsonify({"message": "POST request received"}), 201
+            return jsonify({"message": f"User {email} register"}), 201
         except Exception as error:
             db.session.rollback()
             print(error)
@@ -53,6 +59,9 @@ def login():
         verify_data = [email, password]
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
+        email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if re.match(email_patron, email):
+            return jsonify({"message":"Email invalid"}),400
         user_exist = User.query.filter_by(email=email).first()
         if user_exist is None:
             return jsonify({"message":"User not exist"}), 400
