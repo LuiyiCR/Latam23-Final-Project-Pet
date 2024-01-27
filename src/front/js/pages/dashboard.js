@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
 import logo from "../../img/logopetplus.png";
@@ -7,6 +8,7 @@ import "../../styles/dashboard.css";
 const BACKEND_URL = process.env.BACKEND_URL;
 
 const Dashboard = () => {
+  const { store } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [newPetData, setNewPetData] = useState({
     nombre: "",
@@ -59,8 +61,12 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <button onClick={handleOpenModal}>test</button>
+    <div className="container dashboard-container">
+      <h1>{`¡Bienvenido...!`} {/*${store.user.name}*/}</h1>
+      <div className="section-add-pet">
+        <h3>Agrega tu mascota</h3>
+        <button className="btn btn-primary" onClick={handleOpenModal}>Agregar Mascota</button>
+      </div>
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
