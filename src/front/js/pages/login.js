@@ -114,7 +114,7 @@ const Login = () => {
     }
 
     return (
-        <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms">
+        <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms h-100">
 
             {errorMessage && (
                 <div className="alert alert-danger error-message" role="alert">
@@ -127,7 +127,7 @@ const Login = () => {
                 <h2 className="mt-3">Iniciar Sesion</h2>
             </div>
 
-            <form className="contenedor-form mb-5">
+            <form className="contenedor-form mb-5 h-100">
                 <div className="mb-3 d-flex justify-content-center flex-column align-items-center">
                     <div className="div-input-interno">
                         <label htmlFor="exampleInputEmail1" className="form-label">Correo Electronico</label>

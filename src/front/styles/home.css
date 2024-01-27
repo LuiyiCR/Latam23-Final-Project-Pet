@@ -1,0 +1,17 @@
+body{
+    min-height: 100%;
+}
+
+#app{
+    min-height: 100vh;
+}
+
+.div-layout{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    margin-top: auto;
+}

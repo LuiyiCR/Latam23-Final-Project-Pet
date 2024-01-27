@@ -11,7 +11,7 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [type, setType] = useState("owner");
+    const [type, setType] = useState("user");
     const [errorMessage, setErrorMessage] = useState("");
     const [alertMessageColor, setalertMessageColor] = useState("alert-danger")
 
@@ -37,6 +37,11 @@ const Signup = () => {
     function setConfirmPasswordValue(event) {
         const value = event.target.value;
         setConfirmPassword(value);
+    }
+
+    function setTypeValue(event) {
+        const valor = event.target.value;
+        setType(valor);
     }
 
     // Funciones para verificacion de Nombre
@@ -121,9 +126,12 @@ const Signup = () => {
 
     //Fucnciones para verificacion de tipo de usuario
 
-    function verifyType(event) {
-        const valor = event.target.value;
-        setType(valor);
+    function verifyType() {
+        if (type !== "user" && type !== "veterinary") {
+            setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde");
+            return false
+        }
+        return true
     }
 
 
@@ -157,13 +165,12 @@ const Signup = () => {
                 return 500
             }
 
+            return 201
 
         } catch (error) {
             setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde");
             window.scrollTo(0, 0);
         }
-
-        return 201
     }
 
     // Funcion onClick para manejar el boton de enviar (submit) / registrarse
@@ -174,7 +181,8 @@ const Signup = () => {
 
         if (verifyName() &&
             verifyEmail() &&
-            verifyPassword()) {
+            verifyPassword() &&
+            verifyType()) {
 
             const statusCode = await enviarData();
 
@@ -212,7 +220,7 @@ const Signup = () => {
                 <h2 className="mt-3">Crear una cuenta</h2>
             </div>
 
-            <form className="contenedor-form mb-5">
+            <form className="contenedor-form mb-5 h-100">
                 <div className="mb-3">
                     <label htmlFor="exampleInputName" className="form-label">Nombre</label>
                     <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} placeholder="cual es tu nombre?" />
@@ -236,13 +244,13 @@ const Signup = () => {
                     </div>
 
                     <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={verifyType} value="owner" checked={type === "owner"} />
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={setTypeValue} value="user" checked={type === "user"} />
                         <label className="form-check-label" htmlFor="flexRadioDefault1">
                             Dueño de mascota
                         </label>
                     </div>
                     <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={verifyType} value="vet" checked={type === "vet"} />
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={setTypeValue} value="veterinary" checked={type === "veterinary"} />
                         <label className="form-check-label" htmlFor="flexRadioDefault2">
                             Veterinario
                         </label>
