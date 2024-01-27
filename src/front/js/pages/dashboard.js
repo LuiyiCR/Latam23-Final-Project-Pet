@@ -65,7 +65,19 @@ const Dashboard = () => {
       <h1>{`¡Bienvenido...!`} {/*${store.user.name}*/}</h1>
       <div className="section-add-pet">
         <h3>Agrega tu mascota</h3>
+        <img src="/ruta/imagen-mascota.png" alt="Imagen Mascota" className="mascota-image" />
+        <p>¡Añade una nueva mascota a tu familia! Completa la información a continuación:</p>
         <button className="btn btn-primary" onClick={handleOpenModal}>Agregar Mascota</button>
+      </div>
+      <div className="card">
+        <div className="card-body">
+          <div className="event-info">
+            <h5 className="card-title">Descubre eventos para tu mascota y únete</h5>
+            <p className="card-text">Explora eventos divertidos y sociales para tu mascota. ¡No te los pierdas!</p>
+            <button className="btn btn-primary">Ver más</button>
+          </div>
+          <img src="/ruta/imagen-evento.jpg" className="card-img" alt="Imagen Evento" />
+        </div>
       </div>
 
       <Modal show={showModal} onHide={handleCloseModal}>
