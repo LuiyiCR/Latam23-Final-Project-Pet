@@ -1,8 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logoImgUrl from '../../img/logo.png';
+import { Context } from '../store/appContext';
+
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
+  const location = useLocation();
+
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
 
@@ -46,6 +51,12 @@ export const Navbar = () => {
               </a>
             </li>
           </ul>
+
+          {location.pathname === '/dashboard' && (
+            <button className="btn btn-light text-black rounded-3" onClick={actions.logout}>
+              Logout
+            </button>
+          )}
 
           <div className='btn-group gap-3'>
             <Link to="/guest" className="button btn text-white rounded-3" type="button">
