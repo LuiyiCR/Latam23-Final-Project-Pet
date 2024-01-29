@@ -58,14 +58,17 @@ export const Navbar = () => {
             </button>
           )}
 
-          <div className='btn-group gap-3'>
-            <Link to="/guest" className="button btn text-white rounded-3" type="button">
-              Explorar como invitado
-            </Link>
-            <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
-              Iniciar sesión
-            </Link>
-          </div>
+          {location.pathname !== '/dashboard' && (
+            <div className='btn-group gap-3'>
+              <Link to="/guest" className="button btn text-white rounded-3" type="button">
+                Explorar como invitado
+              </Link>
+              <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
+                Iniciar sesión
+              </Link>
+            </div>
+          )}
+
         </div>
       </div>
     </nav>
