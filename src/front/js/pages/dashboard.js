@@ -68,22 +68,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container dashboard-container text-center mt-5">
-      <h1>{`¡Bienvenido...!`} {/*${store.user.name}*/}</h1>
+    <div className="container dashboard-container text-center">
+      <h1 className="bienvenida mt-5 mb-4">¡Bienvenido <span className='header-bienvenida'>Miguel </span>!</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
 
       <TestButton />
-
-      <div className="card">
-        <div className="card-body">
-          <div className="event-info">
-            <h5 className="card-title">Descubre eventos para tu mascota y únete</h5>
-            <p className="card-text">Explora eventos divertidos y sociales para tu mascota. ¡No te los pierdas!</p>
-            <button className="btn btn-light text-black rounded-3">Ver más</button>
-          </div>
-          <img src="/ruta/imagen-evento.jpg" className="card-img" alt="Imagen Evento" />
-        </div>
-      </div>
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>

@@ -25,18 +25,20 @@ const PetList = ({ pets, handleOpenModal, handleAddPet }) => {
               </div>
             ))}
           </div>
-          <button className="btn btn-primary" onClick={handleOpenModal}>
+          <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
             Agregar Otra Mascota
           </button>
         </div>
       ) : (
         <div className="section-add-pet">
-          <h3 className='m-5'>¡No tienes mascotas registradas, agrega una ahora! <i className="fas fa-paw"></i></h3>
-          <button className="btn btn-primary" onClick={handleOpenModal}>
+          <h3 className='m-3'>¡No tienes mascotas registradas, agrega una ahora! <i className="fas fa-paw"></i></h3>
+          <img src="https://images.pexels.com/photos/2173872/pexels-photo-2173872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gatito" className="img-gatito" />
+          <button className="button btn text-white rounded-3 m-3" onClick={handleOpenModal}>
             Agregar Mascota
           </button>
         </div>
-      )}
+      )
+      }
     </React.Fragment >
   )
 }

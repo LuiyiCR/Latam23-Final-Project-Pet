@@ -5,14 +5,12 @@ const TestButton = () => {
   const { actions } = useContext(Context);
 
   const simulateAddPet = () => {
-    // Datos simulados que podrías obtener del formulario
     const simulatedPetData = {
       nombre: "Simba",
       fecha_de_nacimiento: "2022-01-01",
-      // ... otros campos
+      foto: "https://images.pexels.com/photos/17407385/pexels-photo-17407385/free-photo-of-cute-pomeranian-puppy.jpeg?auto=compress&cs=tinysrgb&w=600"
     };
 
-    // Llamada a la función addPet con datos simulados
     actions.addPet(simulatedPetData);
   };
 

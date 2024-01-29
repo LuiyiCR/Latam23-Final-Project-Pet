@@ -53,9 +53,9 @@ export const Navbar = () => {
           </ul>
 
           {location.pathname === '/dashboard' && (
-            <button className="btn btn-light text-black rounded-3" onClick={actions.logout}>
+            <Link to='/' className="btn btn-light text-black rounded-3" onClick={actions.logout}>
               Logout
-            </button>
+            </Link>
           )}
 
           {location.pathname !== '/dashboard' && (
