@@ -18,13 +18,13 @@ const Dashboard = () => {
   const [newPetData, setNewPetData] = useState({
     nombre: "",
     fecha_de_nacimiento: "",
-    discapacidad: "",
     raza: "",
     genero: "",
     especie: "",
     foto: "",
-    historial_medico: "",
-    otros: "",
+    // discapacidad: "",
+    // historial_medico: "",
+    // otros: "",
   });
 
   const handleOpenModal = () => {
@@ -68,7 +68,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container dashboard-container">
+    <div className="container dashboard-container text-center mt-5">
       <h1>{`¡Bienvenido...!`} {/*${store.user.name}*/}</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
 
@@ -79,7 +79,7 @@ const Dashboard = () => {
           <div className="event-info">
             <h5 className="card-title">Descubre eventos para tu mascota y únete</h5>
             <p className="card-text">Explora eventos divertidos y sociales para tu mascota. ¡No te los pierdas!</p>
-            <button className="btn btn-primary">Ver más</button>
+            <button className="btn btn-light text-black rounded-3">Ver más</button>
           </div>
           <img src="/ruta/imagen-evento.jpg" className="card-img" alt="Imagen Evento" />
         </div>
@@ -112,7 +112,7 @@ const Dashboard = () => {
               value={newPetData.fecha_de_nacimiento}
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="discapacidad">Discapacidad</label>
             <input
               type="text"
@@ -122,7 +122,7 @@ const Dashboard = () => {
               onChange={handleInputChange}
               value={newPetData.discapacidad}
             />
-          </div>
+          </div> */}
           <div className="form-group">
             <label htmlFor="raza">Raza</label>
             <input
