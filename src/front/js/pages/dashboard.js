@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from "react-bootstrap";
+import PetList from "../component/petlist";
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
 
@@ -9,6 +10,9 @@ const BACKEND_URL = process.env.BACKEND_URL;
 
 const Dashboard = () => {
   const { store } = useContext(Context);
+  if (!store.pets) {
+    store.pets = [];
+  }
   const [showModal, setShowModal] = useState(false);
   const [newPetData, setNewPetData] = useState({
     nombre: "",
@@ -63,12 +67,8 @@ const Dashboard = () => {
   return (
     <div className="container dashboard-container">
       <h1>{`¡Bienvenido...!`} {/*${store.user.name}*/}</h1>
-      <div className="section-add-pet">
-        <h3>Agrega tu mascota</h3>
-        <img src="/ruta/imagen-mascota.png" alt="Imagen Mascota" className="mascota-image" />
-        <p>¡Añade una nueva mascota a tu familia! Completa la información a continuación:</p>
-        <button className="btn btn-primary" onClick={handleOpenModal}>Agregar Mascota</button>
-      </div>
+      <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
+
       <div className="card">
         <div className="card-body">
           <div className="event-info">
@@ -172,7 +172,7 @@ const Dashboard = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div >
   );
 };
 
