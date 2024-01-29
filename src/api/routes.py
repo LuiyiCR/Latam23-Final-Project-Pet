@@ -83,8 +83,15 @@ def login():
             return jsonify({"message": "Server error"}), 500 
             
 
-@api.route('/pet', methods=['POST', 'GET'])
-def handle_pets():
+@api.route('/user/<int:user_id>/pets', methods=['POST', 'GET'])
+def handle_pets(user_id):
+
+    # Verficiar si el usuario con esa id existe
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({"message": "No user found with that id"}), 404
+
+    # POST
     if request.method == 'POST':
         data = request.json
         name = data.get("name")
@@ -99,7 +106,7 @@ def handle_pets():
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
         # Creacion de la mascota
-        new_pet = Pet(name = name, born_date = born_date, disabilities = disabilities, breed = breed, gender = gender, animal = animal, medical_history = medical_history)
+        new_pet = Pet(name = name, user_id = user_id, born_date = born_date, disabilities = disabilities, breed = breed, gender = gender, animal = animal, medical_history = medical_history)
         try:
             db.session.add(new_pet)
             db.session.commit()
@@ -108,3 +115,6 @@ def handle_pets():
             db.session.rollback()
             return jsonify({"message": "Server error"}), 500
         
+    # Get
+    pet_list = [{"id": pet.id, "name": pet.name} for pet in user.pet]
+    return jsonify({'Pets': pet_list})

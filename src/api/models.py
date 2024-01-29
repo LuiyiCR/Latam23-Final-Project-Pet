@@ -9,7 +9,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(300), unique=True, nullable=True)
     salt = db.Column(db.String(300), unique=True, nullable=True)
     user_type = db.Column(db.String(10), unique=False, nullable=False)
-
+    pet = db.relationship("Pet", back_populates="user")
 
     
     def __repr__(self):
@@ -26,6 +26,8 @@ class User(db.Model):
 
 class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User", back_populates="pet")
     name = db.Column(db.String(200), nullable=False)
     born_date = db.Column(db.Date, nullable=False)
     disabilities = db.Column(db.String(300), nullable=True)
