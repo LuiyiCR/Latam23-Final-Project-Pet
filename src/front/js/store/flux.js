@@ -13,12 +13,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			pets: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			addPet: (pet) => {
+				const store = getStore();
+
+				const updatedPets = [...store.pets, pet];
+
+				setStore({ pets: updatedPets });
 			},
 
 			getMessage: async () => {

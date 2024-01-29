@@ -5,11 +5,12 @@ import { Modal, Button } from "react-bootstrap";
 import PetList from "../component/petlist";
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
+import TestButton from "../component/testbutton";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
 const Dashboard = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   if (!store.pets) {
     store.pets = [];
   }
@@ -54,6 +55,8 @@ const Dashboard = () => {
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData);
+
+        actions.addPet(responseData.pet);
       } else {
         console.error('Error al agregar la mascota', response.status);
       }
@@ -68,6 +71,8 @@ const Dashboard = () => {
     <div className="container dashboard-container">
       <h1>{`¡Bienvenido...!`} {/*${store.user.name}*/}</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
+
+      <TestButton />
 
       <div className="card">
         <div className="card-body">

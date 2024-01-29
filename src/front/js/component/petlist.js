@@ -1,6 +1,11 @@
 import React from 'react';
 
-const PetList = ({ pets, handleOpenModal }) => {
+const PetList = ({ pets, handleOpenModal, handleAddPet }) => {
+  const addPet = (newPet) => {
+    handleAddPet(newPet);
+    handleOpenModal();
+  }
+
   return (
     <React.Fragment>
       {pets.length > 0 ? (
@@ -17,7 +22,7 @@ const PetList = ({ pets, handleOpenModal }) => {
         </div>
       ) : (
         <div className="section-add-pet">
-          <h3>Aun no tienes mascotas, agrega tu mascota</h3>
+          <h3>¡No tienes mascotas registradas, agrega una ahora! <i className="fas fa-paw"></i></h3>
           <button className="btn btn-primary" onClick={handleOpenModal}>
             Agregar Mascota
           </button>
