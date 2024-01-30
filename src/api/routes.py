@@ -96,17 +96,16 @@ def handle_pets(user_id):
         data = request.json
         name = data.get("name")
         born_date = data.get("born_date")
-        disabilities = data.get("disabilities")
         breed = data.get("breed")
         gender = data.get("gender")
         animal = data.get("animal")
-        medical_history = data.get("medical_history")
+        photo = data.get("photo")
         # Verificaciones
-        verify_data = [name, born_date, disabilities, breed, gender, animal, medical_history]
+        verify_data = [name, born_date, breed, gender, animal]
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
         # Creacion de la mascota
-        new_pet = Pet(name = name, user_id = user_id, born_date = born_date, disabilities = disabilities, breed = breed, gender = gender, animal = animal, medical_history = medical_history)
+        new_pet = Pet(name = name, user_id = user_id, born_date = born_date, breed = breed, gender = gender, animal = animal, photo = photo)
         try:
             db.session.add(new_pet)
             db.session.commit()
@@ -116,5 +115,44 @@ def handle_pets(user_id):
             return jsonify({"message": "Server error"}), 500
         
     # Get
-    pet_list = [{"id": pet.id, "name": pet.name} for pet in user.pet]
+    pet_list = [{"id": pet.id, "name": pet.name, "photo": pet.photo} for pet in user.pet]
     return jsonify({'Pets': pet_list})
+
+
+@api.route('/user/<int:user_id>/pets/<int:pet_id>', methods=['GET', 'DELETE'])
+def pet_properties(user_id, pet_id):
+
+    # Verficiar si el usuario con esa id existe
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({"message": "No user found with that id"}), 404
+
+    # Verificar si la mascota del usuario con esa id existe
+    pet_properties = None
+    for pet in user.pet:
+        if pet.id == pet_id:
+            pet_properties = pet
+            break
+
+    if pet_properties is None:
+        return jsonify({"message": "Pet not found"})
+    
+    #GET
+    if request.method == 'GET':
+        return jsonify(pet_properties.serialize()), 200
+
+    #DELETE
+    try:
+        db.session.delete(pet_properties)
+        db.session.commit()
+        
+        return jsonify({
+            "message": "Pet successfully deleted"
+        }), 200
+        
+    except Exception as error:
+        db.session.rollback()
+        
+        return jsonify({
+            "message": "Something went wrong, try again later"
+        }), 500

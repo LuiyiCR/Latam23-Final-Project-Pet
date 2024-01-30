@@ -75,7 +75,7 @@ Orange: #F18043
 
 .btn {
   background: #8c52ff;
-  box-shadow: -17px 17px 33px #f7f7f7, 17px -17px 33px #ffffff;
+  /* box-shadow: -17px 17px 33px #f7f7f7, 17px -17px 33px #ffffff; */
 }
 
 .btn:hover {
