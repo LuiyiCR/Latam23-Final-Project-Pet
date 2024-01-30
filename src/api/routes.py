@@ -59,9 +59,9 @@ def login():
         verify_data = [email, password]
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
-        email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-        if re.match(email_patron, email):
-            return jsonify({"message":"Email invalid"}),400
+        # email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        # if re.match(email_patron, email):
+        #     return jsonify({"message":"Email invalid"}),400
         user_exist = User.query.filter_by(email=email).first()
         if user_exist is None:
             return jsonify({"message":"User not exist"}), 400

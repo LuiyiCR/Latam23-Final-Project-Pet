@@ -80,6 +80,9 @@ const Login = () => {
                     }
                 })
 
+            const data = await response.json();
+            return data;
+
         } catch (error) {
             setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde")
         }
@@ -88,9 +91,6 @@ const Login = () => {
             setErrorMessage("Correo electronico o contraseña incorrecta, vuelva a intentarlo");
             return false
         }
-
-        const data = await response.json();
-        return data;
     }
 
     //Funcion para manejar el onClick de enviar formulario (login)
