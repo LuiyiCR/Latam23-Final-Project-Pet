@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
@@ -11,9 +11,6 @@ const BACKEND_URL = process.env.BACKEND_URL;
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
-  if (!store.pets) {
-    store.pets = [];
-  }
   const [showModal, setShowModal] = useState(false);
   const [newPetData, setNewPetData] = useState({
     nombre: "",
@@ -41,6 +38,24 @@ const Dashboard = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await fetch(BACKEND_URL);
+        if (response.ok) {
+          const responseData = await response.json();
+          actions.setPets(responseData.pets);
+        } else {
+          console.error('Error al obtener las mascotas', response.status);
+        }
+      } catch (error) {
+        console.error('Error al obtener las mascotas', error);
+      }
+    };
+
+    fetchPets();
+  }, []);
 
   const handleAddPet = async () => {
     try {
