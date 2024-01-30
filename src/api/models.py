@@ -6,8 +6,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200), unique=True, nullable=False)
     name = db.Column(db.String(200), unique=False, nullable=False)
-    password_hash = db.Column(db.String(300), unique=True, nullable=True)
-    salt = db.Column(db.String(300), unique=True, nullable=True)
+    password_hash = db.Column(db.String(300), unique=True, nullable=False)
+    salt = db.Column(db.String(300), unique=True, nullable=False)
     user_type = db.Column(db.String(10), unique=False, nullable=False)
     pet = db.relationship("Pet", back_populates="user")
 
@@ -20,13 +20,12 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "type" : self.type
-            # do not serialize the password, its a security breach
         }
 
 
 class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     user = db.relationship("User", back_populates="pet")
     name = db.Column(db.String(200), nullable=False)
     born_date = db.Column(db.Date, nullable=False)

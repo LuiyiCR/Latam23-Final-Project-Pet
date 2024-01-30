@@ -37,9 +37,7 @@ def singup():
             return jsonify({"message":"User all ready exist"}), 400
         salt = str(gensalt(), encoding = 'utf-8')
         password_and_salt = password + salt
-        print(password_and_salt)
         password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
-        print(password_hash)
         new_user = User(name = name,user_type = user_type, email = email, password_hash = password_hash, salt = salt)
         try:
             db.session.add(new_user)
@@ -59,9 +57,6 @@ def login():
         verify_data = [email, password]
         if None in verify_data:
             return jsonify({"message":"All parameters are required"}), 400
-        # email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-        # if re.match(email_patron, email):
-        #     return jsonify({"message":"Email invalid"}),400
         user_exist = User.query.filter_by(email=email).first()
         if user_exist is None:
             return jsonify({"message":"User not exist"}), 400
@@ -74,14 +69,14 @@ def login():
                 user_type = user_exist.user_type  
                 return jsonify({"message":"Authentication successful",
                                 "token": token,
-                                "user_type" : user_type}), 201 
+                                "user_id" : user_exist.id}), 201 
             else:
                 return jsonify({"message":"Incorrect Pasword"}), 401  
         except Exception as error:
             db.session.rollback()
             print(error)
             return jsonify({"message": "Server error"}), 500 
-            
+
 
 @api.route('/user/<int:user_id>/pets', methods=['POST', 'GET'])
 def handle_pets(user_id):
@@ -152,7 +147,7 @@ def pet_properties(user_id, pet_id):
         
     except Exception as error:
         db.session.rollback()
-        
+        print(error)
         return jsonify({
             "message": "Something went wrong, try again later"
         }), 500

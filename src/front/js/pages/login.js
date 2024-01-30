@@ -80,17 +80,19 @@ const Login = () => {
                     }
                 })
 
+            if (response.status !== 201) {
+                setErrorMessage("Correo electronico o contraseña incorrecta, vuelva a intentarlo");
+                return false
+            }
+
             const data = await response.json();
             return data;
 
         } catch (error) {
             setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde")
-        }
-
-        if (response.status !== 201) {
-            setErrorMessage("Correo electronico o contraseña incorrecta, vuelva a intentarlo");
             return false
         }
+
     }
 
     //Funcion para manejar el onClick de enviar formulario (login)
@@ -107,7 +109,9 @@ const Login = () => {
                 return
             }
             const token = responseData.token;
+            const user_id = responseData.user_id;
             localStorage.setItem("token", token);
+            localStorage.setItem("user_id", user_id)
             navigate("/dashboard");
         }
         window.scrollTo(0, 0);
