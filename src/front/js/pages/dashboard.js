@@ -41,8 +41,8 @@ const Dashboard = () => {
       name: "",
       born_date: "",
       breed: "",
-      gender: "",
-      animal: "",
+      gender: undefined,
+      animal: undefined,
       photo: "",
     });
   };
@@ -97,11 +97,11 @@ const Dashboard = () => {
       validationErrors.born_date = "La fecha de nacimiento de la mascota es requerida";
     }
 
-    if (!newPetData.gender.trim()) {
+    if (!newPetData.gender || newPetData.gender === 'Selecciona género') {
       validationErrors.gender = "El género de la mascota es requerido";
     }
 
-    if (!newPetData.animal.trim()) {
+    if (!newPetData.animal || newPetData.animal === 'Selecciona especie') {
       validationErrors.animal = "La especie de la mascota es requerida";
     }
 
@@ -194,37 +194,41 @@ const Dashboard = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="nombre">Genero<span className="text-danger">*</span></label>
+            <label htmlFor="gender">Genero<span className="text-danger">*</span></label>
             <select
               className="form-select"
+              id="gender"
               name="gender"
               value={newPetData.gender}
               onChange={handleInputChange}
-              style={{ color: newPetData.animal ? 'black' : '#999' }}
-
-            ><option value="" disabled selected style={{ color: '#999' }}>Selecciona género</option>
+              style={{ color: newPetData.gender ? 'black' : '#999' }}
+            >
+              <option value="" disabled style={{ color: '#999' }}>Selecciona género</option>
               <option value="Macho">Macho</option>
               <option value="Hembra">Hembra</option>
               <option value="Desconocido">Desconocido</option>
             </select>
+            {errorMessages.gender && <small className="text-danger">{errorMessages.gender}</small>}
           </div>
+
           <div className="form-group">
-            <label htmlFor="nombre">Especie<span className="text-danger">*</span></label>
+            <label htmlFor="animal">Especie<span className="text-danger">*</span></label>
             <select
               className="form-select"
+              id="animal"
               name="animal"
               value={newPetData.animal}
               onChange={handleInputChange}
               style={{ color: newPetData.animal ? 'black' : '#999' }}
             >
-              <option value="" disabled selected style={{ color: '#999' }}>Selecciona especie</option>
+              <option value="" disabled style={{ color: '#999' }}>Selecciona especie</option>
               <option value="Perro">Perro</option>
               <option value="Gato">Gato</option>
               <option value="Conejo">Conejo</option>
               <option value="Otros">Otros</option>
             </select>
+            {errorMessages.animal && <small className="text-danger">{errorMessages.animal}</small>}
           </div>
-
 
           <div className="form-group">
             <label htmlFor="foto">Foto</label>
