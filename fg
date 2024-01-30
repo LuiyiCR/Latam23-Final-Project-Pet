@@ -1,0 +1,5 @@
+ id |           email           | name  |                        password_hash                         |             salt              | user_type 
+----+---------------------------+-------+--------------------------------------------------------------+-------------------------------+-----------
+  2 | luiyi_salazar@hotmail.com | Luiyi | $2b$12$Um9g6J5D8U4sEiVC3udxOefyjrOim6xHpcOMBbP9hHYod.eh3l4jK | $2b$12$m4AXgSRkE/aFvZQYiuZNBe | user
+(1 row)
+

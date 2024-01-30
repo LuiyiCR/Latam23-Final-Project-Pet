@@ -110,3 +110,35 @@ i {
     z-index: -1;
   }
 }
+
+/* Modal */
+.button {
+  border: none;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  padding: 0.375rem 0.75rem;
+}
+
+.form-select {
+  padding: 0.375rem 0.75rem;
+}
+
+.text-center {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.Modal {
+  padding: 1rem;
+}
+
+.Modal-Header,
+.Modal-Body,
+.Modal-Footer {
+  padding: 1rem;
+}

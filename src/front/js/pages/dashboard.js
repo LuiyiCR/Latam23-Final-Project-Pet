@@ -13,16 +13,22 @@ const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [newPetData, setNewPetData] = useState({
-    nombre: "",
-    fecha_de_nacimiento: "",
-    raza: "",
-    genero: "",
-    especie: "",
-    foto: "",
-    // discapacidad: "",
-    // historial_medico: "",
-    // otros: "",
+    name: "",
+    born_date: "",
+    breed: "",
+    gender: "",
+    animal: "",
+    photo: null,
   });
+
+  const [errorMessages, setErrorMessages] = useState({
+    name: "",
+    born_date: "",
+    breed: "",
+    gender: "",
+    animal: "",
+    photo: "",
+  })
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -30,6 +36,15 @@ const Dashboard = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+
+    setErrorMessages({
+      name: "",
+      born_date: "",
+      breed: "",
+      gender: "",
+      animal: "",
+      photo: "",
+    });
   };
 
   const handleInputChange = (e) => {
@@ -37,12 +52,27 @@ const Dashboard = () => {
       ...newPetData,
       [e.target.name]: e.target.value,
     });
+    setErrorMessages({
+      ...errorMessages,
+      [e.target.name]: "",
+    });
+  };
+
+  const handleFileChange = (e) => {
+    setNewPetData({
+      ...newPetData,
+      photo: e.target.files[0],
+    });
+    setErrorMessages({
+      ...errorMessages,
+      photo: "",
+    });
   };
 
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await fetch(BACKEND_URL);
+        const response = await fetch(BACKEND_URL + `api/user/${user_id}/pets`)
         if (response.ok) {
           const responseData = await response.json();
           actions.setPets(responseData.pets);
@@ -55,11 +85,41 @@ const Dashboard = () => {
     };
 
     fetchPets();
-  }, []);
+  }, [store.pets]);
 
   const handleAddPet = async () => {
+    const validationErrors = {};
+
+    if (!newPetData.name.trim()) {
+      validationErrors.name = "El nombre de la mascota es requerido";
+    }
+    if (!newPetData.born_date.trim()) {
+      validationErrors.born_date = "La fecha de nacimiento de la mascota es requerida";
+    }
+
+    if (!newPetData.gender.trim()) {
+      validationErrors.gender = "El género de la mascota es requerido";
+    }
+
+    if (!newPetData.animal.trim()) {
+      validationErrors.animal = "La especie de la mascota es requerida";
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrorMessages(validationErrors);
+      return;
+    }
+
     try {
-      const response = await fetch(BACKEND_URL, {
+      const formData = new FormData();
+      formData.append("name", newPetData.name);
+      formData.append("born_date", newPetData.born_date);
+      formData.append("breed", newPetData.breed);
+      formData.apeend("gender", newPetData.gender);
+      formData.append("animal", newPetData.animal);
+      formData.append("photo", newPetData.photo);
+
+      const response = await fetch((BACKEND_URL + `api/user/${user_id}/pets`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +131,9 @@ const Dashboard = () => {
         const responseData = await response.json();
         console.log(responseData);
 
-        actions.addPet(responseData.pet);
+        if (actions.addPet) {
+          actions.addPet(responseData.pet);
+        }
       } else {
         console.error('Error al agregar la mascota', response.status);
       }
@@ -91,92 +153,101 @@ const Dashboard = () => {
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Agrega tu mascota</Modal.Title>
+          <Modal.Title>Agrega los datos de tu mascota 🐾 🐱 🐰</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="form-group">
-            <label htmlFor="nombre">Nombre</label>
+            <label htmlFor="nombre">Nombre <span className="text-danger">*</span></label>
             <input
               type="text"
               className="form-control"
               id="nombre"
-              name="nombre"
+              name="name"
               onChange={handleInputChange}
-              value={newPetData.nombre}
+              value={newPetData.name}
             />
+            {errorMessages.name && <small className="text-danger">{errorMessages.name}</small>}
           </div>
           <div className="form-group">
-            <label htmlFor="fecha_de_nacimiento">Fecha de nacimiento</label>
+            <label htmlFor="fecha_de_nacimiento">Fecha de nacimiento <span className="text-danger">*</span></label>
             <input
               type="date"
               className="form-control"
               id="fecha_de_nacimiento"
-              name="fecha_de_nacimiento"
+              name="born_date"
               onChange={handleInputChange}
-              value={newPetData.fecha_de_nacimiento}
+              value={newPetData.born_date}
             />
+            {errorMessages.born_date && <small className="text-danger">{errorMessages.born_date}</small>}
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="discapacidad">Discapacidad</label>
-            <input
-              type="text"
-              className="form-control"
-              id="discapacidad"
-              name="discapacidad"
-              onChange={handleInputChange}
-              value={newPetData.discapacidad}
-            />
-          </div> */}
           <div className="form-group">
             <label htmlFor="raza">Raza</label>
             <input
               type="text"
               className="form-control"
               id="raza"
-              name="raza"
+              name="breed"
               onChange={handleInputChange}
-              value={newPetData.raza}
+              value={newPetData.breed}
             />
+            {errorMessages.breed && <small className="text-danger">{errorMessages.breed}</small>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="nombre">Genero<span className="text-danger">*</span></label>
+            <select
+              className="form-select"
+              name="gender"
+              value={newPetData.gender}
+              onChange={handleInputChange}
+              style={{ color: newPetData.animal ? 'black' : '#999' }}
+
+            ><option value="" disabled selected style={{ color: '#999' }}>Selecciona género</option>
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+              <option value="Desconocido">Desconocido</option>
+            </select>
           </div>
           <div className="form-group">
-            <label htmlFor="genero">Género</label>
-            <input
-              type="text"
-              className="form-control"
-              id="genero"
-              name="genero"
+            <label htmlFor="nombre">Especie<span className="text-danger">*</span></label>
+            <select
+              className="form-select"
+              name="animal"
+              value={newPetData.animal}
               onChange={handleInputChange}
-              value={newPetData.genero}
-            />
+              style={{ color: newPetData.animal ? 'black' : '#999' }}
+            >
+              <option value="" disabled selected style={{ color: '#999' }}>Selecciona especie</option>
+              <option value="Perro">Perro</option>
+              <option value="Gato">Gato</option>
+              <option value="Conejo">Conejo</option>
+              <option value="Otros">Otros</option>
+            </select>
           </div>
-          <div className="form-group">
-            <label htmlFor="especie">Especie</label>
-            <input
-              type="text"
-              className="form-control"
-              id="especie"
-              name="especie"
-              onChange={handleInputChange}
-              value={newPetData.especie}
-            />
-          </div>
+
+
           <div className="form-group">
             <label htmlFor="foto">Foto</label>
             <input
-              type="text"
+              type="file"
               className="form-control"
               id="foto"
-              name="foto"
-              onChange={handleInputChange}
-              value={newPetData.foto}
+              name="photo"
+              accept="image/*"
+              lang="es"
+              onChange={handleFileChange}
             />
+            {errorMessages.photo && <small className="text-danger">{errorMessages.photo}</small>}
           </div>
         </Modal.Body>
+        <div className="text-center">
+          <small className="text-muted"><span className="text-danger">*</span>Campos obligatorios</small>
+        </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button className="btn btn-light text-black rounded-3" variant="secondary" onClick={handleCloseModal}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={handleAddPet}>
+          <Button className="button btn text-white rounded-3" variant="primary" onClick={handleAddPet}>
             Guardar
           </Button>
         </Modal.Footer>

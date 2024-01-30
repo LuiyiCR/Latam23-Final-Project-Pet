@@ -22,9 +22,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			setPets: (pets) => {
+				const store = getStore();
+				if (JSON.stringify(store.pets) !== JSON.stringify(pets)) {
+					setStore({ ...store, pets: pets });
+				}
+			},
+
 			addPet: (pet) => {
 				const store = getStore();
-
 				const updatedPets = [...store.pets, pet];
 
 				setStore({ pets: updatedPets });
