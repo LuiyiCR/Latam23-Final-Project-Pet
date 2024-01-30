@@ -108,7 +108,7 @@ const Login = () => {
             }
             const token = responseData.token;
             localStorage.setItem("token", token);
-            navigate("/");
+            navigate("/dashboard");
         }
         window.scrollTo(0, 0);
     }
