@@ -65,8 +65,7 @@ def login():
         validation_password = check_password_hash(password_hash, password)
         try:
             if validation_password:
-                token = create_access_token(identity= user_exist.id) 
-                user_type = user_exist.user_type  
+                token = create_access_token(identity= user_exist.id)
                 return jsonify({"message":"Authentication successful",
                                 "token": token}), 201 
             else:

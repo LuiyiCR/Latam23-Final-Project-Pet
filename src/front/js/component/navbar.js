@@ -1,76 +1,81 @@
-import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoImgUrl from '../../img/logo.png';
-import { Context } from '../store/appContext';
 
 
 export const Navbar = () => {
-  const { store, actions } = useContext(Context);
-  const location = useLocation();
 
-  return (
-    <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    const location = useLocation();
+    const navigate = useNavigate();
 
-      <div className="container">
-        <Link to="/" className="" type="button">
-          <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
-        </Link>
+    function handleLogout() {
+        localStorage.removeItem("token");
+        navigate("/");
+    }
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+    return (
+        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <Link to="/" className="nav-link" type="button">
-                Inicio
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Mis mascotas
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Veterinarios
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Acerca de nosotros
-              </a>
-            </li>
-          </ul>
+            <div className="container">
+                <Link to="/" className="" type="button">
+                    <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
+                </Link>
 
-          {location.pathname === '/dashboard' && (
-            <Link to='/' className="btn btn-light text-black rounded-3" onClick={actions.logout}>
-              Logout
-            </Link>
-          )}
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
 
-          {location.pathname !== '/dashboard' && (
-            <div className='btn-group gap-3'>
-              <Link to="/guest" className="button btn text-white rounded-3" type="button">
-                Explorar como invitado
-              </Link>
-              <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
-                Iniciar sesión
-              </Link>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav mx-auto">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link" type="button">
+                                Inicio
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                Mis mascotas
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                Veterinarios
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                Acerca de nosotros
+                            </a>
+                        </li>
+                    </ul>
+
+                    {location.pathname === '/dashboard' && (
+                        <Link to='/' className="btn btn-light text-black rounded-3" onClick={handleLogout}>
+                            Logout
+                        </Link>
+                    )}
+
+                    {location.pathname !== '/dashboard' && (
+                        <div className='btn-group gap-3'>
+                            <Link to="/guest" className="button btn text-white rounded-3" type="button">
+                                Explorar como invitado
+                            </Link>
+                            <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
+                                Iniciar sesión
+                            </Link>
+                        </div>
+                    )}
+
+                </div>
             </div>
-          )}
-
-        </div>
-      </div>
-    </nav>
-  );
+        </nav>
+    );
 };
