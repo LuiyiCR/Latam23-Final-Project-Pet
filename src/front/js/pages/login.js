@@ -109,9 +109,7 @@ const Login = () => {
                 return
             }
             const token = responseData.token;
-            const user_id = responseData.user_id;
             localStorage.setItem("token", token);
-            localStorage.setItem("user_id", user_id)
             navigate("/dashboard");
         }
         window.scrollTo(0, 0);

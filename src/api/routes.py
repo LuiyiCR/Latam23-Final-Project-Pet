@@ -7,7 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from bcrypt import gensalt
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 import re
 
 api = Blueprint('api', __name__)
@@ -68,8 +68,7 @@ def login():
                 token = create_access_token(identity= user_exist.id) 
                 user_type = user_exist.user_type  
                 return jsonify({"message":"Authentication successful",
-                                "token": token,
-                                "user_id" : user_exist.id}), 201 
+                                "token": token}), 201 
             else:
                 return jsonify({"message":"Incorrect Pasword"}), 401  
         except Exception as error:
@@ -78,13 +77,16 @@ def login():
             return jsonify({"message": "Server error"}), 500 
 
 
-@api.route('/user/<int:user_id>/pets', methods=['POST', 'GET'])
-def handle_pets(user_id):
+@api.route('/user/pets', methods=['POST', 'GET'])
+@jwt_required()
+def handle_pets():
+    
+    user_id = get_jwt_identity()
 
     # Verficiar si el usuario con esa id existe
     user = User.query.get(user_id)
     if user is None:
-        return jsonify({"message": "No user found with that id"}), 404
+        return jsonify({"message": "User not found"}), 404
 
     # POST
     if request.method == 'POST':
@@ -114,13 +116,16 @@ def handle_pets(user_id):
     return jsonify({'Pets': pet_list})
 
 
-@api.route('/user/<int:user_id>/pets/<int:pet_id>', methods=['GET', 'DELETE'])
-def pet_properties(user_id, pet_id):
+@api.route('/user/pets/<int:pet_id>', methods=['GET', 'DELETE'])
+@jwt_required()
+def pet_properties(pet_id):
+    
+    user_id = get_jwt_identity()
 
     # Verficiar si el usuario con esa id existe
     user = User.query.get(user_id)
     if user is None:
-        return jsonify({"message": "No user found with that id"}), 404
+        return jsonify({"message": "User not found"}), 404
 
     # Verificar si la mascota del usuario con esa id existe
     pet_properties = None
