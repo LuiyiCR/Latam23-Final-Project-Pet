@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
+import { Pets } from "./pages/pet";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
@@ -29,6 +30,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Dashboard />} path="/dashboard" />
+                        <Route element={<Pets />} path="/pet" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
