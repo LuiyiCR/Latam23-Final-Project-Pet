@@ -43,6 +43,10 @@ i {
   text-transform: uppercase;
 }
 
+.fas.fa-star {
+  font-size: 1.9rem;
+}
+
 .fas.fa-plus-circle {
   font-size: 2rem;
 }
@@ -113,33 +117,33 @@ i {
 
 /* Modal */
 
-.button {
+.dashboard.modal.button {
   border: none;
 }
 
-.form-group {
+.dashboard.modal.form-group {
   margin-bottom: 1rem;
 }
 
-.form-control {
+.dashboard.modal.form-control {
   padding: 0.375rem 0.75rem;
 }
 
-.form-select {
+.dashboard.modal.form-select {
   padding: 0.375rem 0.75rem;
 }
 
-.text-center {
+.dashboard.modal.text-center {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.Modal {
+.dashboard.modal.modal {
   padding: 1rem;
 }
 
-.Modal-Header,
-.Modal-Body,
-.Modal-Footer {
+.dashboard.modal.Modal-Header,
+.dashboard.modal.Modal-Body,
+.dashboard.modal.Modal-Footer {
   padding: 1rem;
 }

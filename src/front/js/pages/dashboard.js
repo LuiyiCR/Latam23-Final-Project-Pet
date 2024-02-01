@@ -155,7 +155,7 @@ const Dashboard = () => {
 
   return (
     <div className="container dashboard-container text-center">
-      <h1 className="bienvenida mt-5 mb-4">¡Bienvenido <span className='header-bienvenida'>Miguel </span>!</h1>
+      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Bienvenido <span className='header-bienvenida'>{name}</span>!</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
 
       <TestButton />
