@@ -57,13 +57,13 @@ export const Navbar = () => {
                         </li>
                     </ul>
 
-                    {location.pathname === '/dashboard' && (
+                    {location.pathname === '/dashboard' || location.pathname == '/pet' && (
                         <Link to='/' className="btn btn-light text-black rounded-3" onClick={handleLogout}>
                             Logout
                         </Link>
                     )}
 
-                    {location.pathname !== '/dashboard' && (
+                    {location.pathname !== '/dashboard' && location.pathname !== '/pet' && (
                         <div className='btn-group gap-3'>
                             <Link to="/guest" className="button btn text-white rounded-3" type="button">
                                 Explorar como invitado
