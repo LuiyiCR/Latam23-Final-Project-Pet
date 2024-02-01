@@ -3,9 +3,9 @@ import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import PetList from "../component/petlist";
+import defaultPetImgUrl from '../../img/foto-cat-doc.png';
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
-// import TestButton from "../component/testbutton";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -117,6 +117,10 @@ const Dashboard = () => {
       return;
     }
 
+    if (!newPetData.photo) {
+      newPetData.photo = defaultPetImgUrl;
+    }
+
     try {
       const formData = new FormData();
       formData.append("name", newPetData.name);
@@ -161,10 +165,8 @@ const Dashboard = () => {
 
   return (
     <div className="container dashboard-container text-center">
-      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola <span className='header-bienvenida'>Miguel</span>!</h1>
+      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola...! <span className='header-bienvenida'></span></h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
-
-      {/* <TestButton /> */}
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
