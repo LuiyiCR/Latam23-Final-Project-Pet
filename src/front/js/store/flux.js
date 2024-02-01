@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			pets: [],
+			pet:{}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -36,6 +37,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const updatedPets = [...store.pets, pet];
 
 				setStore({ pets: updatedPets });
+			},
+			handelPet: async (userId) => {
+				try {
+					const respons = await fetch(`${process.env.BACKEND_URL}/api/user/pets/1`, {
+						method: "GET",
+						headers: {
+						  "Authorization": "Bearer " + localStorage.getItem("token"),
+						  "Content-Type": 'application/json'
+						}
+					  });
+					const data = await respons.json()
+					setStore({pet:data})
+					return data
+				}
+				catch (error) {
+					console.log("Error loading message from backend", error)
+				}
 			},
 
 			getMessage: async () => {
