@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileChange, handleAddPet, newPetData, errorMessages }) => {
+const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileChange, handleAddPet, newPetData: propNewPetData, errorMessages: propErrorMessages }) => {
+
   return (
     <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
@@ -16,9 +17,9 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             id="nombre"
             name="name"
             onChange={handleInputChange}
-            value={newPetData.name}
+            value={propNewPetData.name}
           />
-          {errorMessages.name && <small className="text-danger">{errorMessages.name}</small>}
+          {propErrorMessages.name && <small className="text-danger">{propErrorMessages.name}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="fecha_de_nacimiento">Fecha de nacimiento <span className="text-danger">*</span></label>
@@ -28,9 +29,9 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             id="fecha_de_nacimiento"
             name="born_date"
             onChange={handleInputChange}
-            value={newPetData.born_date}
+            value={propNewPetData.born_date}
           />
-          {errorMessages.born_date && <small className="text-danger">{errorMessages.born_date}</small>}
+          {propErrorMessages.born_date && <small className="text-danger">{propErrorMessages.born_date}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="raza">Raza</label>
@@ -40,9 +41,9 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             id="raza"
             name="breed"
             onChange={handleInputChange}
-            value={newPetData.breed}
+            value={propNewPetData.breed}
           />
-          {errorMessages.breed && <small className="text-danger">{errorMessages.breed}</small>}
+          {propErrorMessages.breed && <small className="text-danger">{propErrorMessages.breed}</small>}
         </div>
 
         <div className="form-group">
@@ -51,16 +52,16 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             className="form-select"
             id="gender"
             name="gender"
-            value={newPetData.gender}
+            value={propNewPetData.gender}
             onChange={handleInputChange}
-            style={{ color: newPetData.gender ? 'black' : '#999' }}
+            style={{ color: propNewPetData.gender ? 'black' : '#999' }}
           >
             <option value="" disabled style={{ color: '#999' }}>Selecciona género</option>
             <option value="Macho">Macho</option>
             <option value="Hembra">Hembra</option>
             <option value="Desconocido">Desconocido</option>
           </select>
-          {errorMessages.gender && <small className="text-danger">{errorMessages.gender}</small>}
+          {propErrorMessages.gender && <small className="text-danger">{propErrorMessages.gender}</small>}
         </div>
 
         <div className="form-group">
@@ -69,9 +70,9 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             className="form-select"
             id="animal"
             name="animal"
-            value={newPetData.animal}
+            value={propNewPetData.animal}
             onChange={handleInputChange}
-            style={{ color: newPetData.animal ? 'black' : '#999' }}
+            style={{ color: propNewPetData.animal ? 'black' : '#999' }}
           >
             <option value="" disabled style={{ color: '#999' }}>Selecciona especie</option>
             <option value="Perro">Perro</option>
@@ -79,7 +80,7 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             <option value="Conejo">Conejo</option>
             <option value="Otros">Otros</option>
           </select>
-          {errorMessages.animal && <small className="text-danger">{errorMessages.animal}</small>}
+          {propErrorMessages.animal && <small className="text-danger">{propErrorMessages.animal}</small>}
         </div>
 
         <div className="form-group">
@@ -93,7 +94,7 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             lang="es"
             onChange={handleFileChange}
           />
-          {errorMessages.photo && <small className="text-danger">{errorMessages.photo}</small>}
+          {propErrorMessages.photo && <small className="text-danger">{propErrorMessages.photo}</small>}
         </div>
       </Modal.Body>
       <div className="text-center">
@@ -108,7 +109,6 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
         </Button>
       </Modal.Footer>
     </Modal>
-
   )
 }
 export default PetModal;

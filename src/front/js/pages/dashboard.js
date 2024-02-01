@@ -154,6 +154,15 @@ const Dashboard = () => {
         if (actions.addPet) {
           actions.addPet(newPetData);
         }
+
+        setNewPetData({
+          name: "",
+          born_date: "",
+          breed: "",
+          gender: "",
+          animal: "",
+          photo: null,
+        });
       } else {
         console.error('Error al agregar la mascota', response.status);
       }
