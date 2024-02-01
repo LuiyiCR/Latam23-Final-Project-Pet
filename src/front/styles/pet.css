@@ -44,4 +44,51 @@
   min-width: 500px;
 }
 
+.button-pet{
+  padding: 10px;
+  border: 2px solid #ee643a;
+  border-radius: 50px;
+}
+.text-button{
+  padding-top: 7px;
+}
+.arrow-button {
+  padding: 8px 9px;
+  background-color: #ee643a;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border: none;
+}
 
+.arrow-button:hover {
+  background-color:  #f87851;
+}
+
+.arrow-button i {
+  transition: transform 0.3s ease;
+}
+
+.arrow-button:hover i {
+  transform: translateX(2px);
+}
+.fa-arrow-right {
+  color: white;
+}
+
+.message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  width: fit-content;
+}
+.text-button-info{
+  padding-left: 3px;
+}
+.icon{
+  padding-top: 3px;
+}
