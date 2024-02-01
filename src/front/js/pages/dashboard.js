@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import PetList from "../component/petlist";
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
-import TestButton from "../component/testbutton";
+// import TestButton from "../component/testbutton";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 
@@ -69,8 +69,6 @@ const Dashboard = () => {
     });
   };
 
-
-
   useEffect(() => {
     const fetchPets = async () => {
       try {
@@ -124,16 +122,24 @@ const Dashboard = () => {
       formData.append("name", newPetData.name);
       formData.append("born_date", newPetData.born_date);
       formData.append("breed", newPetData.breed);
-      formData.apeend("gender", newPetData.gender);
+      formData.append("gender", newPetData.gender);
       formData.append("animal", newPetData.animal);
       formData.append("photo", newPetData.photo);
 
       const response = await fetch((BACKEND_URL + `api/user/pets`), {
         method: "POST",
         headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token"),
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newPetData),
+        body: JSON.stringify({
+          name: newPetData.name,
+          born_date: newPetData.born_date,
+          breed: newPetData.breed,
+          gender: newPetData.gender,
+          animal: newPetData.animal,
+          photo: newPetData.photo,
+        }),
       });
 
       if (response.ok) {
@@ -141,7 +147,7 @@ const Dashboard = () => {
         console.log(responseData);
 
         if (actions.addPet) {
-          actions.addPet(responseData.pet);
+          actions.addPet(newPetData);
         }
       } else {
         console.error('Error al agregar la mascota', response.status);
@@ -155,10 +161,10 @@ const Dashboard = () => {
 
   return (
     <div className="container dashboard-container text-center">
-      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Bienvenido <span className='header-bienvenida'>{name}</span>!</h1>
+      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola <span className='header-bienvenida'>Miguel</span>!</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
 
-      <TestButton />
+      {/* <TestButton /> */}
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>

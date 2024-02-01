@@ -13,7 +13,7 @@ const PetList = ({ pets, handleOpenModal, handleAddPet }) => {
         {pets.map((pet, index) => (
           <div key={index} className="card card-mis-mascotas">
             <Link to={`/detalle-mascota/${index}`} className="detalle-link">
-              <img src={pet.foto} alt={pet.nombre} className="card-img-top" />
+              <img src={pet.photo} alt={pet.nombre} className="card-img-top" />
               <div className="card-body">
                 <h5 className="card-title">{pet.nombre}</h5>
                 <i className="fas fa-plus-circle"></i>
