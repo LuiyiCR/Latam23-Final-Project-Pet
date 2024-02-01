@@ -24,6 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setPets: (pets) => {
 				const store = getStore();
+				console.log(store.pets);
+				console.log(pets);
 				if (JSON.stringify(store.pets) !== JSON.stringify(pets)) {
 					setStore({ ...store, pets: pets });
 				}

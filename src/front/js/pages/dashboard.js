@@ -69,13 +69,22 @@ const Dashboard = () => {
     });
   };
 
+
+
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await fetch(BACKEND_URL + `api/user/${user_id}/pets`)
+        const response = await fetch(BACKEND_URL + `api/user/pets`, {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token"),
+            "Content-Type": 'application/json'
+          }
+        })
         if (response.ok) {
           const responseData = await response.json();
-          actions.setPets(responseData.pets);
+          console.log(responseData);
+          actions.setPets(responseData.Pets);
         } else {
           console.error('Error al obtener las mascotas', response.status);
         }
@@ -119,7 +128,7 @@ const Dashboard = () => {
       formData.append("animal", newPetData.animal);
       formData.append("photo", newPetData.photo);
 
-      const response = await fetch((BACKEND_URL + `api/user/${user_id}/pets`), {
+      const response = await fetch((BACKEND_URL + `api/user/pets`), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
