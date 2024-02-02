@@ -7,8 +7,8 @@ import { Pets } from "./pages/pet";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
+// import PrivateRoute from "./component/PrivateRoute";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -19,6 +19,8 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
+
+    const isLoggedIn = localStorage.getItem("token") !== null;
 
     return (
         <div className="div-layout">

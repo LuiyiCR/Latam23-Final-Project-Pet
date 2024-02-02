@@ -13,14 +13,14 @@ export const Navbar = () => {
         navigate("/");
     }
 
+    const isLoggedIn = localStorage.getItem("token") !== null;
+
     return (
         <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-
             <div className="container">
                 <Link to="/" className="" type="button">
                     <img className="logo" src={logoImgUrl} alt="Pet+ Logo" />
                 </Link>
-
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -40,11 +40,13 @@ export const Navbar = () => {
                                 Inicio
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Mis mascotas
-                            </a>
-                        </li>
+                        {isLoggedIn && (
+                            <li className="nav-item">
+                                <Link to="/dashboard" className='nav-link' type='button'>
+                                    Mis mascotas
+                                </Link>
+                            </li>
+                        )}
                         <li className="nav-item">
                             <a className="nav-link" href="#">
                                 Veterinarios
@@ -71,7 +73,6 @@ export const Navbar = () => {
                             </Link>
                         </div>
                     )}
-
                 </div>
             </div>
         </nav>
