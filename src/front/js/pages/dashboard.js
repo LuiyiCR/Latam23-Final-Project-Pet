@@ -3,11 +3,22 @@ import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import PetList from "../component/petlist";
+import PetModal from "../component/PetModal";
+import Directory from "../component/Directory";
+import defaultPetImgUrl from '../../img/foto-cat-doc.png';
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
-// import TestButton from "../component/testbutton";
 
 const BACKEND_URL = process.env.BACKEND_URL;
+
+const veterinaries = [
+  {
+    name: 'Veterinaria del Valle 🇨🇱', phoneNumber: 'Tel: 1234567890', country: 'Chile', picture: 'https://images.unsplash.com/photo-1601579532110-08986d17f900?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  { name: 'Veterinaria Gonzalez 🇲🇽', phoneNumber: 'Tel: 0987654321', country: 'México', picture: 'https://images.pexels.com/photos/19601385/pexels-photo-19601385/free-photo-of-young-doctor-holding-a-stethoscope.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { name: 'Veterinaria Pet+ 🇵🇦', phoneNumber: 'Tel: 0987654321', country: 'Panamá', picture: 'https://plus.unsplash.com/premium_photo-1663133414738-d8e2c14e05ad?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  { name: 'Doctores Echandi 🇻🇪', phoneNumber: 'Tel: 0987654321', country: 'Venezuela', picture: 'https://images.pexels.com/photos/9951386/pexels-photo-9951386.jpeg?auto=compress&cs=tinysrgb&w=600' },
+];
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
@@ -117,6 +128,10 @@ const Dashboard = () => {
       return;
     }
 
+    if (!newPetData.photo) {
+      newPetData.photo = defaultPetImgUrl;
+    }
+
     try {
       const formData = new FormData();
       formData.append("name", newPetData.name);
@@ -149,6 +164,15 @@ const Dashboard = () => {
         if (actions.addPet) {
           actions.addPet(newPetData);
         }
+
+        setNewPetData({
+          name: "",
+          born_date: "",
+          breed: "",
+          gender: "",
+          animal: "",
+          photo: null,
+        });
       } else {
         console.error('Error al agregar la mascota', response.status);
       }
@@ -161,116 +185,18 @@ const Dashboard = () => {
 
   return (
     <div className="container dashboard-container text-center">
-      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola <span className='header-bienvenida'>Miguel</span>!</h1>
+      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola...! <span className='header-bienvenida'></span></h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
-
-      {/* <TestButton /> */}
-
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Agrega los datos de tu mascota 🐾 🐱 🐰</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="form-group">
-            <label htmlFor="nombre">Nombre <span className="text-danger">*</span></label>
-            <input
-              type="text"
-              className="form-control"
-              id="nombre"
-              name="name"
-              onChange={handleInputChange}
-              value={newPetData.name}
-            />
-            {errorMessages.name && <small className="text-danger">{errorMessages.name}</small>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="fecha_de_nacimiento">Fecha de nacimiento <span className="text-danger">*</span></label>
-            <input
-              type="date"
-              className="form-control"
-              id="fecha_de_nacimiento"
-              name="born_date"
-              onChange={handleInputChange}
-              value={newPetData.born_date}
-            />
-            {errorMessages.born_date && <small className="text-danger">{errorMessages.born_date}</small>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="raza">Raza</label>
-            <input
-              type="text"
-              className="form-control"
-              id="raza"
-              name="breed"
-              onChange={handleInputChange}
-              value={newPetData.breed}
-            />
-            {errorMessages.breed && <small className="text-danger">{errorMessages.breed}</small>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="gender">Genero<span className="text-danger">*</span></label>
-            <select
-              className="form-select"
-              id="gender"
-              name="gender"
-              value={newPetData.gender}
-              onChange={handleInputChange}
-              style={{ color: newPetData.gender ? 'black' : '#999' }}
-            >
-              <option value="" disabled style={{ color: '#999' }}>Selecciona género</option>
-              <option value="Macho">Macho</option>
-              <option value="Hembra">Hembra</option>
-              <option value="Desconocido">Desconocido</option>
-            </select>
-            {errorMessages.gender && <small className="text-danger">{errorMessages.gender}</small>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="animal">Especie<span className="text-danger">*</span></label>
-            <select
-              className="form-select"
-              id="animal"
-              name="animal"
-              value={newPetData.animal}
-              onChange={handleInputChange}
-              style={{ color: newPetData.animal ? 'black' : '#999' }}
-            >
-              <option value="" disabled style={{ color: '#999' }}>Selecciona especie</option>
-              <option value="Perro">Perro</option>
-              <option value="Gato">Gato</option>
-              <option value="Conejo">Conejo</option>
-              <option value="Otros">Otros</option>
-            </select>
-            {errorMessages.animal && <small className="text-danger">{errorMessages.animal}</small>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="foto">Foto</label>
-            <input
-              type="file"
-              className="form-control"
-              id="foto"
-              name="photo"
-              accept="image/*"
-              lang="es"
-              onChange={handleFileChange}
-            />
-            {errorMessages.photo && <small className="text-danger">{errorMessages.photo}</small>}
-          </div>
-        </Modal.Body>
-        <div className="text-center">
-          <small className="text-muted"><span className="text-danger">*</span>Campos obligatorios</small>
-        </div>
-        <Modal.Footer>
-          <Button className="btn btn-light text-black rounded-3" variant="secondary" onClick={handleCloseModal}>
-            Cerrar
-          </Button>
-          <Button className="button btn text-white rounded-3" variant="primary" onClick={handleAddPet}>
-            Guardar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Directory veterinaries={veterinaries} />
+      <PetModal
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        handleInputChange={handleInputChange}
+        handleFileChange={handleFileChange}
+        handleAddPet={handleAddPet}
+        newPetData={newPetData}
+        errorMessages={errorMessages}
+      />
     </div >
   );
 };

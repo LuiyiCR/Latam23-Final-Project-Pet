@@ -7,6 +7,7 @@ const PetList = ({ pets, handleOpenModal, handleAddPet }) => {
     handleOpenModal();
   }
   if (pets && pets.length > 0) {
+<<<<<<< HEAD
     return (<div className="section-your-pets">
       <h3 className='mb-5'>Tus Mascotas:</h3>
       <div className="card-container card-mis-mascotas">
@@ -21,11 +22,28 @@ const PetList = ({ pets, handleOpenModal, handleAddPet }) => {
             </Link>
           </div>
         ))}
+=======
+    return (
+      <div className="section-your-pets">
+        <h3 className='mb-5'>Tus Mascotas:</h3>
+        <div className="card-container card-mis-mascotas">
+          {pets.map((pet, index) => (
+            <div key={index} className="card card-mis-mascotas">
+              <Link to={`/detalle-mascota/${index}`} className="detalle-link">
+                <img src={pet.photo} alt={pet.name} className="card-img-top" />
+                <div className="card-body">
+                  <h5 className="card-title">{pet.name}</h5>
+                  <i className="fas fa-plus-circle"></i>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+        <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
+          Agregar Otra Mascota
+        </button>
+>>>>>>> de2f39172abce47c67ce3e52b8366fc58c891c1a
       </div>
-      <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
-        Agregar Otra Mascota
-      </button>
-    </div>
     )
   }
   if (pets && pets.length === 0) {
