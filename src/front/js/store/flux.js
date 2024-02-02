@@ -26,14 +26,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			setUserName: name => {
-				const store = getStore();
-				setStore({
-					user: { ...store.user, name },
-					greeting: `¡Hola ${name}!`
-				});
-			},
-
 			setPets: (pets) => {
 				const store = getStore();
 				console.log(store.pets);

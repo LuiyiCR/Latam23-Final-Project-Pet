@@ -4,11 +4,21 @@ import { useNavigate, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import PetList from "../component/petlist";
 import PetModal from "../component/PetModal";
+import Directory from "../component/Directory";
 import defaultPetImgUrl from '../../img/foto-cat-doc.png';
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
 
 const BACKEND_URL = process.env.BACKEND_URL;
+
+const veterinaries = [
+  {
+    name: 'Veterinaria del Valle 🇨🇱', phoneNumber: 'Tel: 1234567890', country: 'Chile', picture: 'https://images.unsplash.com/photo-1601579532110-08986d17f900?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  { name: 'Veterinaria Gonzalez 🇲🇽', phoneNumber: 'Tel: 0987654321', country: 'México', picture: 'https://images.pexels.com/photos/19601385/pexels-photo-19601385/free-photo-of-young-doctor-holding-a-stethoscope.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { name: 'Veterinaria Pet+ 🇵🇦', phoneNumber: 'Tel: 0987654321', country: 'Panamá', picture: 'https://plus.unsplash.com/premium_photo-1663133414738-d8e2c14e05ad?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+  { name: 'Doctores Echandi 🇻🇪', phoneNumber: 'Tel: 0987654321', country: 'Venezuela', picture: 'https://images.pexels.com/photos/9951386/pexels-photo-9951386.jpeg?auto=compress&cs=tinysrgb&w=600' },
+];
 
 const Dashboard = () => {
   const { store, actions } = useContext(Context);
@@ -177,6 +187,7 @@ const Dashboard = () => {
     <div className="container dashboard-container text-center">
       <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola...! <span className='header-bienvenida'></span></h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
+      <Directory veterinaries={veterinaries} />
       <PetModal
         showModal={showModal}
         handleCloseModal={handleCloseModal}
