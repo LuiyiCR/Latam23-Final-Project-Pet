@@ -11,10 +11,19 @@ export const Pets = () => {
     const [showMessage, setShowMessage] = useState(false);
     const {id} = useParams()
     const date = new Date(pet.born_date);
-    const formattedDate = `${date.getDate()+1}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    const formattedDate = errorDate();
     const actualDate = new Date();
     const age = ageOperation(date, actualDate);
     
+    function errorDate(){
+        const day = date.getDate()+1;
+        if (day > 31){
+            return `${date.getDate()-30}/${date.getMonth()+2}/${date.getFullYear()}`
+        }else{
+            return `${date.getDate()+1}/${date.getMonth()+1}/${date.getFullYear()}`
+        }
+    }
+
     function ageOperation(dateOfBirth, currentDate) {
         const yearsDiff = currentDate.getFullYear() - dateOfBirth.getFullYear();
         const monthsDiff = currentDate.getMonth() - dateOfBirth.getMonth();
@@ -52,6 +61,7 @@ export const Pets = () => {
     
     console.log("Fecha de nacimiento:", formattedDate);
     console.log(age)
+    console.log(date.getMonth())
 
     const handleShowMessage = () => {
         setShowMessage(true);
