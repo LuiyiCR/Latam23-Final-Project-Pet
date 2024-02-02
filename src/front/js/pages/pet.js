@@ -10,6 +10,48 @@ export const Pets = () => {
     const pet = store.pet
     const [showMessage, setShowMessage] = useState(false);
     const {id} = useParams()
+    const date = new Date(pet.born_date);
+    const formattedDate = `${date.getDate()+1}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    const actualDate = new Date();
+    const age = ageOperation(date, actualDate);
+    
+    function ageOperation(dateOfBirth, currentDate) {
+        const yearsDiff = currentDate.getFullYear() - dateOfBirth.getFullYear();
+        const monthsDiff = currentDate.getMonth() - dateOfBirth.getMonth();
+        const daysDiff = currentDate.getDate() - dateOfBirth.getDate();
+        const resul = (yearsDiff * 365) + Math.floor(monthsDiff * 30.4167) + daysDiff;
+    
+        if (resul < 0) {
+            return `Aun no nace`;
+        }
+    
+        if (resul < 31) {
+            if (resul === 1) {
+                return `1 día`;
+            } else {
+                return `${resul} días`;
+            }
+        }
+    
+        if (resul < 365) {
+            if (Math.floor(resul / 30.4167) === 1) {
+                return `1 mes`;
+            } else {
+                return `${Math.floor(resul / 30.4167)} meses`;
+            }
+        }
+    
+        if (resul >= 365) {
+            if (Math.floor(resul / 365) === 1) {
+                return `1 año`;
+            } else {
+                return `${Math.floor(resul / 365)} años`;
+            }
+        }
+    }
+    
+    console.log("Fecha de nacimiento:", formattedDate);
+    console.log(age)
 
     const handleShowMessage = () => {
         setShowMessage(true);
@@ -26,16 +68,20 @@ export const Pets = () => {
         fetchPet();
     }, [])
 
-    return pet ? ( 
+    return store.pet ? ( 
             <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms">
                 <div className="imgen">
                     <img src={`${store.photo}`} alt="Pet Image" />
                 </div>
                 <h1 className="mt-4">{store.pet.name}</h1>
                 <div className="info d-flex div-signup flex-column mt-3">
-                    <h5 className="mx-2">Fecha de nacimiento: {store.pet.born_date}</h5>
-                    <h5 className="mx-2">Raza: {store.pet.breed}</h5>
-                    <h5 className="mx-2">Género: {store.pet.gender}</h5>
+                <h5 className="mx-2">Fecha de nacimiento: {formattedDate}</h5>
+                <h5 className="mx-2">Raza: {store.pet.breed}</h5>
+                <h5 className="mx-2">Edad: {age}</h5>
+                <h5 className="mx-2">Género: {store.pet.gender}</h5>
+                <h5 className="mx-2">Especie: {store.pet.animal}</h5>
+
+                    
                 </div>
                 <div className="info d-flex div-signup flex-column align-items-center mt-3">
                 <div className="w-100 my-1">

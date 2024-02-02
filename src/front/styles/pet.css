@@ -1,5 +1,5 @@
 .imgen {
-  background-color: black;
+  background: linear-gradient(to right, #a36ff9, #b69fff);
   height: 200px;
   width: 200px;
   border-radius: 50%;
