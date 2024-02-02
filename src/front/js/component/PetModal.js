@@ -1,14 +1,15 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import "../../styles/PetModal.css";
 
 const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileChange, handleAddPet, newPetData: propNewPetData, errorMessages: propErrorMessages }) => {
 
   return (
     <Modal show={showModal} onHide={handleCloseModal}>
-      <Modal.Header closeButton>
+      <Modal.Header className="my-modal-header" closeButton>
         <Modal.Title>Agrega los datos de tu mascota 🐾 🐱 🐰</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="my-modal-body">
         <div className="form-group">
           <label htmlFor="nombre">Nombre <span className="text-danger">*</span></label>
           <input
@@ -100,7 +101,7 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
       <div className="text-center">
         <small className="text-muted"><span className="text-danger">*</span>Campos obligatorios</small>
       </div>
-      <Modal.Footer>
+      <Modal.Footer className="my-modal-footer">
         <Button className="btn btn-light text-black rounded-3" variant="secondary" onClick={handleCloseModal}>
           Cerrar
         </Button>

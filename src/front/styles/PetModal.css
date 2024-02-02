@@ -1,0 +1,33 @@
+.modal .form-control {
+  padding: 0.375rem 0.75rem;
+}
+
+.modal .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal .form-select {
+  padding: 0.375rem 0.75rem;
+}
+
+.modal .text-center {
+  margin-bottom: 1rem;
+}
+
+.modal {
+  padding: 1rem;
+}
+
+.my-modal-header,
+.my-modal-body,
+.my-modal-footer {
+  padding: 1rem;
+}
+
+.my-modal-body {
+  padding-bottom: 0;
+}
+
+.modal .button {
+  border: none;
+}
