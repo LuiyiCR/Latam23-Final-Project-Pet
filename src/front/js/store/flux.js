@@ -49,9 +49,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ pets: updatedPets });
 			},
-			handelPet: async (userId) => {
+			handelPet: async (petId) => {
 				try {
-					const respons = await fetch(`${process.env.BACKEND_URL}/api/user/pets/1`, {
+					const respons = await fetch(`${process.env.BACKEND_URL}/api/user/pets/${petId}`, {
 						method: "GET",
 						headers: {
 							"Authorization": "Bearer " + localStorage.getItem("token"),

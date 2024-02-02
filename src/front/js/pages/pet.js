@@ -1,14 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import "../../styles/pet.css";
 import { Context } from "../store/appContext";
 
 export const Pets = () => {
     const { store, actions } = useContext(Context);
+    const location = useLocation();
+    const petId = location.pathname.split('/')[2]
+    console.log(petId)
     const [showMessage, setShowMessage] = useState(false);
 
     const handleShowMessage = () => {
         setShowMessage(true);
     };
+    useEffect(() => {
+        const fetchPet = async () => {
+            try {
+                const petData = await actions.handelPet(petId);
+                console.log(petData);
+            } catch (error) {
+                console.log("Error fetching pet data:", error);
+            }
+        };
+        fetchPet();
+    }, [])
 
     return (
         <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms">

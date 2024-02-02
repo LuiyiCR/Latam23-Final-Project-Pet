@@ -72,7 +72,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await fetch(BACKEND_URL + `api/user/pets`, {
+        const response = await fetch(BACKEND_URL + `/api/user/pets`, {
           method: "GET",
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("token"),
