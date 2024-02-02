@@ -1,5 +1,5 @@
 .directory-header {
-  background-color: #f1804343;
+  background-color: #f180431f;
   margin-top: 4rem;
   margin-bottom: 1.5rem;
   border-radius: 1rem;
@@ -24,6 +24,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.veterinary-country {
+  background-color: #f180431f;
+  border-radius: 0.625rem;
+  padding: 0.3125rem;
+  color: #8c52ff;
+}
+
 .directory-cards {
   display: flex;
   flex-wrap: wrap;
@@ -33,7 +40,7 @@
 
 .directory-card {
   flex: 0 0 100%;
-  margin: 10px;
+  margin: 0.625rem;
 }
 
 @media (min-width: 600px) {
@@ -59,9 +66,9 @@
   width: 5rem;
   box-shadow: 0px 4px 10px rgba(140, 82, 255, 0.2),
     0px 4px 10px rgba(241, 128, 67, 0.2);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 10px;
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  margin: 0.625rem;
   transition: all 0.3s ease;
 }
 

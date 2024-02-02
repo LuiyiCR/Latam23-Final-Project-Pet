@@ -11,7 +11,7 @@ const Directory = ({ veterinaries }) => {
             <h3 className='veterinary-name'>{veterinary.name}</h3>
             <p>{veterinary.phoneNumber}</p>
             <img className='veterinary-picture' src={veterinary.picture} alt={veterinary.name} />
-            <p>{veterinary.country}</p>
+            <p className='veterinary-country'>{veterinary.country}</p>
           </div>
         ))}
       </div>

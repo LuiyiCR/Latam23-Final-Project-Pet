@@ -85,7 +85,7 @@ i {
   .container.dashboard-container::before {
     width: 40%;
     background: #784eed;
-    border-radius: 15px;
+    border-radius: 1rem;
     filter: blur(100px);
     z-index: -1;
   }
@@ -98,7 +98,7 @@ i {
   right: 0;
   width: 35%;
   height: 25%;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   opacity: 0.5;
   background: #f18043;
   filter: blur(125px);
@@ -109,7 +109,7 @@ i {
   .container.dashboard-container::after {
     width: 40%;
     background: #ff5722;
-    border-radius: 15px;
+    border-radius: 1rem;
     filter: blur(100px);
     z-index: -1;
   }
