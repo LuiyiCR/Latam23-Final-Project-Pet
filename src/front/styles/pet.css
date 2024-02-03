@@ -31,19 +31,6 @@
   margin-right: 1.5rem;
 }
 
-.accordion-item {
-  width: 100%;
-}
-
-.accordion-button.collapsed {
-  background-color: #f69274 !important;
-  width: 100%;
-}
-
-.accordion-button:not(.collapsed) {
-  background-color: #ee643a !important;
-  width: 100%;
-}
 .page{
   max-width: 100%;
   min-width: 500px;
@@ -51,18 +38,20 @@
 
 .button-pet{
   padding: 10px;
-  border: 2px solid #ee643a;
+  border: 2px solid #f18043;
   border-radius: 50px;
 }
+
 .text-button{
   padding-top: 7px;
   margin-left: 1rem;
 }
+
 .arrow-button {
   padding: 8px 9px;
   margin-right: 1rem;
   width: 60px;
-  background-color: #ee643a;
+  background-color: #f18043;
   color: #fff;
   border-radius: 20px;
   text-decoration: none;
@@ -81,22 +70,16 @@
 .arrow-button:hover i {
   transform: translateX(2px);
 }
+
 .fa-arrow-right {
   color: white;
 }
 
-.message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #f5c6cb;
-  border-radius: 5px;
-  width: fit-content;
-}
+
 .text-button-info{
   padding-left: 3px;
 }
+
 .icon{
   padding-top: 3px;
 }
