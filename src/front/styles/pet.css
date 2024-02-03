@@ -16,14 +16,19 @@
 
 
 .info {
-  width: 40%; 
-  height: 30%;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px; 
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
   background-color: white; 
   position: relative;
   overflow: hidden;
-  padding: 5px;
   border-radius: 10px;
   min-width: 150px;
+}
+
+.info h5 strong {
+  margin-right: 1.5rem;
 }
 
 .accordion-item {
@@ -31,7 +36,7 @@
 }
 
 .accordion-button.collapsed {
-  background-color: #ee643a !important;
+  background-color: #f69274 !important;
   width: 100%;
 }
 
@@ -51,12 +56,15 @@
 }
 .text-button{
   padding-top: 7px;
+  margin-left: 1rem;
 }
 .arrow-button {
   padding: 8px 9px;
+  margin-right: 1rem;
+  width: 60px;
   background-color: #ee643a;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
   border: none;
