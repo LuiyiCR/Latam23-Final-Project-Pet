@@ -10,7 +10,6 @@ import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
 
 const BACKEND_URL = process.env.BACKEND_URL;
-
 const veterinaries = [
   {
     name: 'Veterinaria del Valle 🇨🇱', phoneNumber: 'Tel: 1234567890', country: 'Chile', picture: 'https://images.unsplash.com/photo-1601579532110-08986d17f900?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -21,6 +20,7 @@ const veterinaries = [
 ];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { store, actions } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [newPetData, setNewPetData] = useState({
@@ -182,6 +182,14 @@ const Dashboard = () => {
       console.error('Error al agregar la mascota', error);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [])
+
 
   return (
     <div className="container dashboard-container text-center">
