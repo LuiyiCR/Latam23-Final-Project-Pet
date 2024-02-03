@@ -24,7 +24,7 @@ def singup():
         name =  data.get("name")
         user_type = data.get("user_type")
         password = data.get("password")
-        if user_type != "veterinario" and user_type != "user":
+        if user_type != "veterinary" and user_type != "user":
             return jsonify({"message":"type invalid"}), 400
         verify_data = [email, name, password, user_type]
         email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
@@ -148,10 +148,51 @@ def pet_properties(pet_id):
         return jsonify({
             "message": "Pet successfully deleted"
         }), 200
-        
+    
     except Exception as error:
         db.session.rollback()
         print(error)
         return jsonify({
             "message": "Something went wrong, try again later"
         }), 500
+
+@api.route('/veterinary/pets', methods=['POST', 'GET'])
+@jwt_required()
+def handle_patients():
+    veterinary_id = get_jwt_identity()
+
+    # Verficiar si el usuario con esa id existe
+    veterinary = User.query.get(veterinary_id)
+    if veterinary is None or veterinary.user_type != "veterinary":
+        return jsonify({"message": "Veterinario no encontrado"}), 404
+
+    # POST
+    if request.method == 'POST':
+        data = request.json
+        name = data.get("name")
+        born_date = data.get("born_date")
+        breed = data.get("breed")
+        gender = data.get("gender")
+        animal = data.get("animal")
+        photo = data.get("photo")
+
+        # Verificaciones
+        verify_data = [name, born_date, breed, gender, animal]
+        if None in verify_data:
+            return jsonify({"message": "All parameters are required"}), 400      
+
+         #creacion de la ficha médica vinculada al veterinario y al usuario
+        new_pet = Pet(name=name, user_id=veterinary_id, born_date=born_date, breed=breed, gender=gender, animal=animal, photo=photo)
+        try:
+            db.session.add(new_pet)
+            db.session.commit()
+            return jsonify({"message": "Ficha del paciente creada exitosamente"}), 201
+        except Exception as error:
+            db.session.rollback()
+            return jsonify({"message": "Error en el servidor"}), 500
+        
+    # GET
+    pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
+    return jsonify({"Pets": pet_list})
+        
+   
