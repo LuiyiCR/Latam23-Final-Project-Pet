@@ -12,8 +12,11 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [type, setType] = useState("user");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [alertMessageColor, setalertMessageColor] = useState("alert-danger")
+    const [isVeterinarian, setIsVeterinarian] = useState(false);
 
     const navigate = useNavigate();
 
@@ -40,8 +43,18 @@ const Signup = () => {
     }
 
     function setTypeValue(event) {
-        const valor = event.target.value;
-        setType(valor);
+        const value = event.target.value;
+        setType(value);
+    }
+
+    function setPhoneValue(event) {
+        const value = event.target.value;
+        setPhone(value);
+    }
+
+    function setAddressValue(event) {
+        const value = event.target.value;
+        setAddress(value);
     }
 
     // Funciones para verificacion de Nombre
@@ -256,6 +269,22 @@ const Signup = () => {
                         </label>
                     </div>
                 </div>
+
+                {type === "veterinary" && (
+                    <div className="veterinary-form-extension">
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputNumber" className="form-label">Numero de telefono</label>
+                            <input type="tel" className="form-control" id="exampleInputNumber" aria-describedby="nameHelp" autoComplete="off" value={phone} onChange={setPhoneValue} placeholder="6241130987" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputAddress" className="form-label">Direccion</label>
+                            <input type="text" className="form-control" id="exampleInputAddress" aria-describedby="nameHelp" autoComplete="off" value={address} onChange={setAddressValue} placeholder="Escalinata Roberto Pichardo 2600, Nuevo Leon" />
+                        </div>
+                    </div>
+                )}
+
+
+
                 <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Registrarse</button>
             </form>
 
