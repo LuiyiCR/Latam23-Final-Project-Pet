@@ -34,7 +34,7 @@ def singup():
             return jsonify({"message":"All parameters are required"}), 400
         user_exist = User.query.filter_by(email = email).first()
         if user_exist:
-            return jsonify({"message":"User all ready exist"}), 400
+            return jsonify({"message":"User already exist"}), 400
         salt = str(gensalt(), encoding = 'utf-8')
         password_and_salt = password + salt
         password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
@@ -42,7 +42,7 @@ def singup():
         try:
             db.session.add(new_user)
             db.session.commit()
-            return jsonify({"message": f"User {email} register"}), 201
+            return jsonify({"message": f"User {email} registered"}), 201
         except Exception as error:
             db.session.rollback()
             print(error)
@@ -69,7 +69,7 @@ def singup_veterinary():
             return jsonify({"message":"All parameters are required"}), 400
         user_exist = User.query.filter_by(email = email).first()
         if user_exist:
-            return jsonify({"message":"User all ready exist"}), 400
+            return jsonify({"message":"User already exist"}), 400
         salt = str(gensalt(), encoding = 'utf-8')
         password_and_salt = password + salt
         password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
@@ -86,7 +86,7 @@ def singup_veterinary():
         try:
             db.session.add(new_veterinary)
             db.session.commit()
-            return jsonify({"message": f"Veterinary {email} register"}), 201
+            return jsonify({"message": f"Veterinary {email} registered"}), 201
         except Exception as error:
             db.session.rollback()
             print(error)
@@ -105,7 +105,7 @@ def login():
             return jsonify({"message":"All parameters are required"}), 400
         user_exist = User.query.filter_by(email=email).first()
         if user_exist is None:
-            return jsonify({"message":"User not exist"}), 400
+            return jsonify({"message":"User does not exist"}), 400
         password = password + user_exist.salt
         password_hash = user_exist.password_hash
         validation_password = check_password_hash(password_hash, password)
@@ -115,7 +115,7 @@ def login():
                 return jsonify({"message":"Authentication successful",
                                 "token": token}), 201 
             else:
-                return jsonify({"message":"Incorrect Pasword"}), 401  
+                return jsonify({"message":"Invalid email or password"}), 401  
         except Exception as error:
             db.session.rollback()
             print(error)
@@ -151,7 +151,7 @@ def handle_pets():
         try:
             db.session.add(new_pet)
             db.session.commit()
-            return jsonify({"message": "pet successfully registered"}), 201
+            return jsonify({"message": "Pet successfully registered"}), 201
         except Exception as error:
             db.session.rollback()
             return jsonify({"message": "Server error"}), 500
@@ -236,7 +236,7 @@ def handle_patients():
         try:
             db.session.add(new_pet)
             db.session.commit()
-            return jsonify({"message": "Patient file successfully registered"}), 201
+            return jsonify({"message": "Patient pet successfully registered"}), 201
         except Exception as error:
             db.session.rollback()
             return jsonify({"message": "Server Error"}), 500
