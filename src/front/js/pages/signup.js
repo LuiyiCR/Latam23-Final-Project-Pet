@@ -14,9 +14,9 @@ const Signup = () => {
     const [type, setType] = useState("user");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+    const [country, setCountry] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
-    const [alertMessageColor, setalertMessageColor] = useState("alert-danger")
-    const [isVeterinarian, setIsVeterinarian] = useState(false);
+    const [alertMessageColor, setalertMessageColor] = useState("alert-danger");
 
     const navigate = useNavigate();
 
@@ -55,6 +55,11 @@ const Signup = () => {
     function setAddressValue(event) {
         const value = event.target.value;
         setAddress(value);
+    }
+
+    const setCountryValue = (event) => {
+        const value = event.target.value;
+        setCountry(value);
     }
 
     // Funciones para verificacion de Nombre
@@ -101,8 +106,8 @@ const Signup = () => {
 
     function verifyContainsPassword(password) {
         // Expresiones para buscar al menos una letra mayúscula y al menos un número
-        var contieneMayuscula = /[A-Z]/.test(password);
-        var contieneNumero = /\d/.test(password);
+        const contieneMayuscula = /[A-Z]/.test(password);
+        const contieneNumero = /\d/.test(password);
 
         // Verifica si la contraseña cumple con ambos requisitos
         return contieneMayuscula && contieneNumero;
@@ -147,10 +152,25 @@ const Signup = () => {
         return true
     }
 
+    //Funciones para verificar inputs extra de tipo veterinario
 
-    //Funcion para realizar el envio de datos a la API
+    function verifyPhone() {
+        const onlyDigits = /^\d+$/;
 
-    async function enviarData() {
+        const valid = onlyDigits.test(phone);
+
+        if (valid) {
+            return true
+        }
+        setErrorMessage("El Numero de telefono que proporcionaste no es valido")
+        return false
+    };
+
+
+
+    //Funcion para realizar el envio de datos a la API (User)
+
+    async function enviarDataUser() {
         try {
             const response = await fetch(BACKEND_URL + "/api/user",
                 {
@@ -186,32 +206,104 @@ const Signup = () => {
         }
     }
 
+    //Funcion para realizar el envio de datos a la API (Veterinary)
+
+    async function enviarDataVeterinary() {
+        try {
+            const response = await fetch(BACKEND_URL + "/api/veterinary",
+                {
+                    method: "POST",
+                    body: JSON.stringify(
+                        {
+                            "name": name,
+                            "email": email,
+                            "password": password,
+                            "user_type": type,
+                            "phone": phone,
+                            "address": address,
+                            "country": country
+                        }
+                    ),
+                    headers: {
+                        'Content-Type': "application/json"
+                    }
+                });
+
+            if (response.status === 400) {
+                setErrorMessage("El correo electronico ya se encuentra en uso")
+                return 400
+            }
+
+            if (response.status != 201) {
+                setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+                return 500
+            }
+
+            return 201
+
+        } catch (error) {
+            setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde");
+            window.scrollTo(0, 0);
+        }
+    }
+
+
     // Funcion onClick para manejar el boton de enviar (submit) / registrarse
 
     async function submitHandler(event) {
 
         event.preventDefault();
 
+        if (!verifyType()) {
+            return
+        }
+
         if (verifyName() &&
             verifyEmail() &&
-            verifyPassword() &&
-            verifyType()) {
+            verifyPassword()) {
 
-            const statusCode = await enviarData();
+            if (type === 'user') {
 
-            if (statusCode === 201) {
-                setalertMessageColor("alert-success")
-                setErrorMessage("Registro exitoso, redirigiendo a pantalla de login");
-                window.scrollTo(0, 0);
-                setTimeout(() => {
-                    navigate("/login");
-                }, 3000);
-                return
+                const statusCode = await enviarDataUser();
+
+                if (statusCode === 201) {
+                    setalertMessageColor("alert-success")
+                    setErrorMessage("Registro exitoso, redirigiendo a pantalla de login");
+                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 3000);
+                    return
+                }
+
+                if (statusCode === 400) {
+                    window.scrollTo(0, 0);
+                    return
+                }
+
             }
-            if (statusCode === 400) {
-                window.scrollTo(0, 0);
-                return
+
+            if (verifyPhone()) {
+
+                const statusCode = await enviarDataVeterinary();
+
+                if (statusCode === 201) {
+                    setalertMessageColor("alert-success")
+                    setErrorMessage("Registro exitoso, redirigiendo a pantalla de login");
+                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 3000);
+                    return
+                }
+
+                if (statusCode === 400) {
+                    window.scrollTo(0, 0);
+                    return
+                }
             }
+
+
 
         }
         window.scrollTo(0, 0);
@@ -274,15 +366,39 @@ const Signup = () => {
                     <div className="veterinary-form-extension">
                         <div className="mb-3">
                             <label htmlFor="exampleInputNumber" className="form-label">Numero de telefono</label>
-                            <input type="tel" className="form-control" id="exampleInputNumber" aria-describedby="nameHelp" autoComplete="off" value={phone} onChange={setPhoneValue} placeholder="6241130987" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+                            <input type="tel" className="form-control" id="exampleInputNumber" aria-describedby="nameHelp" autoComplete="off" value={phone} onChange={setPhoneValue} placeholder="6241130987" pattern="[0-9]*" maxLength={10} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputAddress" className="form-label">Direccion</label>
                             <input type="text" className="form-control" id="exampleInputAddress" aria-describedby="nameHelp" autoComplete="off" value={address} onChange={setAddressValue} placeholder="Escalinata Roberto Pichardo 2600, Nuevo Leon" />
                         </div>
+                        <div className="mb-3">
+                            <label htmlFor="inputCountry" className="form-label">Pais</label>
+                            <select className="form-select" id="inputCountry" placeholder="Selecciona tu pais" value={country} onChange={setCountryValue} >
+                                <option value="" disabled selected>Selecciona tu país</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Bolivia">Bolivia</option>
+                                <option value="Brasil">Brasil</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Costa Rica">Costa Rica</option>
+                                <option value="Cuba">Cuba</option>
+                                <option value="Ecuador">Ecuador</option>
+                                <option value="El Salvador">El Salvador</option>
+                                <option value="Guatemala">Guatemala</option>
+                                <option value="Honduras">Honduras</option>
+                                <option value="México">México</option>
+                                <option value="Nicaragua">Nicaragua</option>
+                                <option value="Panamá">Panamá</option>
+                                <option value="Paraguay">Paraguay</option>
+                                <option value="Perú">Perú</option>
+                                <option value="República Dominicana">República Dominicana</option>
+                                <option value="Uruguay">Uruguay</option>
+                                <option value="Venezuela">Venezuela</option>
+                            </select>
+                        </div>
                     </div>
                 )}
-
 
 
                 <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Registrarse</button>
