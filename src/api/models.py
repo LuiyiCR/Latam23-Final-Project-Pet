@@ -10,8 +10,8 @@ class User(db.Model):
     salt = db.Column(db.String(300), unique=True, nullable=False)
     user_type = db.Column(db.String(10), unique=False, nullable=False)
     pet = db.relationship("Pet", back_populates="user")
-
-    
+    veterinary = db.relationship("Veterinary", back_populates="user")
+     
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -20,6 +20,24 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "type" : self.type
+        }
+
+class Veterinary(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    phone = db.Column(db.String(20), nullable=False)
+    address = db.Column(db.String(200), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user = db.relationship("User", back_populates="veterinary")
+
+    def __repr__(self):
+        return f'<Veterinary {self.email}>'
+
+    def serialize(self):
+        return {
+            "phone": self.phone,
+            "address" : self.address,
+            "country": self.country
         }
 
 

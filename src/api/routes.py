@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Pet
+from api.models import db, User, Pet, Veterinary
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from bcrypt import gensalt
@@ -38,7 +38,7 @@ def singup():
         salt = str(gensalt(), encoding = 'utf-8')
         password_and_salt = password + salt
         password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
-        new_user = User(name = name,user_type = user_type, email = email, password_hash = password_hash, salt = salt)
+        new_user = User(name = name, user_type = user_type, email = email, password_hash = password_hash, salt = salt)
         try:
             db.session.add(new_user)
             db.session.commit()
@@ -47,6 +47,52 @@ def singup():
             db.session.rollback()
             print(error)
             return jsonify ({"message": "Server error"}), 500
+
+@api.route('/veterinary', methods=['POST'])
+def singup_veterinary():
+    if request.method == 'POST':
+        data = request.json
+        email = data.get("email")
+        name =  data.get("name")
+        user_type = data.get("user_type")
+        password = data.get("password")
+        phone = data.get("phone")
+        address = data.get("address")
+        country = data.get("country")
+        if user_type != "veterinary" and user_type != "user":
+            return jsonify({"message":"type invalid"}), 400
+        verify_data = [email, name, password, user_type, phone, address, country]
+        email_patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if not re.match(email_patron, email):
+            return jsonify({"message":"Email invalid"}),400
+        if None in verify_data:
+            return jsonify({"message":"All parameters are required"}), 400
+        user_exist = User.query.filter_by(email = email).first()
+        if user_exist:
+            return jsonify({"message":"User all ready exist"}), 400
+        salt = str(gensalt(), encoding = 'utf-8')
+        password_and_salt = password + salt
+        password_hash = str(generate_password_hash(password_and_salt), encoding = 'utf-8')
+        new_user = User(name = name, user_type = user_type, email = email, password_hash = password_hash, salt = salt)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+        except Exception as error:
+            db.session.rollback()
+            print(error)
+            return jsonify ({"message": "Server error"}), 500
+
+        new_veterinary = Veterinary(phone = phone, address = address, country = country, user_id = new_user.id)
+        try:
+            db.session.add(new_veterinary)
+            db.session.commit()
+            return jsonify({"message": f"Veterinary {email} register"}), 201
+        except Exception as error:
+            db.session.rollback()
+            print(error)
+            return jsonify ({"message": "Server error"}), 500
+
+        
 
 @api.route('/token', methods = ['POST'])
 def login():
@@ -156,15 +202,9 @@ def pet_properties(pet_id):
             "message": "Something went wrong, try again later"
         }), 500
 
-@api.route('/veterinary/pets', methods=['POST', 'GET'])
+@api.route('/veterinary/pets', methods=['POST'])
 @jwt_required()
 def handle_patients():
-    veterinary_id = get_jwt_identity()
-
-    # Verficiar si el usuario con esa id existe
-    veterinary = User.query.get(veterinary_id)
-    if veterinary is None or veterinary.user_type != "veterinary":
-        return jsonify({"message": "Veterinario no encontrado"}), 404
 
     # POST
     if request.method == 'POST':
@@ -175,24 +215,34 @@ def handle_patients():
         gender = data.get("gender")
         animal = data.get("animal")
         photo = data.get("photo")
+        user_email = data.get("user_email")
 
         # Verificaciones
-        verify_data = [name, born_date, breed, gender, animal]
+        verify_data = [name, born_date, breed, gender, animal, user_email]
         if None in verify_data:
-            return jsonify({"message": "All parameters are required"}), 400      
+            return jsonify({"message": "All parameters are required"}), 400     
 
-         #creacion de la ficha médica vinculada al veterinario y al usuario
-        new_pet = Pet(name=name, user_id=veterinary_id, born_date=born_date, breed=breed, gender=gender, animal=animal, photo=photo)
+        # Verificar si el usuario con ese email existe y es un usuario normal
+        user = User.query.filter_by(email=user_email, user_type="user").first()
+        if user is None:
+            return jsonify({"message": "User not found"}), 404
+
+        # Verficiar si la mascota con ese id existe
+        pets = user.pet
+        print(pets) 
+
+        # Creacion de la ficha médica vinculada al veterinario y al usuario
+        new_pet = Pet(name=name, user_id=user.id, born_date=born_date, breed=breed, gender=gender, animal=animal, photo=photo)
         try:
             db.session.add(new_pet)
             db.session.commit()
-            return jsonify({"message": "Ficha del paciente creada exitosamente"}), 201
+            return jsonify({"message": "Patient file successfully registered"}), 201
         except Exception as error:
             db.session.rollback()
-            return jsonify({"message": "Error en el servidor"}), 500
+            return jsonify({"message": "Server Error"}), 500
         
-    # GET
-    pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
-    return jsonify({"Pets": pet_list})
+    # # GET
+    # pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
+    # return jsonify({"Pets": pet_list})
         
    
