@@ -14,7 +14,7 @@ const Signup = () => {
     const [type, setType] = useState("user");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
-    const [country, setCountry] = useState('');
+    const [country, setCountry] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [alertMessageColor, setalertMessageColor] = useState("alert-danger");
 
@@ -159,12 +159,28 @@ const Signup = () => {
 
         const valid = onlyDigits.test(phone);
 
-        if (valid) {
+        if (valid && phone.length === 10) {
             return true
         }
         setErrorMessage("El Numero de telefono que proporcionaste no es valido")
         return false
     };
+
+    function verifyAddress() {
+        if (address.length !== 0) {
+            return true
+        }
+        setErrorMessage("La direccion que proporcionaste no es valida")
+        return false
+    }
+
+    function verifyCountry() {
+        if (country.length !== 0) {
+            return true
+        }
+        setErrorMessage("Por favor selecciona un pais");
+        return false
+    }
 
 
 
@@ -283,7 +299,9 @@ const Signup = () => {
 
             }
 
-            if (verifyPhone()) {
+            if (verifyPhone() &&
+                verifyAddress() &&
+                verifyCountry()) {
 
                 const statusCode = await enviarDataVeterinary();
 
