@@ -7,11 +7,13 @@ export const Navbar = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const name = localStorage.getItem("name");
 
     function handleLogout() {
         localStorage.removeItem("token");
         navigate("/");
     }
+
 
     const isLoggedIn = localStorage.getItem("token") !== null;
 
@@ -61,8 +63,9 @@ export const Navbar = () => {
 
                     {isLoggedIn ? (
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div className='login-profile-icon' style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-                                <i className="fas fa-user-circle" style={{ fontSize: '2rem' }}></i>
+                            <div className='login-profile-icon' style={{ marginRight: '1rem', display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                                <i className="fas fa-user-circle" style={{ fontSize: '1.9rem' }}></i>
+                                <span style={{ marginLeft: '0.5rem' }}>{name}</span>
                             </div>
                             <Link to='/' className="btn btn-light text-black rounded-3" onClick={handleLogout}>
                                 Logout
