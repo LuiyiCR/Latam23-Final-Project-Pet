@@ -1,0 +1,43 @@
+/* 
+Morado: #8C52FF
+Orange: #F18043 */
+
+.container.about-us {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.about-us-header {
+  background-color: #f180431f;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #f18043;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.about-us-text-highlight {
+  font-weight: bold;
+}
+
+.img-fluid.about-us {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  margin: 0 auto;
+  background-origin: 10px;
+}
+
+.about-us-members {
+  background-color: #f180431f;
+  border-radius: 0.625rem;
+  padding: 0.3125rem;
+  color: #8c52ff;
+  text-align: center;
+}

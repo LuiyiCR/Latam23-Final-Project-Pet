@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import logoImgUrl from '../../img/logo.png';
-
+import logoImgUrl from '../../img/logo.png'
+import AboutUs from './AboutUs';
 
 export const Navbar = () => {
 
@@ -53,13 +53,13 @@ export const Navbar = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link to="/about-us" className="nav-link" type="button">
                                 Acerca de nosotros
-                            </a>
+                            </Link>
                         </li>
                     </ul>
 
-                    {location.pathname === '/dashboard' || location.pathname.startsWith('/pet') ? (
+                    {isLoggedIn ? (
                         <Link to='/' className="btn btn-light text-black rounded-3" onClick={handleLogout}>
                             Logout
                         </Link>
