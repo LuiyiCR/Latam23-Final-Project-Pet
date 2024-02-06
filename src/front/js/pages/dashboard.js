@@ -71,16 +71,25 @@ const Dashboard = () => {
     });
   };
 
-  const handleFileChange = (e) => {
-    setNewPetData({
-      ...newPetData,
-      photo: e.target.files[0],
-    });
-    setErrorMessages({
-      ...errorMessages,
-      photo: "",
-    });
-  };
+  const handleFileChange = async(e) => {
+    const file = e.target.files[0];
+    const fromData = new FormData();
+    fromData.append('file', file);
+    fromData.append('upload_preset', process.env.PRESENT_KEY);
+    
+    try {
+        const data = await actions.cloudinaryUpload(fromData);
+        console.log(data);
+        const photo = data.secure_url
+        console.log(photo)
+        setNewPetData({
+          ...newPetData,
+          photo: photo
+      });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
   useEffect(() => {
     const fetchPets = async () => {

@@ -71,6 +71,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+			cloudinaryUpload: async (fromData) =>{
+				try{
+					const response = await fetch( `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`, {
+										method:'POST',
+										body: fromData
+									}
+										)
+					const data = await response.json()
+					return data
+				}catch(error){
+					console.log(error)
+				}
+			},
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

@@ -99,6 +99,17 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             onChange={handleFileChange}
           />
           {propErrorMessages.photo && <small className="text-danger">{propErrorMessages.photo}</small>}
+          {propNewPetData.photo ? 
+          <div className="mesagge-upload-photo d-flex align-items-center my-2">
+            <i className="fas fa-check-circle mr-2" style={{ color: "green" }}></i>
+            <p className="my-0 mx-1">Listo!</p>
+          </div>
+           : 
+          <div className="mesagge-upload-photo d-flex align-items-center my-2">
+            <i className="fas fa-image mr-1" style={{ color: "red" }}></i>
+            <p className="my-0 mx-1">No hay archivo ....</p>
+          </div>
+          }
         </div>
       </Modal.Body>
       <div className="text-center">
