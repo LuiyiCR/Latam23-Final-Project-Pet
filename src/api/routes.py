@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Pet, Veterinary
+from api.models import db, User, Pet, Veterinary, PatientFile
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from bcrypt import gensalt
@@ -209,21 +209,30 @@ def handle_patients():
     # POST
     if request.method == 'POST':
         data = request.json
-        name = data.get("name")
+        name = data.get("name") # Nombre de la mascota
         born_date = data.get("born_date")
         breed = data.get("breed")
         gender = data.get("gender")
         animal = data.get("animal")
         photo = data.get("photo")
-        user_email = data.get("user_email")
+
+        # Información del dueño de la mascota
+        owner_email = data.get("owner_email")
+        owner_name = data.get("owner_name")
+        owner_phone = data.get("owner_phone")
+        owner_address = data.get("owner_address")
+
+        # Información del veterinario
+        veterinary_id = get_jwt_identity()
+        veterinary = User.query.filter_by(id=veterinary_id, user_type="veterinary").first()
 
         # Verificaciones
-        verify_data = [name, born_date, breed, gender, animal, user_email]
+        verify_data = [name, born_date, breed, gender, animal, owner_email, owner_name, owner_phone, owner_address]
         if None in verify_data:
             return jsonify({"message": "All parameters are required"}), 400     
 
         # Verificar si el usuario con ese email existe y es un usuario normal
-        user = User.query.filter_by(email=user_email, user_type="user").first()
+        user = User.query.filter_by(email=owner_email, user_type="user").first()
         if user is None:
             return jsonify({"message": "User not found"}), 404
 
@@ -231,16 +240,45 @@ def handle_patients():
         pets = user.pet
         print(pets) 
 
-        # Creacion de la ficha médica vinculada al veterinario y al usuario
-        new_pet = Pet(name=name, user_id=user.id, born_date=born_date, breed=breed, gender=gender, animal=animal, photo=photo)
+        # Creación de la mascota vinculada al usuario
+        new_pet = Pet(
+            name=name, 
+            user_id=user.id, 
+            born_date=born_date, 
+            breed=breed, 
+            gender=gender, 
+            animal=animal, 
+            photo=photo
+            )
         try:
             db.session.add(new_pet)
             db.session.commit()
-            return jsonify({"message": "Patient pet successfully registered"}), 201
+
         except Exception as error:
             db.session.rollback()
+            print(error)
             return jsonify({"message": "Server Error"}), 500
+
+        try:
+            # Creación de la ficha del paciente para el veterinario
+            new_patient_file = PatientFile(
+                pet_id=new_pet.id,
+                veterinary_id=veterinary.id,
+                owner_name=owner_name,
+                owner_phone=owner_phone,
+                owner_address=owner_address,
+                owner_email=owner_email
+            )
+            db.session.add(new_patient_file)
+            db.session.commit()
+            return jsonify({"message": "Pet and Patient file successfully created"}), 201
+
+        except Exception as error:
+            db.session.rollback()
+            print(error)
+            return jsonify({"message": "Server Error"}), 500        
         
+
     # # GET
     # pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
     # return jsonify({"Pets": pet_list})
