@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import "../../styles/pet.css";
 import { Context } from "../store/appContext";
 
@@ -82,10 +82,13 @@ export const Pets = () => {
     }, [])
 
 
-    return store.pet ? (
+    return pet ? (
         <div className="container-fluid div-signup d-flex align-items-center flex-column background-container-forms">
+            <div>
+
+            </div>
             <div className="imgen">
-                <img src={`${store.photo}`} alt="Pet Image" />
+                <img src={`${store.pet.photo}`} alt="Pet Image" />
             </div>
             <h1 className="mt-4">{capitalizarPrimeraLetra(store.pet.name)}</h1>
             <div className="info d-flex div-signup flex-column mt-3">
@@ -148,6 +151,13 @@ export const Pets = () => {
                 <div className="alert alert-warning message" role="alert">
                     Próximamente
                 </div>)}
+            <div>
+                <button className="btn back-button-pet" >
+                    <Link to='/dashboard' className="back-link-pet" onClick={() => window.scrollTo(0, 0)} >
+                        <h3>Back</h3>
+                    </Link>   
+                </button>
+            </div>
         </div>
     ) : (
         <div className="spinner-border text-dark" role="status">

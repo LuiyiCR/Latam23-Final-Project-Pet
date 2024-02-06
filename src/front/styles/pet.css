@@ -83,3 +83,40 @@
 .icon{
   padding-top: 3px;
 }
+
+.back-button-pet {
+  margin-right: 1rem;
+  width: 100px;
+  min-width: 90px;
+  background-color: #f18043;
+  justify-content: center;
+  align-items: center;
+  color: #fff; 
+  border-radius: 20px;
+  border: none;
+  transition: background-color 0.3s ease, color 0.5s ease; 
+  padding-top: 10px;
+}
+
+.back-button-pet:hover {
+  background-color: #f87851;
+  color: whitesmoke; 
+}
+.back-button-pet h3 {
+  transition: transform 0.3s ease; 
+}
+
+.back-button-pet:hover h3 {
+  transform: translateY(-2px); 
+}
+.back-link-pet {
+  color: whitesmoke; 
+  text-decoration: none; 
+  border: none;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.back-link-pet:hover {
+  background-color: #f87851;
+}
