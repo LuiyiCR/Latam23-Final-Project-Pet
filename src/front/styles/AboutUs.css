@@ -60,3 +60,10 @@ Orange: #F18043 */
 .about-us-description {
   padding: 1.5rem;
 }
+
+.about-us-icon {
+  color: #8c52ff;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}

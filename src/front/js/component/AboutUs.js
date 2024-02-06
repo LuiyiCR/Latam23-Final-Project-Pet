@@ -19,6 +19,8 @@ const AboutUs = () => {
             bibendum turpis, non vulputate ligula libero vel nisi. Integer venenatis ultricies diam, non cursus nisi
             ultricies nec. Sed non purus nec est hendrerit eleifend. Nulla facilisi.
           </p>
+          <p className='about-us-icon'><i class="fas fa-code"></i>
+          </p>
         </div>
 
         {/* Miguel */}
@@ -30,6 +32,7 @@ const AboutUs = () => {
             bibendum turpis, non vulputate ligula libero vel nisi. Integer venenatis ultricies diam, non cursus nisi
             ultricies nec. Sed non purus nec est hendrerit eleifend. Nulla facilisi.
           </p>
+          <p className='about-us-icon'><i class="fas fa-code"></i></p>
         </div>
 
         {/* Luiyi */}
@@ -39,6 +42,7 @@ const AboutUs = () => {
           <p className='about-us-description'>
             Les saludo desde San José, Costa Rica. Soy un apasionado de la tecnología y el desarrollo web. Me encantan los deportes, principalmente el fútbol y el ajedrez. Soy un amante de la libertad y el tiempo en familia. La vida me ha enseñado que el conocimiento es el camino para alcanzar la libertad y que nada se compara a disfrutar de la vida sin ataduras, aunque sin abusos. <span className='about-us-text-highlight'>¡Pura vida!</span>
           </p>
+          <p className='about-us-icon'><i class="fas fa-code"></i></p>
         </div>
       </div>
     </div>

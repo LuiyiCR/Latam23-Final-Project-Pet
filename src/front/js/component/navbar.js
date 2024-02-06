@@ -60,9 +60,14 @@ export const Navbar = () => {
                     </ul>
 
                     {isLoggedIn ? (
-                        <Link to='/' className="btn btn-light text-black rounded-3" onClick={handleLogout}>
-                            Logout
-                        </Link>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <div className='login-profile-icon' style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
+                                <i className="fas fa-user-circle" style={{ fontSize: '2rem' }}></i>
+                            </div>
+                            <Link to='/' className="btn btn-light text-black rounded-3" onClick={handleLogout}>
+                                Logout
+                            </Link>
+                        </div>
                     ) : (
                         <div className='btn-group gap-3'>
                             <Link to="/guest" className="button btn text-white rounded-3" type="button">
