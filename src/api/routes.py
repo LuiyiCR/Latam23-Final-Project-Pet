@@ -281,6 +281,6 @@ def handle_patients():
         
 
     # GET
-    pet_list = [{"pet_id": patients.pet_id, "owner": patients.owner_name} for patients in veterinary.patient_file]
+    pet_list = [{"pet_name": patients.pet.name, "owner": patients.owner_name, "pet_photo": patients.pet.photo if patients.pet.photo else "No photo available"} for patients in veterinary.patient_file]
     return jsonify({"Patients": pet_list})
         
