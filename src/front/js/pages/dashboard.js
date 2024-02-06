@@ -41,6 +41,8 @@ const Dashboard = () => {
     photo: "",
   })
 
+  const name = localStorage.getItem("name");
+
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -193,7 +195,7 @@ const Dashboard = () => {
 
   return (
     <div className="container dashboard-container text-center">
-      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola...! <span className='header-bienvenida'></span></h1>
+      <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola, <span className='header-bienvenida'>{name}</span>!</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
       <Directory veterinaries={veterinaries} />
       <PetModal

@@ -113,7 +113,9 @@ def login():
             if validation_password:
                 token = create_access_token(identity= user_exist.id)
                 return jsonify({"message":"Authentication successful",
-                                "token": token}), 201 
+                                "token": token,
+                                "name": user_exist.name,
+                                }), 201 
             else:
                 return jsonify({"message":"Invalid email or password"}), 401  
         except Exception as error:

@@ -86,6 +86,9 @@ const Login = () => {
             }
 
             const data = await response.json();
+
+            localStorage.setItem('name', data.name);
+
             return data;
 
         } catch (error) {
