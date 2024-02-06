@@ -65,6 +65,10 @@
 /* Mensaje de alerta de error en el formulario */
 
 .error-message{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     text-align: center;
 }
 

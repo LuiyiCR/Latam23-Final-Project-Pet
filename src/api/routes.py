@@ -279,8 +279,8 @@ def handle_patients():
             return jsonify({"message": "Server Error"}), 500        
         
 
-    # # GET
-    # pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
-    # return jsonify({"Pets": pet_list})
+    # GET
+    pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
+    return jsonify({"Pets": pet_list})
         
    

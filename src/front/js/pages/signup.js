@@ -288,7 +288,7 @@ const Signup = () => {
                     window.scrollTo(0, 0);
                     setTimeout(() => {
                         navigate("/login");
-                    }, 3000);
+                    }, 4000);
                     return
                 }
 
@@ -311,7 +311,7 @@ const Signup = () => {
                     window.scrollTo(0, 0);
                     setTimeout(() => {
                         navigate("/login");
-                    }, 3000);
+                    }, 4000);
                     return
                 }
 
@@ -335,6 +335,9 @@ const Signup = () => {
             {errorMessage && (
                 <div className={"alert error-message " + alertMessageColor} role="alert">
                     {errorMessage}
+                    <div className="spinner-border text-success" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             )}
 
