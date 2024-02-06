@@ -48,9 +48,9 @@ export const Navbar = () => {
                             </li>
                         )}
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <Link to="/login" className="nav-link" type="button">
                                 Veterinarios
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/about-us" className="nav-link" type="button">

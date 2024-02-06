@@ -75,14 +75,14 @@ const Signup = () => {
 
     function verifyName() {
         if (verifyNameParameters(name)) {
-            setErrorMessage("El nombre que proporcionaste no es valido");
+            setErrorMessage("El nombre que proporcionaste no es válido");
             return false
         }
         return true
     }
 
 
-    // Funciones para verificaciones de correo electronico
+    // Funciones para verificaciones de correo electrónico
 
     function verifyEmailParameters() {
         if (email.includes(".com") &&
@@ -97,7 +97,7 @@ const Signup = () => {
         if (verifyEmailParameters()) {
             return true
         }
-        setErrorMessage("El Correo electronico que proporcionaste no es valido")
+        setErrorMessage("El correo electrónico que proporcionaste no es válido")
         return false
     }
 
@@ -131,7 +131,7 @@ const Signup = () => {
 
     function verifyPassword() {
         if (!verifyPassowordParameters()) {
-            setErrorMessage("Tu contraseña debe ser de al menos 8 caracteres, contener minimo una letra mayuscula, un numero y sin espacios en blanco")
+            setErrorMessage("Tu contraseña debe ser de al menos 8 caracteres, contener mínimo una letra mayúscula, un número y sin espacios en blanco")
             return false
         }
         if (!comparePasswords()) {
@@ -142,11 +142,11 @@ const Signup = () => {
     }
 
 
-    //Fucnciones para verificacion de tipo de usuario
+    //Funciones para verificación de tipo de usuario
 
     function verifyType() {
         if (type !== "user" && type !== "veterinary") {
-            setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde");
+            setErrorMessage("Ocurrió un error al crear tu cuenta, por favor vuelve a intentarlo más tarde");
             return false
         }
         return true
@@ -162,7 +162,7 @@ const Signup = () => {
         if (valid && phone.length === 10) {
             return true
         }
-        setErrorMessage("El Numero de telefono que proporcionaste no es valido")
+        setErrorMessage("El número de teléfono que proporcionaste no es válido")
         return false
     };
 
@@ -170,7 +170,7 @@ const Signup = () => {
         if (address.length !== 0) {
             return true
         }
-        setErrorMessage("La direccion que proporcionaste no es valida")
+        setErrorMessage("La dirección que proporcionaste no es válida")
         return false
     }
 
@@ -205,24 +205,24 @@ const Signup = () => {
                 });
 
             if (response.status === 400) {
-                setErrorMessage("El correo electronico ya se encuentra en uso")
+                setErrorMessage("El correo electrónico ya se encuentra en uso")
                 return 400
             }
 
             if (response.status != 201) {
-                setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+                setErrorMessage("Ocurrió un error al crear tu cuenta, por favor vuelve a intentarlo más tarde")
                 return 500
             }
 
             return 201
 
         } catch (error) {
-            setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde");
+            setErrorMessage("Ocurrió un error, vuelva a intentarlo más tarde");
             window.scrollTo(0, 0);
         }
     }
 
-    //Funcion para realizar el envio de datos a la API (Veterinary)
+    //Función para realizar el envío de datos a la API (Veterinary)
 
     async function enviarDataVeterinary() {
         try {
@@ -246,19 +246,19 @@ const Signup = () => {
                 });
 
             if (response.status === 400) {
-                setErrorMessage("El correo electronico ya se encuentra en uso")
+                setErrorMessage("El correo electrónico ya se encuentra en uso")
                 return 400
             }
 
             if (response.status != 201) {
-                setErrorMessage("Ocurrio un error al crear tu cuenta, por favor vuelve a intentarlo mas tarde")
+                setErrorMessage("Ocurrió un error al crear tu cuenta, por favor vuelve a intentarlo más tarde")
                 return 500
             }
 
             return 201
 
         } catch (error) {
-            setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde");
+            setErrorMessage("Ocurrió un error, vuelve a intentarlo más tarde");
             window.scrollTo(0, 0);
         }
     }
@@ -349,10 +349,10 @@ const Signup = () => {
             <form className="contenedor-form mb-5 h-100">
                 <div className="mb-3">
                     <label htmlFor="exampleInputName" className="form-label">Nombre</label>
-                    <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} placeholder="cual es tu nombre?" />
+                    <input type="text" className="form-control" id="exampleInputName" aria-describedby="nameHelp" autoComplete="off" value={name} onChange={setNameValue} placeholder="¿Cuál es tu nombre?" />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Correo Electronico</label>
+                    <label htmlFor="exampleInputEmail1" className="form-label">Correo Electrónico</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} placeholder="email@email.com" />
                 </div>
                 <div className="mb-3">
@@ -386,15 +386,15 @@ const Signup = () => {
                 {type === "veterinary" && (
                     <div className="veterinary-form-extension">
                         <div className="mb-3">
-                            <label htmlFor="exampleInputNumber" className="form-label">Numero de telefono</label>
+                            <label htmlFor="exampleInputNumber" className="form-label">Número de teléfono</label>
                             <input type="tel" className="form-control" id="exampleInputNumber" aria-describedby="nameHelp" autoComplete="off" value={phone} onChange={setPhoneValue} placeholder="6241130987" pattern="[0-9]*" maxLength={10} />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="exampleInputAddress" className="form-label">Direccion</label>
+                            <label htmlFor="exampleInputAddress" className="form-label">Dirección</label>
                             <input type="text" className="form-control" id="exampleInputAddress" aria-describedby="nameHelp" autoComplete="off" value={address} onChange={setAddressValue} placeholder="Escalinata Roberto Pichardo 2600, Nuevo Leon" />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="inputCountry" className="form-label">Pais</label>
+                            <label htmlFor="inputCountry" className="form-label">País</label>
                             <select className="form-select" id="inputCountry" placeholder="Selecciona tu pais" value={country} onChange={setCountryValue} >
                                 <option value="" disabled selected>Selecciona tu país</option>
                                 <option value="Argentina">Argentina</option>
@@ -427,7 +427,7 @@ const Signup = () => {
 
             <div className="question-mark">
                 <div>
-                    Ya estas registrado? <Link to={"/login"}>Iniciar Sesion</Link>
+                    ¿Ya estás registrado? <Link to={"/login"}>Iniciar Sesión</Link>
                 </div>
             </div>
 

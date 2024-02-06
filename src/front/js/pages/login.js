@@ -41,7 +41,7 @@ const Login = () => {
         if (verifyEmailParameters()) {
             return true
         }
-        setErrorMessage("El Correo electronico que proporcionaste no es valido")
+        setErrorMessage("El correo electrónico que proporcionaste no es válido")
         return false
     }
 
@@ -81,7 +81,7 @@ const Login = () => {
                 })
 
             if (response.status !== 201) {
-                setErrorMessage("Correo electronico o contraseña incorrecta, vuelva a intentarlo");
+                setErrorMessage("Correo electrónico o contraseña incorrecta, vuelve a intentarlo");
                 return false
             }
 
@@ -89,7 +89,7 @@ const Login = () => {
             return data;
 
         } catch (error) {
-            setErrorMessage("Ocurrio un error, vuelva a intentarlo mas tarde")
+            setErrorMessage("Ocurrió un error, vuelve a intentarlo más tarde")
             return false
         }
 
@@ -126,13 +126,13 @@ const Login = () => {
 
             <div className="signup-header mb-3">
                 <img src={logo} />
-                <h2 className="mt-3">Iniciar Sesion</h2>
+                <h2 className="mt-3">Iniciar Sesión</h2>
             </div>
 
             <form className="contenedor-form mb-5 h-100">
                 <div className="mb-3 d-flex justify-content-center flex-column align-items-center">
                     <div className="div-input-interno">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Correo Electronico</label>
+                        <label htmlFor="exampleInputEmail1" className="form-label">Correo Electrónico</label>
                         <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" autoComplete="off" value={email} onChange={setEmailValue} placeholder="email@email.com" />
                     </div>
                 </div>
@@ -143,12 +143,12 @@ const Login = () => {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Iniciar Sesion</button>
+                <button type="submit" className="btn btn-primary boton-signup" onClick={submitHandler}>Iniciar Sesión</button>
             </form>
 
             <div className="question-mark">
                 <div>
-                    Aun no tienes cuenta? <Link to={"/signup"}>Registrate</Link>
+                    ¿Aún no tienes cuenta? <Link to={"/signup"}>¡Regístrate!</Link>
                 </div>
             </div>
 

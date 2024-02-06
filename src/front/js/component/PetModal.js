@@ -19,7 +19,9 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             name="name"
             onChange={handleInputChange}
             value={propNewPetData.name}
+            placeholder="¿Cuál es el nombre de tu mascota?"
           />
+
           {propErrorMessages.name && <small className="text-danger">{propErrorMessages.name}</small>}
         </div>
         <div className="form-group">
@@ -43,12 +45,13 @@ const PetModal = ({ showModal, handleCloseModal, handleInputChange, handleFileCh
             name="breed"
             onChange={handleInputChange}
             value={propNewPetData.breed}
+            placeholder="¿Cuál es la raza de tu mascota?"
           />
           {propErrorMessages.breed && <small className="text-danger">{propErrorMessages.breed}</small>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="gender">Genero<span className="text-danger">*</span></label>
+          <label htmlFor="gender">Género<span className="text-danger">*</span></label>
           <select
             className="form-select"
             id="gender"
