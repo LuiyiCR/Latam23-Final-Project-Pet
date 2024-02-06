@@ -30,7 +30,6 @@ class Veterinary(db.Model):
     country = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     user = db.relationship("User", back_populates="veterinary")
-    # patient_file = db.relationship("PatientFile", back_populates="veterinary", lazy=True)
 
     def serialize(self):
         return {
@@ -74,7 +73,6 @@ class PatientFile(db.Model):
 
     pet = db.relationship("Pet", back_populates="patient_file", lazy=True)
     user = db.relationship("User", back_populates="patient_file", lazy=True)
-    # veterinary = db.relationship("Veterinary", back_populates="patient_file", lazy=True)
 
     def serialize(self):
         return {
