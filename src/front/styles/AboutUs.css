@@ -7,11 +7,12 @@ Orange: #F18043 */
   flex-direction: column;
   justify-content: center;
   align-self: center;
+  padding: 2rem;
 }
 
 .about-us-header {
   background-color: #f180431f;
-  margin-top: 4rem;
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   border-radius: 1rem;
   padding: 1rem;
@@ -20,8 +21,21 @@ Orange: #F18043 */
   font-size: 2.5em;
 }
 
+.about-us-columns {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #f180430b;
+  margin: 1.5rem 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.about-us-columns:hover {
+  transform: scale(1.03);
+}
+
 .about-us-text-highlight {
   font-weight: bold;
+  color: #f18043;
 }
 
 .img-fluid.about-us {
@@ -30,7 +44,7 @@ Orange: #F18043 */
   object-fit: cover;
   object-position: top;
   display: block;
-  margin: 0 auto;
+  margin: 1rem auto;
   background-origin: 10px;
 }
 
@@ -40,4 +54,9 @@ Orange: #F18043 */
   padding: 0.3125rem;
   color: #8c52ff;
   text-align: center;
+  margin-bottom: 15px;
+}
+
+.about-us-description {
+  padding: 1.5rem;
 }
