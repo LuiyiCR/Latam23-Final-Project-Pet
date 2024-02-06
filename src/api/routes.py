@@ -202,9 +202,13 @@ def pet_properties(pet_id):
             "message": "Something went wrong, try again later"
         }), 500
 
-@api.route('/veterinary/pets', methods=['POST'])
+@api.route('/veterinary/pets', methods=['POST', 'GET'])
 @jwt_required()
 def handle_patients():
+    
+    # Información del veterinario
+    veterinary_id = get_jwt_identity()
+    veterinary = User.query.filter_by(id=veterinary_id, user_type="veterinary").first()
 
     # POST
     if request.method == 'POST':
@@ -222,9 +226,6 @@ def handle_patients():
         owner_phone = data.get("owner_phone")
         owner_address = data.get("owner_address")
 
-        # Información del veterinario
-        veterinary_id = get_jwt_identity()
-        veterinary = User.query.filter_by(id=veterinary_id, user_type="veterinary").first()
 
         # Verificaciones
         verify_data = [name, born_date, breed, gender, animal, owner_email, owner_name, owner_phone, owner_address]
@@ -280,7 +281,6 @@ def handle_patients():
         
 
     # GET
-    pet_list = [{"id": pet.id, "name": pet.name} for pet in veterinary.pet]
-    return jsonify({"Pets": pet_list})
+    pet_list = [{"pet_id": patients.pet_id, "owner": patients.owner_name} for patients in veterinary.patient_file]
+    return jsonify({"Patients": pet_list})
         
-   
