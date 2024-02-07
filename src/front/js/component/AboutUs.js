@@ -1,5 +1,5 @@
 import React from 'react';
-import oscarImgUrl from '../../img/foto-cat-doc.png';
+import oscarImgUrl from '../../img/foto-oscar.jpeg';
 import miguelImgUrl from '../../img/foto-miguel.jpg';
 import luiyiImgUrl from '../../img/foto-luiyi.jpeg';
 import "../../styles/AboutUs.css";
@@ -13,13 +13,15 @@ const AboutUs = () => {
         {/* Oscar */}
         <div className="col-md-4 about-us-columns">
           <img src={oscarImgUrl} className="img-fluid about-us rounded-circle mb-3" alt="Oscar" />
-          <h4 className='about-us-members'>Oscar 🌮 🇲🇽</h4>
+          <h4 className='about-us-members'>Oscar 🌌 🇲🇽</h4>
           <p className='about-us-description'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit, lorem a finibus feugiat, odio urna
-            bibendum turpis, non vulputate ligula libero vel nisi. Integer venenatis ultricies diam, non cursus nisi
-            ultricies nec. Sed non purus nec est hendrerit eleifend. Nulla facilisi.
+          ¡Hola! Soy un estudiante de ingeniería informática de UPIICSA, apasionado por explorar y dominar 
+          nuevas tecnologías. Me especializo en redes y sistemas digitales, pero mi entusiasmo se centra 
+          actualmente en el desarrollo web, donde encuentro la lógica de programación emocionante. Siempre 
+          estoy aprendiendo y adaptándome a las demandas tecnológicas cambiantes. Mi objetivo es seguir 
+          explorando nuevas oportunidades mientras avanzo en este emocionante viaje hacia el futuro digital.
           </p>
-          <p className='about-us-icon'><i class="fas fa-code"></i>
+          <p className='about-us-icon'><i className="fas fa-code"></i>
           </p>
         </div>
 
@@ -31,7 +33,7 @@ const AboutUs = () => {
             ¡Saludos desde Los Cabos, México! Me emociona sumergirme en el mundo del desarrollo de nuevas aplicaciones. En mi tiempo libre, disfruto haciendo ejercicio y practicando deportes para mantenerme activo. También me encanta jugar videojuegos para relajarme y divertirme.
             Para mí, la disciplina, el compromiso y la perseverancia son valores fundamentales que guían mi vida. He aprendido a lo largo de los años que con esfuerzo y dedicación, cualquier meta es alcanzable.
           </p>
-          <p className='about-us-icon'><i class="fas fa-code"></i></p>
+          <p className='about-us-icon'><i className="fas fa-code"></i></p>
         </div>
 
         {/* Luiyi */}
@@ -41,7 +43,7 @@ const AboutUs = () => {
           <p className='about-us-description'>
             Les saludo desde San José, Costa Rica. Soy un apasionado de la tecnología y el desarrollo web. Me encantan los deportes, principalmente el fútbol y el ajedrez. Soy un amante de la libertad y el tiempo en familia. La vida me ha enseñado que el conocimiento es el camino para alcanzar la libertad y que nada se compara a disfrutar de la vida sin ataduras, aunque sin abusos. <span className='about-us-text-highlight'>¡Pura vida!</span>
           </p>
-          <p className='about-us-icon'><i class="fas fa-code"></i></p>
+          <p className='about-us-icon'><i className="fas fa-code"></i></p>
         </div>
       </div>
     </div>

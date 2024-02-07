@@ -111,9 +111,10 @@ const Login = () => {
                 return
             }
             const token = responseData.token;
-            const name = responseData.name
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 1);
             localStorage.setItem("token", token);
-            localStorage.setItem('name', name);
+            localStorage.setItem("expiration", expirationDate.getTime());
             navigate("/dashboard");
         }
         window.scrollTo(0, 0);
