@@ -1,0 +1,65 @@
+.container.dashboard-container-vet::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 25%;
+    border-radius: 20px;
+    opacity: 0.5;
+    background: #ff5722;
+    filter: blur(125px);
+    z-index: -1;
+  }
+  
+  @media (max-width: 767px) {
+    .container.dashboard-container-vet::before {
+      width: 40%;
+      background: #f18043;
+      border-radius: 1rem;
+      filter: blur(100px);
+      z-index: -1;
+    }
+  }
+  
+  .container.dashboard-container-vet::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35%;
+    height: 25%;
+    border-radius: 1.25rem;
+    opacity: 0.5;
+    background: #784eed;
+    filter: blur(125px);
+    z-index: -1;
+  }
+  
+  @media (max-width: 767px) {
+    .container.dashboard-container-vet::after {
+      width: 40%;
+      background: #784eed;
+      border-radius: 1rem;
+      filter: blur(100px);
+      z-index: -1;
+    }
+  }
+
+
+.patient-icon {
+    color: #f18043;
+}
+  
+#header-bienvenida-vet {
+    color: #784eed;
+}
+  
+
+#button-vet {
+    background: #f18043;
+}
+  
+#button-vet:hover {
+    background-color: #784eed;
+}

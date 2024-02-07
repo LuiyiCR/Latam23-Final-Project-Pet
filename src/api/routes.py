@@ -115,6 +115,7 @@ def login():
                 return jsonify({"message":"Authentication successful",
                                 "token": token,
                                 "name": user_exist.name,
+                                "type": user_exist.user_type
                                 }), 201 
             else:
                 return jsonify({"message":"Invalid email or password"}), 401  

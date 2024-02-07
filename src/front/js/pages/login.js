@@ -66,7 +66,7 @@ const Login = () => {
 
     async function enviarData() {
         try {
-            const response = await fetch(BACKEND_URL + "/api/token",
+            const response = await fetch(BACKEND_URL + "api/token",
                 {
                     method: "POST",
                     body: JSON.stringify(
@@ -87,12 +87,11 @@ const Login = () => {
 
             const data = await response.json();
 
-            localStorage.setItem('name', data.name);
-
             return data;
 
         } catch (error) {
             setErrorMessage("Ocurrió un error, vuelve a intentarlo más tarde")
+            console.log(error)
             return false
         }
 
@@ -112,7 +111,9 @@ const Login = () => {
                 return
             }
             const token = responseData.token;
+            const name = responseData.name
             localStorage.setItem("token", token);
+            localStorage.setItem('name', name);
             navigate("/dashboard");
         }
         window.scrollTo(0, 0);

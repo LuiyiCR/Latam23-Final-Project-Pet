@@ -7,6 +7,7 @@ import { Pets } from "./pages/pet";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
+import VetView from "./pages/vetView";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -30,6 +31,7 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Dashboard />} path="/dashboard" />
+                        <Route element={<VetView />} path="/veterinary" />
                         <Route element={<Pets />} path="/pet/:id" />
                         <Route element={<AboutUs />} path="/about-us" />
                         <Route element={<h1>Not found!</h1>} />

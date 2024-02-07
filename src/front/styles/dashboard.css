@@ -1,9 +1,9 @@
 i {
-  color: #f18043;
+  color: #8c52ff;
 }
 
 .header-bienvenida {
-  color: #8c52ff;
+  color: #f18043;
 }
 
 .card-container.card-mis-mascotas {
@@ -21,7 +21,7 @@ i {
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 2.875rem 0.4375rem 2.875rem 0.4375rem;
-}
+} 
 
 .card.card-mis-mascotas:hover {
   background-color: #f180432c;

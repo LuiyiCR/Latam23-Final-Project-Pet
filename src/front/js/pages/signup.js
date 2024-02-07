@@ -188,7 +188,7 @@ const Signup = () => {
 
     async function enviarDataUser() {
         try {
-            const response = await fetch(BACKEND_URL + "/api/user",
+            const response = await fetch(BACKEND_URL + "api/user",
                 {
                     method: "POST",
                     body: JSON.stringify(
@@ -226,7 +226,7 @@ const Signup = () => {
 
     async function enviarDataVeterinary() {
         try {
-            const response = await fetch(BACKEND_URL + "/api/veterinary",
+            const response = await fetch(BACKEND_URL + "api/veterinary",
                 {
                     method: "POST",
                     body: JSON.stringify(

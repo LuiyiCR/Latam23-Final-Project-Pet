@@ -18,7 +18,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			pets: [],
-			pet: {}
+			pet: {},
+
+			patients: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -28,8 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setPets: (pets) => {
 				const store = getStore();
-				console.log(store.pets);
-				console.log(pets);
 				if (JSON.stringify(store.pets) !== JSON.stringify(pets)) {
 					setStore({ ...store, pets: pets });
 				}
@@ -71,16 +71,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			cloudinaryUpload: async (fromData) =>{
-				try{
-					const response = await fetch( `https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`, {
-										method:'POST',
-										body: fromData
-									}
-										)
+
+			setPatients: (patients) => {
+				const store = getStore();
+				if (JSON.stringify(store.patients) !== JSON.stringify(patients)) {
+					setStore({ ...store, patients: patients });
+				}
+			},
+
+			cloudinaryUpload: async (fromData) => {
+				try {
+					const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`, {
+						method: 'POST',
+						body: fromData
+					}
+					)
 					const data = await response.json()
 					return data
-				}catch(error){
+				} catch (error) {
 					console.log(error)
 				}
 			},

@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PetList = ({ pets, handleOpenModal, handleAddPet }) => {
-  const addPet = (newPet) => {
-    handleAddPet(newPet);
-    handleOpenModal();
-  }
+const PetList = ({ pets, handleOpenModal }) => {
+
   if (pets && pets.length > 0) {
     return (<div className="section-your-pets">
       <h3 className='mb-5'>Tus Mascotas:</h3>
