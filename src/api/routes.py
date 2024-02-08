@@ -287,3 +287,8 @@ def handle_patients():
     pet_list = [{"pet_name": patients.pet.name, "owner_name": patients.owner_name, "pet_photo": patients.pet.photo if patients.pet.photo else "No photo available"} for patients in veterinary.patient_file]
     return jsonify({"Patients": pet_list})
         
+@api.route('/veterinarys', methods=['GET'])
+def handle_veterinarys ():
+    veterinary_instances = Veterinary.query.all()
+    serialized_veterinaries = [veterinary.serialize() for veterinary in veterinary_instances]
+    return jsonify(serialized_veterinaries), 200
