@@ -335,9 +335,11 @@ const Signup = () => {
             {errorMessage && (
                 <div className={"alert error-message " + alertMessageColor} role="alert">
                     {errorMessage}
-                    <div className="spinner-border text-success" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
+                    {alertMessageColor === "alert-success" && (
+                        <div className="spinner-border text-success" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    )}
                 </div>
             )}
 
@@ -396,7 +398,7 @@ const Signup = () => {
                         <div className="mb-3">
                             <label htmlFor="inputCountry" className="form-label">País</label>
                             <select className="form-select" id="inputCountry" placeholder="Selecciona tu pais" value={country} onChange={setCountryValue} >
-                                <option value="" disabled selected>Selecciona tu país</option>
+                                <option value="" disabled defaultValue>Selecciona tu país</option>
                                 <option value="Argentina">Argentina</option>
                                 <option value="Bolivia">Bolivia</option>
                                 <option value="Brasil">Brasil</option>
