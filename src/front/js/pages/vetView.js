@@ -13,13 +13,17 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const { store, actions } = useContext(Context);
     const [showModal, setShowModal] = useState(false);
-    const [newPetData, setNewPetData] = useState({
+    const [newPatientData, setNewPatientData] = useState({
         name: "",
         born_date: "",
         breed: "",
         gender: "",
         animal: "",
         photo: null,
+        ownerName: "",
+        ownerEmail: "",
+        ownerPhone: "",
+        ownerAddress: ""
     });
 
     const [errorMessages, setErrorMessages] = useState({
@@ -29,6 +33,10 @@ const Dashboard = () => {
         gender: "",
         animal: "",
         photo: "",
+        ownerName: "",
+        ownerEmail: "",
+        ownerPhone: "",
+        ownerAddress: ""
     })
 
     const name = localStorage.getItem("name");
@@ -47,12 +55,16 @@ const Dashboard = () => {
             gender: undefined,
             animal: undefined,
             photo: "",
+            ownerName: "",
+            ownerEmail: "",
+            ownerPhone: "",
+            ownerAddress: ""
         });
     };
 
     const handleInputChange = (e) => {
-        setNewPetData({
-            ...newPetData,
+        setNewPatientData({
+            ...newPatientData,
             [e.target.name]: e.target.value,
         });
         setErrorMessages({
@@ -69,11 +81,9 @@ const Dashboard = () => {
 
         try {
             const data = await actions.cloudinaryUpload(fromData);
-            console.log(data);
             const photo = data.secure_url
-            console.log(photo)
-            setNewPetData({
-                ...newPetData,
+            setNewPatientData({
+                ...newPatientData,
                 photo: photo
             });
         } catch (error) {
@@ -93,7 +103,6 @@ const Dashboard = () => {
                 })
                 if (response.ok) {
                     const responseData = await response.json();
-                    console.log(responseData);
                     actions.setPatients(responseData.Patients);
                 } else {
                     console.error('Error al obtener las mascotas', response.status);
@@ -106,22 +115,38 @@ const Dashboard = () => {
         fetchPatients();
     }, [store.patients]);
 
-    const handleAddPet = async () => {
+    const handleAddPatient = async () => {
         const validationErrors = {};
 
-        if (!newPetData.name.trim()) {
+        if (!newPatientData.name.trim()) {
             validationErrors.name = "El nombre de la mascota es requerido";
         }
-        if (!newPetData.born_date.trim()) {
+        if (!newPatientData.born_date.trim()) {
             validationErrors.born_date = "La fecha de nacimiento de la mascota es requerida";
         }
 
-        if (!newPetData.gender || newPetData.gender === 'Selecciona género') {
+        if (!newPatientData.gender || newPatientData.gender === 'Selecciona género') {
             validationErrors.gender = "El género de la mascota es requerido";
         }
 
-        if (!newPetData.animal || newPetData.animal === 'Selecciona especie') {
+        if (!newPatientData.animal || newPatientData.animal === 'Selecciona especie') {
             validationErrors.animal = "La especie de la mascota es requerida";
+        }
+
+        if (!newPatientData.ownerName.trim()) {
+            validationErrors.ownerName = "El nombre del dueño es requerido";
+        }
+
+        if (!newPatientData.ownerEmail.trim()) {
+            validationErrors.ownerEmail = "El email del dueño es requerido";
+        }
+
+        if (!newPatientData.ownerPhone.trim()) {
+            validationErrors.ownerPhone = "El telefono del dueño es requerido";
+        }
+
+        if (!newPatientData.ownerAddress.trim()) {
+            validationErrors.ownerAddress = "La direccion del dueño es requerido";
         }
 
         if (Object.keys(validationErrors).length > 0) {
@@ -129,58 +154,68 @@ const Dashboard = () => {
             return;
         }
 
-        if (!newPetData.photo) {
-            newPetData.photo = defaultPetImgUrl;
+        if (!newPatientData.photo) {
+            newPatientData.photo = defaultPetImgUrl;
         }
 
         try {
             const formData = new FormData();
-            formData.append("name", newPetData.name);
-            formData.append("born_date", newPetData.born_date);
-            formData.append("breed", newPetData.breed);
-            formData.append("gender", newPetData.gender);
-            formData.append("animal", newPetData.animal);
-            formData.append("photo", newPetData.photo);
+            formData.append("name", newPatientData.name);
+            formData.append("born_date", newPatientData.born_date);
+            formData.append("breed", newPatientData.breed);
+            formData.append("gender", newPatientData.gender);
+            formData.append("animal", newPatientData.animal);
+            formData.append("photo", newPatientData.photo);
+            formData.append("photo", newPatientData.ownerName);
+            formData.append("photo", newPatientData.ownerEmail);
+            formData.append("photo", newPatientData.ownerPhone);
+            formData.append("photo", newPatientData.ownerAddress);
 
-            const response = await fetch((BACKEND_URL + `api/user/pets`), {
+            const response = await fetch((BACKEND_URL + `api/veterinary/pets`), {
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token"),
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: newPetData.name,
-                    born_date: newPetData.born_date,
-                    breed: newPetData.breed,
-                    gender: newPetData.gender,
-                    animal: newPetData.animal,
-                    photo: newPetData.photo,
+                    name: newPatientData.name,
+                    born_date: newPatientData.born_date,
+                    breed: newPatientData.breed,
+                    gender: newPatientData.gender,
+                    animal: newPatientData.animal,
+                    photo: newPatientData.photo,
+                    owner_name: newPatientData.ownerName,
+                    owner_email: newPatientData.ownerEmail,
+                    owner_phone: newPatientData.ownerPhone,
+                    owner_address: newPatientData.ownerAddress
                 }),
             });
 
             if (response.ok) {
-                const responseData = await response.json();
-                console.log(responseData);
 
-                if (actions.addPet) {
-                    actions.addPet(newPetData);
+                if (actions.addPatient) {
+                    actions.addPatient(newPatientData);
                 }
 
-                setNewPetData({
+                setNewPatientData({
                     name: "",
                     born_date: "",
                     breed: "",
                     gender: "",
                     animal: "",
                     photo: null,
+                    ownerName: "",
+                    ownerEmail: "",
+                    ownerPhone: "",
+                    ownerAddress: ""
                 });
             } else {
-                console.error('Error al agregar la mascota', response.status);
+                console.error('Error al agregar el paciente', response.status);
             }
 
             handleCloseModal();
         } catch (error) {
-            console.error('Error al agregar la mascota', error);
+            console.error('Error al agregar el paciente', error);
         }
     };
 
@@ -190,6 +225,8 @@ const Dashboard = () => {
             navigate("/login");
         }
     }, [])
+
+
 
 
     return (
@@ -202,8 +239,8 @@ const Dashboard = () => {
                 handleCloseModal={handleCloseModal}
                 handleInputChange={handleInputChange}
                 handleFileChange={handleFileChange}
-                handleAddPet={handleAddPet}
-                newPetData={newPetData}
+                handleAddPatient={handleAddPatient}
+                newPatientData={newPatientData}
                 errorMessages={errorMessages}
             />
         </div >

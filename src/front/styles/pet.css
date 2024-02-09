@@ -3,48 +3,57 @@
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  overflow: hidden; 
+  overflow: hidden;
   min-width: 100px;
 }
 
 .imgen img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   min-width: 100px;
 }
-
 
 .info {
   padding: 2rem;
   width: 100%;
-  max-width: 700px; 
+  max-width: 700px;
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
-  background-color: white; 
+  background-color: white;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
   min-width: 150px;
 }
 
-.info h5 strong {
-  margin-right: 1.5rem;
-}
-
-.page{
+.page {
   max-width: 100%;
   min-width: 500px;
 }
 
-.button-pet{
-  padding: 10px;
+.button-pet {
   border: 2px solid #f18043;
   border-radius: 50px;
 }
 
-.text-button{
-  padding-top: 7px;
+.text-button-history-title,
+.text-button-apointment-title,
+.text-button-other-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.detail-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
   margin-left: 1rem;
+  margin-bottom: 0;
 }
 
 .arrow-button {
@@ -60,7 +69,7 @@
 }
 
 .arrow-button:hover {
-  background-color:  #f87851;
+  background-color: #f87851;
 }
 
 .arrow-button i {
@@ -75,48 +84,52 @@
   color: white;
 }
 
-
-.text-button-info{
-  padding-left: 3px;
+.text-button-info {
+  padding-left: 0.5rem;
 }
 
-.icon{
-  padding-top: 3px;
+/*HistoryToggle*/
+.history-subtitle {
+  font-weight: bold;
 }
 
-.back-button-pet {
-  margin-right: 1rem;
-  width: 100px;
-  min-width: 90px;
-  background-color: #f18043;
+.history-content {
+  margin-top: 0.625rem;
+  padding: 0.625rem;
+}
+
+.history-text {
+  margin: 0;
+}
+
+.back-button {
+  display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff; 
-  border-radius: 20px;
-  border: none;
-  transition: background-color 0.3s ease, color 0.5s ease; 
-  padding-top: 10px;
+  flex-direction: column;
+  margin-bottom: 0;
 }
 
-.back-button-pet:hover {
-  background-color: #f87851;
-  color: whitesmoke; 
-}
-.back-button-pet h3 {
-  transition: transform 0.3s ease; 
+.back-button:hover .fa-arrow-left {
+  transform: translateY(-2px);
+  color: black;
 }
 
-.back-button-pet:hover h3 {
-  transform: translateY(-2px); 
-}
-.back-link-pet {
-  color: whitesmoke; 
-  text-decoration: none; 
-  border: none;
-  border-radius: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.back-link-pet:hover {
-  background-color: #f87851;
+@media (max-width: 576px) {
+  .text-button-history-title.open,
+  .text-button-apointment-title.open,
+  .text-button-other-title.open,
+  .fas.fa-paw.icon.detail-icon,
+  .fas.fa-calendar-alt.detail-icon,
+  .fas.fa-info-circle.detail-icon {
+    align-self: center;
+    margin-bottom: 0;
+    padding-top: 0.2rem;
+    padding-bottom: rem;
+    text-align: center;
+  }
+  .text-button.open {
+    flex-direction: column;
+    align-items: start;
+  }
 }
