@@ -14,6 +14,44 @@ export const Pets = () => {
     const formattedDate = errorDate();
     const actualDate = new Date();
     const age = ageOperation(date, actualDate);
+    const [visibleHistory, setVisibleHistory] = useState(false);
+    const [visibleAppointments, setVisibleAppointments] = useState(false);
+    const [visibleOthers, setVisibleOthers] = useState(false);
+
+    const [lastVaccines, setLastVaccines] = useState([
+        { name: "Rabia", date: "2023-12-01" },
+        { name: "Parvovirus", date: "2023-11-15" },
+        { name: "Moquillo", date: "2023-10-25" },
+        { name: "Hepatitis", date: "2023-09-30" },
+        { name: "Leptospirosis", date: "2023-09-15" }
+    ]);
+
+    const [nextAppointments, setNextAppointments] = useState([
+        { type: "Baño", date: "2024-02-10" },
+        { type: "Desparacitación", date: "2024-02-15" },
+        { type: "Vacunación", date: "2024-02-20" },
+        { type: "Cirugía", date: "2024-02-25" },
+        { type: "Revisión General", date: "2024-03-01" }
+    ]);
+
+    const [otherInfo, setOtherInfo] = useState([
+        "La mascota requiere de medicamento especial ya que tiene hipertensión",
+        "La mascota es agresiva con otros animales",
+        "La mascota es alérgica a ciertos alimentos",
+        "La mascota solo come si le hablas en francés",
+    ]);
+
+    const handleToggleHistory = () => {
+        setVisibleHistory(!visibleHistory);
+    };
+
+    const handleToggleAppointments = () => {
+        setVisibleAppointments(!visibleAppointments);
+    };
+
+    const handleToggleOthers = () => {
+        setVisibleOthers(!visibleOthers);
+    };
 
     function errorDate() {
         const day = date.getDate() + 1;
@@ -97,68 +135,99 @@ export const Pets = () => {
                 <h5 className="mx-2 mb-4">⏱️ <strong>Edad:</strong> {age}</h5>
                 <h5 className="mx-2 mb-4">🧬 <strong>Género:</strong> {store.pet.gender}</h5>
                 <h5 className="mx-2 mb-4">🐶 <strong>Especie:</strong> {store.pet.animal}</h5>
-
-
             </div>
             <div className="info d-flex div-signup flex-column align-items-center mt-3">
                 <div className="w-100 my-1">
-                    <div className="  d-flex justify-content-between align-items-center button-pet w-100 ">
-                        <div className="text-button d-flex ">
-                            <i className="fas fa-paw icon"></i>
-                            <h5 className="text-button-info">
+                    <div className="d-flex justify-content-between align-items-center button-pet w-100">
+                        <div className={`text-button d-flex ${visibleHistory ? 'open' : ''}`}>
+                            <i className={`fas fa-paw icon detail-icon ${visibleHistory} ? 'open' : ''}`} style={{ fontSize: "1.2rem" }}></i>
+                            <h5 className={`text-button-history-title ${visibleHistory ? 'open' : ''}`} onClick={handleToggleHistory}>
                                 Historial
                             </h5>
+                            {visibleHistory && (
+                                <div className="history-content text-center">
+                                    <h6 className="history-subtitle mt-1 mb-3">Historial de vacunas</h6>
+                                    <ul className={`list-unstyled ${visibleHistory ? 'open' : ''}`}>
+                                        {lastVaccines.map((vaccine, index) => (
+                                            <li key={index} className="mb-2 text-start">
+                                                <i className="fas fa-syringe me-2"></i>
+                                                <span>{vaccine.name}</span>
+                                                <span className="ms-2">({vaccine.date})</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                        <div className="">
-                            <button className="btn arrow-button" onClick={handleShowMessage}>
-                                <i className="fas fa-arrow-right"></i>
+                        <div>
+                            <button className="btn arrow-button" onClick={handleToggleHistory}>
+                                <i className={visibleHistory ? "fas fa-arrow-down text-white" : "fas fa-arrow-right"}></i>
                             </button>
                         </div>
                     </div>
                 </div>
+
                 <div className="w-100 my-1">
-                    <div className="  d-flex justify-content-between align-items-center button-pet w-100 ">
-                        <div className="text-button d-flex ">
-                            <i className="fas fa-calendar icon"></i>
-                            <h5 className="text-button-info">
+                    <div className="d-flex justify-content-between align-items-center button-pet w-100">
+                        <div className={`text-button d-flex ${visibleAppointments ? 'open' : ''}`}>
+                            <i className="fas fa-calendar-alt detail-icon" style={{ fontSize: "1.2rem" }}></i>
+                            <h5 className={`text-button-apointment-title ${visibleAppointments ? 'open' : ''}`} onClick={handleToggleAppointments}>
                                 Citas
                             </h5>
+                            {visibleAppointments && (
+                                <div className="history-content text-center">
+                                    <h6 className="history-subtitle mt-1 mb-3">Próximas Citas:</h6>
+                                    <ul className="list-unstyled">
+                                        {nextAppointments.map((nextAppointments, index) => (
+                                            <li key={index} className="mb-2 text-start">
+                                                <i className="fas fa-calendar-check me-2"></i>
+                                                <span>{nextAppointments.type}</span>
+                                                <span className="ms-2">({nextAppointments.date})</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                        <div className="">
-                            <button className="btn arrow-button" onClick={handleShowMessage}>
-                                <i className="fas fa-arrow-right"></i>
+                        <div>
+                            <button className="btn arrow-button" onClick={handleToggleAppointments}>
+                                <i className={visibleAppointments ? "fas fa-arrow-down text-white" : "fas fa-arrow-right"}></i>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div className="w-100 my-1">
-                    <div className="  d-flex justify-content-between align-items-center button-pet w-100 ">
-                        <div className="text-button d-flex ">
-                            <i className="fas fa-exclamation-circle icon"></i>
-                            <h5 className="text-button-info">
-                                Otros
+                    <div className="d-flex justify-content-between align-items-center button-pet w-100">
+                        <div className={`text-button d-flex ${visibleOthers ? 'open' : ''}`}>
+                            <i className={`fas fa-info-circle detail-icon ${visibleOthers ? 'open' : ''}`} style={{ fontSize: "1.2rem" }}></i>
+                            <h5 className={`text-button-other-title ${visibleOthers ? 'open' : ''}`} onClick={handleToggleOthers}>
+                                Otros Detalles
                             </h5>
+                            {visibleOthers && (
+                                <div className="others-content">
+                                    <h5 className="others-title"></h5>
+                                    <ul className="others-list mt-3">
+                                        {otherInfo.map((info, index) => (
+                                            <li key={index} className="others-item">{info}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </div>
-                        <div className="">
-                            <button className="btn arrow-button" onClick={handleShowMessage}>
-                                <i className="fas fa-arrow-right"></i>
+                        <div>
+                            <button className="btn arrow-button" onClick={handleToggleOthers}>
+                                <i className={visibleOthers ? "fas fa-arrow-down text-white" : "fas fa-arrow-right"}></i>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            {showMessage && (
-                <div className="alert alert-warning message" role="alert">
-                    Próximamente
-                </div>)}
             <div>
-                <button className="btn back-button-pet" >
-                    <Link to='/dashboard' className="back-link-pet" onClick={() => window.scrollTo(0, 0)} >
-                        <h3>Back</h3>
-                    </Link>   
-                </button>
+                <Link to='/dashboard' className="btn btn-light text-black rounded-3" type="button" onClick={() => window.scrollTo(0, 0)} >
+                    <p className="back-button">Mis Mascotas <br /><i className="fas fa-arrow-left "></i></p>
+                </Link>
             </div>
-        </div>
+        </div >
     ) : (
         <div className="spinner-border text-dark" role="status">
             <span className="visually-hidden">Loading...</span>

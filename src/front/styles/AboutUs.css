@@ -94,5 +94,5 @@ Orange: #F18043 */
 
 .technology-icon:hover,
 .update-icon:hover {
-  transform: scale(1.1); /* Aumentar ligeramente el tamaño al hacer hover */
+  transform: scale(1.1);
 }
