@@ -48,11 +48,11 @@
 
 
 .patient-icon {
-    color: #f18043;
+    color: #784eed;
 }
   
 #header-bienvenida-vet {
-    color: #784eed;
+    color: #f18043;
 }
   
 
@@ -62,4 +62,34 @@
   
 #button-vet:hover {
     background-color: #784eed;
+}
+
+
+.card.card-mis-pacientes {
+  max-width: 20rem;
+  margin: 0.3rem 0.6rem 3.125rem 0.3rem;
+  padding-top: 0.3125rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  border-radius: 2.875rem 0.4375rem 2.875rem 0.4375rem;
+} 
+
+.card.card-mis-pacientes img {
+  width: 6.25rem;
+  height: 6.25rem;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  padding-top: 0.3125rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card.card-mis-pacientes .card-body {
+  padding: 0.625rem;
+  text-transform: uppercase;
+}
+
+.card.card-mis-pacientes:hover {
+  background-color: #f180432c;
 }

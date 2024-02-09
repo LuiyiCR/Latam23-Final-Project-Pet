@@ -118,7 +118,14 @@ const Login = () => {
             localStorage.setItem("token", token);
             localStorage.setItem("name", name);
             localStorage.setItem("expiration", expirationDate.getTime());
-            navigate("/dashboard");
+
+            if (responseData.type === "user") {
+                navigate("/dashboard");
+                return
+            }
+            navigate("/veterinary");
+
+
         }
         window.scrollTo(0, 0);
     }

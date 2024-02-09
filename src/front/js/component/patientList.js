@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import "../../styles/vetView.css";
 
 const PatientList = ({ patients, handleOpenModal }) => {
@@ -9,14 +8,12 @@ const PatientList = ({ patients, handleOpenModal }) => {
             <h3 className='mb-5'>Tus Pacientes:</h3>
             <div className="card-container card-mis-mascotas">
                 {patients.map((pet, index) => (
-                    <div key={index} className="card card-mis-mascotas">
-                        <Link to={`/pet/${pet.id}`} className="detalle-link">
-                            <img src={pet.photo} alt={pet.name} className="card-img-top" />
-                            <div className="card-body">
-                                <h5 className="card-title">{pet.name}</h5>
-                                <i className="fas fa-plus-circle"></i>
-                            </div>
-                        </Link>
+                    <div key={index} className="card card-mis-pacientes">
+                        <img src={pet.photo} alt={pet.name} className="card-img-top" />
+                        <div className="card-body">
+                            <h5 className="card-title">{pet.name}</h5>
+                            <i className="fas fa-plus-circle"></i>
+                        </div>
                     </div>
                 ))}
             </div>
