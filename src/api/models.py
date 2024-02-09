@@ -20,7 +20,13 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "type" : self.type
+            "type" : self.type,
+        }
+    
+    def vets(self):
+        return {
+            "name": self.name,
+            "veterinary": [vet.serialize() for vet in self.veterinary] 
         }
 
 class Veterinary(db.Model):
@@ -35,7 +41,7 @@ class Veterinary(db.Model):
         return {
             "phone": self.phone,
             "address" : self.address,
-            "country": self.country,
+            "country": self.country
         }
 
 

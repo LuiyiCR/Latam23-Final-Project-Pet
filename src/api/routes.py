@@ -288,7 +288,15 @@ def handle_patients():
     return jsonify({"Patients": pet_list})
         
 @api.route('/veterinarys', methods=['GET'])
-def handle_veterinarys ():
-    veterinary_instances = Veterinary.query.all()
-    serialized_veterinaries = [veterinary.serialize() for veterinary in veterinary_instances]
+def handle_veterinarys():
+    veterinary_instances = User.query.filter(User.user_type == "veterinary").all()
+    serialized_veterinaries = []
+
+    for user in veterinary_instances:
+        for vet in user.veterinary:
+            serialized_veterinaries.append({
+                "name": user.name,
+                "veterinary": vet.serialize()
+            })
+
     return jsonify(serialized_veterinaries), 200
