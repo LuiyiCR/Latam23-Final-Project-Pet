@@ -12,15 +12,7 @@ import { any } from "prop-types";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 const invitado = localStorage.getItem("permision")
-console.log(invitado)
-const veterinaries = [
-  {
-    name: 'Veterinaria del Valle 🇨🇱', phoneNumber: 'Tel: 1234567890', country: 'Chile', picture: 'https://images.unsplash.com/photo-1601579532110-08986d17f900?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  { name: 'Veterinaria Gonzalez 🇲🇽', phoneNumber: 'Tel: 0987654321', country: 'México', picture: 'https://images.pexels.com/photos/19601385/pexels-photo-19601385/free-photo-of-young-doctor-holding-a-stethoscope.jpeg?auto=compress&cs=tinysrgb&w=600' },
-  { name: 'Veterinaria Pet+ 🇵🇦', phoneNumber: 'Tel: 0987654321', country: 'Panamá', picture: 'https://plus.unsplash.com/premium_photo-1663133414738-d8e2c14e05ad?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { name: 'Doctores Echandi 🇻🇪', phoneNumber: 'Tel: 0987654321', country: 'Venezuela', picture: 'https://images.pexels.com/photos/9951386/pexels-photo-9951386.jpeg?auto=compress&cs=tinysrgb&w=600' },
-];
+console.log(invitado) 
 
 const Dashboard = () => {
   const navigate = useNavigate();
