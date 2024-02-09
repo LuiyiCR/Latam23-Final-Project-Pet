@@ -8,6 +8,7 @@ import Directory from "../component/Directory";
 import defaultPetImgUrl from '../../img/foto-cat-doc.png';
 import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
+import { any } from "prop-types";
 
 const BACKEND_URL = process.env.BACKEND_URL;
 const invitado = localStorage.getItem("permision")
@@ -105,7 +106,6 @@ const Dashboard = () => {
         })
         if (response.ok) {
           const responseData = await response.json();
-          console.log(responseData);
           actions.setPets(responseData.Pets);
         } else {
           console.error('Error al obtener las mascotas', response.status);
@@ -201,7 +201,9 @@ const Dashboard = () => {
     if (!token) {
       navigate("/login");
     }
-  }, [])
+    
+  }
+  , [])
 
   const handleInv = () => {
     window.alert("logeate");
@@ -212,7 +214,7 @@ const Dashboard = () => {
     <div className="container dashboard-container text-center">
       <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola, <span className='header-bienvenida'>{name}</span>!</h1>
       <PetList pets={store.pets} handleOpenModal={handleOpenModal}handleInv={handleInv} />
-      <Directory veterinaries={veterinaries} />
+      <Directory/>
       <PetModal
         showModal={showModal}
         handleCloseModal={handleCloseModal}
