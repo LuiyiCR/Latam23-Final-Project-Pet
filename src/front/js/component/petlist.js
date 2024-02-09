@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PetList = ({ pets, handleOpenModal }) => {
 
+
+const PetList = ({ pets, handleOpenModal, handleInv }) => {
+  const invitado = localStorage.getItem("permision");
+  console.log("Valor de invitado:", invitado);
   if (pets && pets.length > 0) {
     return (<div className="section-your-pets">
       <h3 className='mb-5'>Tus Mascotas:</h3>
@@ -18,10 +21,17 @@ const PetList = ({ pets, handleOpenModal }) => {
             </Link>
           </div>
         ))}
+        
       </div>
-      <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
-        Agregar Otra Mascota
-      </button>
+      {invitado? (
+  <button className="button btn text-white rounded-3 mb-3" onClick={handleInv}>
+    Agregar Otra Mascota Invitado
+  </button>
+) : (
+  <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
+    Agregar Otra Mascota
+  </button>
+)}
     </div>
     )
   }
@@ -30,9 +40,16 @@ const PetList = ({ pets, handleOpenModal }) => {
       <div className="section-add-pet">
         <h3 className='m-3'>¡No tienes mascotas registradas, agrega una ahora! <i className="fas fa-paw"></i></h3>
         <img src="https://images.pexels.com/photos/2173872/pexels-photo-2173872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gatito" className="img-gatito" />
-        <button className="button btn text-white rounded-3 m-3" onClick={handleOpenModal}>
-          Agregar Mascota
-        </button>
+        {invitado === "Si" ? (
+  <button className="button btn text-white rounded-3 mb-3" onClick={handleInv}>
+    Agregar Otra Mascota Invitado
+  </button>
+) : (
+  <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
+    Agregar Otra Mascota
+  </button>
+)}
+      {console.log(invitado)}
       </div >
     )
   }

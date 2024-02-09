@@ -10,6 +10,8 @@ import logo from "../../img/logopetplus.png";
 import "../../styles/dashboard.css";
 
 const BACKEND_URL = process.env.BACKEND_URL;
+const invitado = localStorage.getItem("permision")
+console.log(invitado)
 const veterinaries = [
   {
     name: 'Veterinaria del Valle 🇨🇱', phoneNumber: 'Tel: 1234567890', country: 'Chile', picture: 'https://images.unsplash.com/photo-1601579532110-08986d17f900?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -201,11 +203,15 @@ const Dashboard = () => {
     }
   }, [])
 
+  const handleInv = () => {
+    window.alert("logeate");
+  }
+  
 
   return (
     <div className="container dashboard-container text-center">
       <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star"></i> ¡Hola, <span className='header-bienvenida'>{name}</span>!</h1>
-      <PetList pets={store.pets} handleOpenModal={handleOpenModal} />
+      <PetList pets={store.pets} handleOpenModal={handleOpenModal}handleInv={handleInv} />
       <Directory veterinaries={veterinaries} />
       <PetModal
         showModal={showModal}
@@ -214,7 +220,7 @@ const Dashboard = () => {
         handleFileChange={handleFileChange}
         handleAddPet={handleAddPet}
         newPetData={newPetData}
-        errorMessages={errorMessages}
+        errorMessages={errorMessages}  
       />
     </div >
   );

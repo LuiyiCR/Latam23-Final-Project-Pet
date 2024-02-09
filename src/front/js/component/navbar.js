@@ -12,9 +12,35 @@ export const Navbar = () => {
     function handleLogout() {
         localStorage.removeItem("token");
         localStorage.removeItem("name");
+        localStorage.removeItem("permision")
         navigate("/");
     }
 
+    const handelInvitado = async ( ) => {
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/token`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: process.env.USER_GUEST,
+                    password: process.env.USER_GUEST_PASS
+                })
+            });
+            const data = await response.json();
+            if (data === false) {
+                return
+            }
+            const token = data.token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("name", "Invitado")
+            localStorage.setItem("permision", false)
+            navigate("/invitado");
+        } catch (error) {
+            console.error("Error al procesar invitado:", error);
+        }
+    };
 
     const isLoggedIn = localStorage.getItem("token") !== null;
 
@@ -74,9 +100,9 @@ export const Navbar = () => {
                         </div>
                     ) : (
                         <div className='btn-group gap-3'>
-                            <Link to="/guest" className="button btn text-white rounded-3" type="button">
+                            <button className="button btn text-white rounded-3" type="button" onClick={handelInvitado}>
                                 Explorar como invitado
-                            </Link>
+                            </button>
                             <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
                                 Iniciar sesión
                             </Link>
