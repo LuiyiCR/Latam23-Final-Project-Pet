@@ -86,6 +86,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ patients: updatedPatients });
 			},
 
+			printPatients: () => {
+				const store = getStore();
+				console.log(store.patients);
+			},
+
 			cloudinaryUpload: async (fromData) => {
 				try {
 					const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUD_NAME}/image/upload`, {

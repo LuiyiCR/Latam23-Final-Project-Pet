@@ -227,6 +227,8 @@ const Dashboard = () => {
     }, [])
 
 
+
+
     return (
         <div className="container dashboard-container-vet text-center">
             <h1 className="bienvenida mt-5 mb-4"> <i className="fas fa-star patient-icon"></i> ¡Hola Dr. <span className='header-bienvenida' id="header-bienvenida-vet" >{name}</span>!</h1>

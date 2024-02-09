@@ -23,13 +23,13 @@ const PatientModal = ({ showModal, handleCloseModal, handleInputChange, handleFi
     return (
         <Modal show={showModal} onHide={handleCloseModal} className="motso">
             <Modal.Header className="my-modal-header" closeButton>
-                <Modal.Title>Crear una ficha para el paciente 🐾 🐕 🐈‍⬛</Modal.Title>
+                <Modal.Title>Crear una ficha para el paciente 🐕 🐈‍⬛</Modal.Title>
             </Modal.Header>
             <Modal.Body className="my-modal-body">
 
                 <div className={`container-form-patient ${currentStep !== 1 ? "hidden" : ""}`}>
                     <div className="form-group">
-                        <h3>Datos de la mascota</h3>
+                        <h3 className="titulo-form-ficha">Datos de la mascota</h3>
                         <label htmlFor="nombre">Nombre <span className="text-danger">*</span></label>
                         <input
                             type="text"
@@ -133,7 +133,7 @@ const PatientModal = ({ showModal, handleCloseModal, handleInputChange, handleFi
                 </div>
                 <div className={`container-form-owner ${currentStep !== 2 ? "hidden" : ""}`}>
                     <div className="form-group">
-                        <h3>Datos del dueño</h3>
+                        <h3 className="titulo-form-ficha">Datos del dueño</h3>
                         <label htmlFor="owner_name">Nombre <span className="text-danger">*</span></label>
                         <input
                             type="text"
