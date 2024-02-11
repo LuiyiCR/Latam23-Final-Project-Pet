@@ -82,6 +82,11 @@ export const Navbar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link to="/directory" className="nav-link" type="button">
+                                Directorio de Veterinarios
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to="/about-us" className="nav-link" type="button">
                                 Acerca de nosotros
                             </Link>

@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Pets } from "./pages/pet";
+import {ViewDirectory} from "./pages/viewVeterinaryDirectory"
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
@@ -35,6 +36,7 @@ const Layout = () => {
                         <Route element={<VetView />} path="/veterinary" />
                         <Route element={<Pets />} path="/pet/:id" />
                         <Route element={<AboutUs />} path="/about-us" />
+                        <Route element={<ViewDirectory />} path="/directory" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
