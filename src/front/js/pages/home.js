@@ -10,13 +10,40 @@ import rosTestimonioImgUrl from '../../img/rosaura-testimonio.png'
 import gusTestimonioImgUrl from '../../img/gustavo-testimonio.png'
 import paoTestimonioImgUrl from '../../img/paola-testimonio.png'
 import soleTestimonioImgUrl from '../../img/soledad-testimonio.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../../styles/home.css';
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
+  const handelInvitado = async ( ) => {
+    try {
+        const response = await fetch(`${process.env.BACKEND_URL}/api/token`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: process.env.USER_GUEST,
+                password: process.env.USER_GUEST_PASS
+            })
+        });
+        const data = await response.json();
+        if (data === false) {
+            return
+        }
+        const token = data.token;
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", "Invitado")
+        localStorage.setItem("permision", false)
+        navigate("/invitado");
+    } catch (error) {
+        console.error("Error al procesar invitado:", error);
+    }
+};
+
 
   const testimonios = [
     {
@@ -70,9 +97,9 @@ export const Home = () => {
                 </p>
 
                 <div className='btn-group gap-3'>
-                  <Link to="/guest" className="button btn text-white rounded-3" type="button">
+                  <button className="button btn text-white rounded-3" type="button" onClick={handelInvitado}>
                     Explorar como invitado
-                  </Link>
+                  </button>
                   <Link to="/login" className="btn btn-light text-black rounded-3" type="button">
                     Iniciar sesión
                   </Link>
