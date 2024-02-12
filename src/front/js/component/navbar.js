@@ -16,7 +16,7 @@ export const Navbar = () => {
         navigate("/");
     }
 
-    const handelInvitado = async ( ) => {
+    const handelInvitado = async () => {
         try {
             const response = await fetch(`${process.env.BACKEND_URL}/api/token`, {
                 method: "POST",
@@ -76,11 +76,6 @@ export const Navbar = () => {
                                 </Link>
                             </li>
                         )}
-                        <li className="nav-item">
-                            <Link to="/login" className="nav-link" type="button">
-                                Veterinarios
-                            </Link>
-                        </li>
                         <li className="nav-item">
                             <Link to="/directory" className="nav-link" type="button">
                                 Directorio de Veterinarios

@@ -28,6 +28,7 @@
   background-color: #f180431f;
   border-radius: 0.625rem;
   color: #8c52ff;
+  padding: 7px;
 }
 
 .directory-cards {
@@ -47,7 +48,7 @@
     flex: 0 0 calc(50% - 20px);
   }
   .directory-cards {
-    justify-content: space-between;
+    justify-content:flex-start;
   }
 }
 

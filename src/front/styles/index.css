@@ -94,13 +94,15 @@ Orange: #F18043
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
+  /* background: rgb(255, 255, 255); */
+  /* background: linear-gradient(
     85deg,
     rgba(255, 255, 255, 1) 0%,
     rgba(252, 251, 255, 1) 47%,
     rgba(140, 82, 255, 10) 500%
-  );
+  ); */
+  background: rgb(140,82,255);
+background: linear-gradient(90deg, rgba(140,82,255,0.1881127450980392) 0%, rgba(255,255,255,1) 49%, rgba(140,82,255,0.19371498599439774) 100%);
 }
 
 .divider-section i {
@@ -207,4 +209,8 @@ Orange: #F18043
 
 .testimonios-container {
   position: relative;
+}
+
+p{
+  font-size: 1.2rem;
 }
