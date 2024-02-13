@@ -206,7 +206,7 @@ export const Pets = () => {
                             {visibleOthers && (
                                 <div className="others-content">
                                     <h5 className="others-title"></h5>
-                                    <ul className="others-list mt-3">
+                                    <ul className="others-list mt-3clea">
                                         {otherInfo.map((info, index) => (
                                             <li key={index} className="others-item">{info}</li>
                                         ))}
