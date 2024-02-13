@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Context } from '../store/appContext';
 import heroImgUrl from '../../img/foto-pc.png';
 import exampleOneImgUrl from '../../img/foto-tem1.png'
@@ -80,6 +80,18 @@ export const Home = () => {
       puntuacion: 5
     },
   ];
+  
+  useEffect(()=>{
+    const invitado = localStorage.getItem("permision");
+    console.log(invitado)
+    if (invitado === "false"){
+      console.log("Adios")
+      localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      localStorage.removeItem("permision")
+      navigate("/");
+    }
+  },[])
 
   return (
     <div className='background-container'>
