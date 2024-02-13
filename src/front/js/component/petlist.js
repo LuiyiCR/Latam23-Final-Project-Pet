@@ -8,11 +8,11 @@ const PetList = ({ pets, handleOpenModal, handleInv }) => {
   console.log("Valor de invitado:", invitado);
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const handleClick = () => {
-      setShowLoginMessage(true);
-      setTimeout(() => {
-        setShowLoginMessage(false);
-      }, 5000);
-    };
+    setShowLoginMessage(true);
+    setTimeout(() => {
+      setShowLoginMessage(false);
+    }, 5000);
+  };
   if (pets && pets.length > 0) {
     return (<div className="section-your-pets">
       <h3 className='mb-5'>Tus Mascotas:</h3>
@@ -30,15 +30,15 @@ const PetList = ({ pets, handleOpenModal, handleInv }) => {
         ))}
       </div>
       {showLoginMessage && <p>Por favor, inicia sesión para registrar una mascota.</p>}
-      {invitado? (
-   <button className="button btn text-white rounded-3 mb-3" onClick={handleClick}>
-     Agregar Otra Mascota 
-   </button>
-) : (
-  <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
-    Agregar Otra Mascota
-  </button>
-)}
+      {invitado ? (
+        <button className="button btn text-white rounded-3 mb-3" onClick={handleClick}>
+          Agregar Otra Mascota
+        </button>
+      ) : (
+        <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
+          Agregar Otra Mascota
+        </button>
+      )}
     </div>
     )
   }
@@ -48,16 +48,16 @@ const PetList = ({ pets, handleOpenModal, handleInv }) => {
         <h3 className='m-3'>¡No tienes mascotas registradas, agrega una ahora! <i className="fas fa-paw"></i></h3>
         <img src="https://images.pexels.com/photos/2173872/pexels-photo-2173872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gatito" className="img-gatito" />
         {showLoginMessage && <p>Por favor, inicia sesión para registrar una mascota.</p>}
-        {invitado? (
-   <button className="button btn text-white rounded-3 mb-3" onClick={handleClick}>
-     Agregar Otra Mascota 
-   </button>
-) : (
-  <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
-    Agregar Otra Mascota
-  </button>
-)}
-      {console.log(invitado)}
+        {invitado ? (
+          <button className="button btn text-white rounded-3 mb-3" onClick={handleClick}>
+            Agregar Mascota
+          </button>
+        ) : (
+          <button className="button btn text-white rounded-3 mb-3" onClick={handleOpenModal}>
+            Agregar Mascota
+          </button>
+        )}
+        {console.log(invitado)}
       </div >
     )
   }
